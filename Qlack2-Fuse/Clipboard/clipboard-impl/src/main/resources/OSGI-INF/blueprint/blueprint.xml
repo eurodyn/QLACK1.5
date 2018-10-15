@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.0.0" xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.0.0"
+	xmlns:jaxrs="http://cxf.apache.org/blueprint/jaxrs">
+
+	<bean id="ClipboardServiceImpl" class="com.eurodyn.qlack2.fuse.clipboard.impl.ClipboardServiceImpl">
+			<jpa:context property="em" unitname="fuse-clipboard" />
+			<tx:transaction method="*" value="Required" />
+	</bean>
+
+	<service id="ClipboardService" ref="ClipboardServiceImpl"
+			interface="com.eurodyn.qlack2.fuse.clipboard.api.ClipboardService"/>
+
+</blueprint>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ***************************************************************************
+* Copyright 2014 EUROPEAN DYNAMICS SA <info@eurodyn.com>
+*
+* Licensed under the EUPL, Version 1.1 only (the "License").
+* You may not use this work except in compliance with the Licence.
+* You may obtain a copy of the Licence at:
+* https://joinup.ec.europa.eu/software/page/eupl/licence-eupl
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the Licence is distributed on an "AS IS" basis,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the Licence for the specific la
+ *************************************************************************** -->
+<!-- ***************************************************************************
+N E V E R auto-format this file in Eclipse. If you break a <bundle> in more than
+a single line, Karaf 3.0.0 fails to restart.
+ *************************************************************************** -->
+
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.2.0"
+	name="QLACK-REPACK">
+	<feature description="Qlack - Repack - MySQL" name="qlack-repack-mysql"
+		version="${mysql.connector.version}">
+		<bundle>mvn:mysql/mysql-connector-java/${mysql.connector.version}</bundle>
+	</feature>
+
+	<feature description="Qlack - Repack - Jackson (with RS support)" name="qlack-repack-jackson-rs"
+		version="${jackson.version}">
+		<feature version="${jackson.version}">qlack-repack-jackson</feature>
+		<bundle>mvn:javax.ws.rs/jsr311-api/${javax.ws.rs.version}</bundle>
+		<bundle>mvn:org.codehaus.jackson/jackson-jaxrs/${jackson.version}</bundle>
+	</feature>
+
+	<feature description="Qlack - Repack - Jackson" name="qlack-repack-jackson"
+		version="${jackson.version}">
+		<bundle>mvn:org.codehaus.jackson/jackson-core-asl/${jackson.version}</bundle>
+		<bundle>mvn:org.codehaus.jackson/jackson-mapper-asl/${jackson.version}</bundle>
+	</feature>
+
+	<feature description="Qlack - Repack - CometD" name="qlack-repack-cometd"
+		version="${cometd.version}">
+		<bundle>mvn:org.cometd.java/bayeux-api/${cometd.version}</bundle>
+		<bundle>mvn:org.cometd.java/cometd-java-common/${cometd.version}</bundle>
+		<bundle>mvn:org.cometd.java/cometd-java-server/${cometd.version}</bundle>
+		<bundle>mvn:org.cometd.java/bayeux-api/${cometd.version}</bundle>
+		<bundle>mvn:org.cometd.java/cometd-java-client/${cometd.version}</bundle>
+		<bundle>mvn:org.cometd.java/cometd-websocket-jetty/${cometd.version}</bundle>
+		<bundle>mvn:org.cometd.java/cometd-java-oort/${cometd.version}</bundle>
+	</feature>
+
+	<feature name="qlack-repack-drools-common" version="${jbpm.version}" description="Qlack - Repack - Drools Common">
+		<feature version="${cxf.version}">cxf-specs</feature>
+		<bundle>mvn:com.google.protobuf/protobuf-java/2.6.1</bundle>
+		<bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.antlr/3.5_1</bundle>
+		<bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.xstream/1.4.7_1</bundle>
+		<bundle start-level='10'>mvn:org.apache.servicemix.specs/org.apache.servicemix.specs.jaxb-api-2.2/1.9.0</bundle>
+		<bundle start-level='10'>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.jaxb-xjc/2.2.1.1_2</bundle>
+		<bundle start-level='10'>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.jaxb-impl/2.2.1.1_2</bundle>
+		<bundle>mvn:org.mvel/mvel2/2.2.4.Final</bundle>
+		<bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.quartz/2.1.6_1</bundle>
+		<bundle>mvn:org.apache.geronimo.specs/geronimo-atinject_1.0_spec/1.0</bundle>
+		<bundle>wrap:mvn:javax.enterprise/cdi-api/1.0-SP4</bundle>
+	</feature>
+
+	<feature name="qlack-repack-jbpm-commons" version="${jbpm.version}" description="Qlack - Repack - jBPM Common">
+		<bundle>wrap:mvn:org.sonatype.aether/aether-api/1.13.1</bundle>
+		<bundle>wrap:mvn:com.mchange/c3p0/0.9.2.1</bundle>
+		<bundle>mvn:org.apache.geronimo.specs/geronimo-jms_1.1_spec/1.1.1</bundle>
+		<bundle>mvn:org.apache.geronimo.specs/geronimo-jta_1.1_spec/1.1.1</bundle>
+		<bundle>mvn:org.codehaus.jackson/jackson-core-asl/${jackson.version}</bundle>
+		<bundle>mvn:org.apache.aries.spifly/org.apache.aries.spifly.static.bundle/1.0.0</bundle>
+	</feature>
+
+	<feature name="jpa" version="1.0.1-qlack" description="JPA implementation provided by Apache Aries JPA 1.0.1. Minor version upgrade compared to the JPA feature of Karaf 3.0.1">
+		<bundle start-level="30">mvn:org.apache.geronimo.specs/geronimo-jta_1.1_spec/1.1.1</bundle>
+		<bundle start-level="30">mvn:org.apache.geronimo.specs/geronimo-jpa_2.0_spec/1.1</bundle>
+		<bundle start-level="30">mvn:org.apache.aries.jpa/org.apache.aries.jpa.api/1.0.0</bundle>
+		<bundle start-level="30">mvn:org.apache.aries.jpa/org.apache.aries.jpa.blueprint.aries/1.0.1</bundle>
+		<bundle start-level="30">mvn:org.apache.aries.jpa/org.apache.aries.jpa.container/1.0.1</bundle>
+		<bundle start-level="30">mvn:org.apache.aries.jpa/org.apache.aries.jpa.container.context/1.0.1</bundle>
+	</feature>
+
+	<feature name="hibernate-dependencies" version="${project.version}" description="Hibernate dependencies">
+		<feature>transaction</feature>
+		<feature>http</feature>
+		<feature>jpa</feature>
+		<bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.antlr/2.7.7_5</bundle>
+		<bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.ant/1.8.2_2</bundle>
+		<bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.dom4j/1.6.1_5</bundle>
+		<bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.serp/1.14.1_1</bundle>
+		<bundle>mvn:com.fasterxml/classmate/0.9.0</bundle>
+		<bundle>mvn:org.javassist/javassist/3.18.1-GA</bundle>
+		<bundle>mvn:org.jboss.spec.javax.security.jacc/jboss-jacc-api_1.4_spec/1.0.2.Final</bundle>
+		<bundle>wrap:mvn:org.jboss/jandex/1.1.0.Final</bundle>
+		<bundle>mvn:org.jboss.logging/jboss-logging/3.1.4.GA</bundle>
+	</feature>
+
+	<feature name="hibernate" version="${hibernate.jpa20.version}" description="Hibernate">
+		<feature version="${project.version}">hibernate-dependencies</feature>
+		<bundle>mvn:org.hibernate.common/hibernate-commons-annotations/4.0.4.Final</bundle>
+		<bundle start-level="100">mvn:org.hibernate/hibernate-core/${hibernate.jpa20.version}</bundle>
+		<bundle start-level="100">mvn:org.hibernate/hibernate-entitymanager/${hibernate.jpa20.version}</bundle>
+		<bundle start-level="100">mvn:org.hibernate/hibernate-osgi/${hibernate.jpa20.version}</bundle>
+	</feature>
+
+	<feature name="hibernate" version="${hibernate.jpa21.version}" description="Hibernate">
+		<feature version="${project.version}">hibernate-dependencies</feature>
+		<bundle start-level="30">mvn:org.hibernate.javax.persistence/hibernate-jpa-2.1-api/1.0.0.Final</bundle>
+		<bundle>mvn:org.hibernate.common/hibernate-commons-annotations/4.0.4.Final</bundle>
+		<bundle start-level="100">mvn:org.hibernate/hibernate-core/${hibernate.jpa21.version}</bundle>
+		<bundle start-level="100">mvn:org.hibernate/hibernate-entitymanager/${hibernate.jpa21.version}</bundle>
+		<bundle start-level="100">mvn:org.hibernate/hibernate-osgi/${hibernate.jpa21.version}</bundle>
+	</feature>
+
+	<feature name="hibernate-validator" version="${hibernate.validator.version}" description="Hibernate Validator">
+		<bundle>mvn:javax.validation/com.springsource.javax.validation/${validation-api.version}</bundle>
+		<bundle>mvn:org.hibernate/hibernate-validator/${hibernate.validator.version}</bundle>
+		<bundle>mvn:org.jboss.logging/jboss-logging/3.1.4.GA</bundle>
+	</feature>
+
+</features>

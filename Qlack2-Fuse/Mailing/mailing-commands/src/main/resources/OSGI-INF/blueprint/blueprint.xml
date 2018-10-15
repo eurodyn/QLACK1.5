@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+    xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+	xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.0.0"
+	xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.0.0"
+	xmlns:jaxrs="http://cxf.apache.org/blueprint/jaxrs">
+	
+	<!-- EXTERNAL SERVICES -->
+	<reference id="MailQueueMonitorClock"
+		interface="com.eurodyn.qlack2.fuse.mailing.api.MailQueueMonitorClock"/>
+
+	<!-- SHELL COMMANDS -->
+	<command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
+        <command name="qlack/mail-queue-monitor">
+            <action class="com.eurodyn.qlack2.fuse.mailing.commands.MailQueueMonitorCommand">
+            	<property name="clock" ref="MailQueueMonitorClock"/>
+            </action>
+        </command>
+    </command-bundle>
+
+</blueprint>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+    xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+	xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.0.0"
+	xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.0.0"
+	xmlns:jaxrs="http://cxf.apache.org/blueprint/jaxrs">
+
+	<!-- MANAGED PROPERTIES -->
+	<cm:property-placeholder
+		persistent-id="com.eurodyn.qlack2.fuse.imaging"
+		update-strategy="reload">
+		<cm:default-properties>
+			<cm:property name="thumbnail.height" value="80" />
+			<cm:property name="thumbnail.width" value="80" />
+		</cm:default-properties>
+	</cm:property-placeholder>
+
+	<!-- LOCAL BEANS & SERVICES -->
+	<bean id="GalleryFolderServiceImpl" class="com.eurodyn.qlack2.fuse.imaging.impl.GalleryFolderServiceImpl">
+		<jpa:context property="em" unitname="fuse-imaging" />
+		<tx:transaction method="*" value="Required" />
+		<property name="galleryImageService" ref="GalleryImageServiceImpl"/>
+	</bean>
+	<service id="GalleryFolderService" ref="GalleryFolderServiceImpl"
+		interface="com.eurodyn.qlack2.fuse.imaging.api.GalleryFolderService" />
+
+	<bean id="GalleryImageServiceImpl" class="com.eurodyn.qlack2.fuse.imaging.impl.GalleryImageServiceImpl">
+		<jpa:context property="em" unitname="fuse-imaging" />
+		<tx:transaction method="*" value="Required" />
+		<property name="imageService" ref="ImageServiceImpl" />
+		<cm:managed-properties persistent-id="com.eurodyn.qlack2.fuse.imaging" update-strategy="container-managed" />
+		<property name="thumbnailHeight" value="${thumbnail.height}"/>
+		<property name="thumbnailWidth" value="${thumbnail.width}"/>
+	</bean>
+	<service id="GalleryImageService" ref="GalleryImageServiceImpl"
+		interface="com.eurodyn.qlack2.fuse.imaging.api.GalleryImageService" />
+
+	<bean id="ImageServiceImpl" class="com.eurodyn.qlack2.fuse.imaging.impl.ImageServiceImpl">
+	</bean>
+	<service id="ImageService" ref="ImageServiceImpl"
+		interface="com.eurodyn.qlack2.fuse.imaging.api.ImageService" />
+
+
+</blueprint>

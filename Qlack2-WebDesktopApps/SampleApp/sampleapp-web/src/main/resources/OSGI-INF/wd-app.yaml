@@ -1,0 +1,28 @@
+!!WDApplication:
+  identification:
+    uniqueId:           36fa7633-451d-44c0-a535-e9aaa85e79dc
+    titleKey:           application_title
+    descriptionKey:     application_description
+    version:            1.0-SNAPSHOT
+  instantiation:
+    path:               apps/sampleapp
+    index:              /
+    multipleInstances:  false
+    restrictAccess:     false
+    translationsGroup:  sampleapp_ui
+  menu:
+    icon:               /img/app-sampleapp-icon.png
+    iconSmall:          /img/app-sampleapp-icon-small.png
+    type:
+      displayOn:        group
+      groupKey:         x_administration
+  window:
+    width:              1205
+    minWidth:           200
+    height:             500
+    minHeight:          300
+    resizable:          true
+    maximizable:        true
+    minimizable:        true
+    closable:           true
+    draggable:          true

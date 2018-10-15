@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+	xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.0.0" xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.0.0"
+	xmlns:jaxrs="http://cxf.apache.org/blueprint/jaxrs">
+
+	<!-- EXTERNAL SERVICES -->
+	<reference-list id="CacheServiceList"
+		interface="com.eurodyn.qlack2.fuse.caching.client.api.CacheService"
+		availability="optional" />
+	<reference id="ResourceService"
+		interface="com.eurodyn.qlack2.fuse.aaa.api.ResourceService" />	<reference id="OperationService"
+		interface="com.eurodyn.qlack2.fuse.aaa.api.OperationService" />
+	<reference id="UserService"
+		interface="com.eurodyn.qlack2.fuse.aaa.api.UserService" />
+	<reference id="GroupService"
+		interface="com.eurodyn.qlack2.fuse.aaa.api.GroupService" />
+	<reference id="OpTemplateService"
+		interface="com.eurodyn.qlack2.fuse.aaa.api.OpTemplateService" />
+	<reference id="EventPublisherService"
+		interface="com.eurodyn.qlack2.fuse.eventpublisher.api.EventPublisherService" />
+
+	<!-- BEAN & SERVICES -->
+	<bean id="DesktopServiceImpl" class="com.eurodyn.qlack2.webdesktop.impl.DesktopServiceImpl">
+		<jpa:context property="entityManager" unitname="webdesktop" />
+		<tx:transaction method="*" value="Required" />
+		<property name="operationService" ref="OperationService"/>
+	</bean>
+	<service id="DesktopService" ref="DesktopServiceImpl"
+		interface="com.eurodyn.qlack2.webdesktop.api.DesktopService" />
+
+	<bean id="DomainUtil"
+		class="com.eurodyn.qlack2.webdesktop.impl.util.DomainUtil">
+		<property name="userService" ref="UserService" />
+		<property name="groupService" ref="GroupService" />
+		<property name="security" ref="SecurityBean"/>
+	</bean>
+
+	<bean id="DesktopGroupBean"
+		class="com.eurodyn.qlack2.webdesktop.impl.DesktopGroupServiceImpl">
+		<property name="groupService" ref="GroupService" />
+		<property name="domainUtil" ref="DomainUtil"/>
+		<property name="resourceService" ref="ResourceService" />
+		<tx:transaction method="*" value="Required" />
+	</bean>
+	<service id="DesktopGroupService" ref="DesktopGroupBean"
+		interface="com.eurodyn.qlack2.webdesktop.api.DesktopGroupService">
+	</service>
+
+	<bean id="DesktopUserBean"
+		class="com.eurodyn.qlack2.webdesktop.impl.DesktopUserServiceImpl">
+		<property name="userService" ref="UserService" />
+		<property name="groupService" ref="GroupService" />
+		<property name="domainUtil" ref="DomainUtil"/>
+		<tx:transaction method="*" value="Required" />
+	</bean>
+	<service id="DesktopUserService" ref="DesktopUserBean"
+		interface="com.eurodyn.qlack2.webdesktop.api.DesktopUserService">
+	</service>
+
+	<bean id="SecurityBean"
+		class="com.eurodyn.qlack2.webdesktop.impl.SecurityServiceImpl">
+		<property name="resourceService" ref="ResourceService" />
+		<property name="operationService" ref="OperationService" />
+		<property name="userService" ref="UserService" />
+		<property name="groupService" ref="GroupService" />
+		<property name="templateService" ref="OpTemplateService" />
+		<property name="domainUtil" ref="DomainUtil"/>
+		<tx:transaction method="*" value="Required" />
+	</bean>
+	<service id="SecurityService" ref="SecurityBean"
+		interface="com.eurodyn.qlack2.webdesktop.api.SecurityService">
+	</service>
+
+	<bean id="ApplicationDeploymentListener"
+		class="com.eurodyn.qlack2.webdesktop.impl.listeners.ApplicationDeploymentListener">
+		<jpa:context property="entityManager" unitname="webdesktop" />
+		<tx:transaction method="*" value="Required" />
+		<property name="resourceService" ref="ResourceService" />
+	</bean>
+	<bean id="ApplicationUndeploymentListener"
+		class="com.eurodyn.qlack2.webdesktop.impl.listeners.ApplicationUndeploymentListener">
+		<jpa:context property="entityManager" unitname="webdesktop" />
+		<tx:transaction method="*" value="Required" />
+	</bean>
+
+	<!-- LISTENERS -->
+	<!-- Listener for newly deployed Web Desktop applications -->
+	<service id="ApplicationDeploymentListenerService" ref="ApplicationDeploymentListener"
+		interface="org.osgi.service.event.EventHandler">
+		<service-properties>
+			<entry key="event.topics" value="org/osgi/framework/BundleEvent/STARTED" />
+		</service-properties>
+	</service>
+	<!-- Listener for undeployed Web Desktop applications -->
+	<service id="ApplicationUndeploymentListenerService" ref="ApplicationUndeploymentListener"
+		interface="org.osgi.service.event.EventHandler">
+		<service-properties>
+			<entry key="event.topics" value="org/osgi/framework/BundleEvent/STOPPED" />
+		</service-properties>
+	</service>
+
+	<!-- SHELL COMMANDS -->
+	<command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
+		<command name="qlack/wd-debug">
+			<action class="com.eurodyn.qlack2.webdesktop.impl.shell.DebugCommand">
+			</action>
+		</command>
+	</command-bundle>
+
+</blueprint>

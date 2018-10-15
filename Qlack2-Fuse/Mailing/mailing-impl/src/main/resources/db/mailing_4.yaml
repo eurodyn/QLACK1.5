@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: mailing_04
+      author: European Dynamics SA (theodoros.galousis@eurodyn.com)
+      changes:
+        - addColumn:
+            tableName: mai_email
+            columns:
+              - column:
+                  name: db_version
+                  type: varchar(38)
+                  constraints:
+                    nullable: false

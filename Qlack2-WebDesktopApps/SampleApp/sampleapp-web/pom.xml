@@ -1,0 +1,100 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.eurodyn.qlack2.webdesktop.apps</groupId>
+		<artifactId>sampleapp</artifactId>
+		<version>1.2.0</version>
+	</parent>
+	<artifactId>sampleapp-web</artifactId>
+	<packaging>bundle</packaging>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-bundle-jaxrs</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.eurodyn.qlack2.webdesktop.apps</groupId>
+			<artifactId>sampleapp-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.eurodyn.qlack2.util</groupId>
+			<artifactId>validator-util</artifactId>
+			<version>${qlack2.util.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.eurodyn.qlack2.util</groupId>
+			<artifactId>angularjs-i18n-moment</artifactId>
+			<version>${qlack2.util.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.eurodyn.qlack2.util</groupId>
+			<artifactId>angularjs-security-idm-api</artifactId>
+			<version>${qlack2.util.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.eurodyn.qlack2.util</groupId>
+			<artifactId>angularjs-validation</artifactId>
+			<version>${qlack2.util.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.eurodyn.qlack2.webdesktop</groupId>
+			<artifactId>webdesktop-api</artifactId>
+			<version>${qlack2.webdesktop.version}</version>
+			<type>bundle</type>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<configuration>
+					<instructions>
+						<Bundle-Description>Sample Web Desktop application (Web)</Bundle-Description>
+						<Web-ContextPath>apps/sampleapp</Web-ContextPath>
+						<_wab>src/main/webapp,${project.build.directory}/wro</_wab>
+						<!-- <Import-Package>com.sun.el.*,*</Import-Package> -->
+					</instructions>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.zeroturnaround</groupId>
+				<artifactId>jrebel-maven-plugin</artifactId>
+				<configuration>
+					<web>
+						<resources>
+							<resource>
+								<target>/apps/sampleapp</target>
+								<directory>${basedir}/src/main/webapp</directory>
+							</resource>
+							<resource>
+								<target>/apps/sampleapp</target>
+								<directory>${project.build.directory}/wro</directory>
+							</resource>
+						</resources>
+					</web>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>aspectj-maven-plugin</artifactId>
+				<configuration>
+					<complianceLevel>1.7</complianceLevel>
+					<aspectLibraries>
+						<aspectLibrary>
+							<groupId>com.eurodyn.qlack2.util</groupId>
+							<artifactId>validator-util</artifactId>
+						</aspectLibrary>
+					</aspectLibraries>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

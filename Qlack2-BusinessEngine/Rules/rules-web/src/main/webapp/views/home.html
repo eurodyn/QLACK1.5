@@ -1,0 +1,45 @@
+<section id="welcome" class="well" ng-controller="ProjectListCtrl">
+	<div class="clearfix">
+		<h3>Welcome to the Rules component</h3>
+		<div class="description">
+			The Rules module allows QBE users to create and manage the business rules required by their application. More specifically, QBE users are able to perform the following actions:
+			<ul><li>Create business rules, either through the provided graphical interface (simple rules) or by uploading a .drl file which can later be edited through the provided text editor (complex rules).</li>
+			<li>Edit business rules including creating and managing different versions of each business rule. </li>
+			<li>Specify the data models used during business rule execution, either through the UI or by uploading Java classes.</li>
+			<li>Group different versions of business rules and data models in working sets, categories and tags for easier reference.</li></ul>
+			Business rules can be used to perform validation of a form created in the Forms component or as part of the execution of a workflow created in the Workflow component.	
+		</div>
+	</div>
+	<div class="clearfix">
+		<div class="pull-left">
+			<h3 translate>label.project.recent</h3>
+		</div>
+		<div class="pull-right actions">
+			<select kendo-drop-down-list
+					k-option-label="selectProjectTitle" 
+					k-rebind="selectProjectTitle"
+					k-data-source="projectsDataSource"
+					k-data-text-field="'name'"
+					k-data-value-field="'id'"
+					k-on-change="selectProject(kendoEvent)"
+					>
+			</select>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-6 col-lg-3" ng-repeat="recentProject in recentProjects">
+			<div class="project bg-info">
+				<h4>{{recentProject.name}}</h4>
+				<div class="row">
+					<div class="col-xs-8">
+						<div class="clearfix"><label translate>label.createdOn</label> {{recentProject.createdOn | qDate:'lll'}}</div>
+						<div class="clearfix"><label translate>label.createdBy</label> {{recentProject.createdBy.firstName}} {{recentProject.createdBy.lastName}}</div>
+					</div>
+					<div class="col-xs-4">
+						<button class="btn btn-primary" ng-click="editProject(recentProject.id)"><i class="fa fa-pencil"></i> <span translate>action.edit</span></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

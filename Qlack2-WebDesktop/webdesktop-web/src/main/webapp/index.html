@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" ng-app="WebDesktop"> <![endif]-->
+<!--[if IE 7]>  <html class="no-js lt-ie9 lt-ie8" ng-app="WebDesktop"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9" ng-app="WebDesktop"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" ng-app="WebDesktop">
+<!--<![endif]-->
+    <head>
+		<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Qlack Web Desktop</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel="shortcut icon" type="image/png" href="favicon.png">
+        <link rel="stylesheet" media="screen" href="css/wd-vendor.css">
+        <link rel="stylesheet" media="screen" href="css/wd.css">
+        <link rel="stylesheet" media="screen" href="css/wd-theme.css">
+       	<!-- Avoid console errors for older browsers -->
+       	<script>
+       		if (!window.console) window.console = {};
+       		if (!window.console.log) window.console.log = function () { };
+       		if (!window.console.debug) window.console.debug = function () { };
+       	</script>
+       	<script src="js/wd-vendor.js"></script>
+       	<script src="js/wd.js"></script>
+    </head>
+    <body>
+    	<div ui-view></div>
+    </body>
+</html>

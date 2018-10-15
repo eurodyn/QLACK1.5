@@ -1,0 +1,21 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.eurodyn.qlack2.webdesktop.apps</groupId>
+		<artifactId>webdesktop-apps</artifactId>
+		<version>1.1.8</version>
+		<relativePath>../</relativePath>
+	</parent>
+
+	<artifactId>cloudmanager</artifactId>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>cloudmanager-api</module>
+		<module>cloudmanager-impl</module>
+		<module>cloudmanager-web</module>
+	</modules>
+
+</project>

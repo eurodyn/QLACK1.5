@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="sampleApp" id="ng-app">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Sample App</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width">
+	<link rel="stylesheet" media="screen" href="../../css/wd-app.css">
+	<link rel="stylesheet" media="screen" href="../../css/wd-app-theme.css">
+	<link rel="stylesheet" media="screen" href="css/sampleapp-vendor.css">
+	<link rel="stylesheet" media="screen" href="css/sampleapp.css">
+	<!-- Avoid console errors for older browsers -->
+	<script>
+		if (!window.console)
+			window.console = {};
+		if (!window.console.log)
+			window.console.log = function() {
+			};
+		if (!window.console.debug)
+			window.console.debug = function() {
+			};
+	</script>
+	<script src="js/sampleapp-vendor.js"></script>
+	<script src="js/sampleapp.js"></script>
+</head>
+<body flow-prevent-drop class="fixed-nav">
+	<ng-include src="'views/menu.html'"></ng-include>	
+	
+	<div ui-view class="container-fluid" autoscroll="false"></div>
+	
+	<div ng-controller="WindowCtrl">
+		<div ng-if="window != null">
+			<div kendo-window="modalWindow" id="modalWindow"
+				k-visible="false" k-modal="true"
+				k-title="'{{window.titleKey | translate}}'" k-content="window.content" 
+				k-on-refresh="windowOpen(kendoEvent)" k-on-close="windowClose(kendoEvent)"></div>
+		</div>
+	</div>
+</body>
+</html>

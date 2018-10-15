@@ -1,0 +1,25 @@
+<groups xmlns="http://www.isdc.ro/wro">
+
+	<group name="cloudmanager">
+		<js>/js/App.coffee</js>
+		<js>/js/Routes.coffee</js>
+		<js>/js/Constants.coffee</js>
+		<js>/js/services/**.coffee</js>
+		<js>/js/controllers/**.coffee</js>
+
+		<css>/css/**.less</css>
+	</group>
+
+	<group name="cloudmanager-vendor">
+		<js minimize="false">/js-vendor/jquery.min.js</js>
+		<js minimize="false">/js-vendor/angular.min.js</js>
+		<js minimize="false">/js-vendor/ui-bootstrap-tpls.min.js</js>
+		<js minimize="false">/js-vendor/angular-ui-router.min.js</js>
+		<js>webjar:QDateProvider.js</js>
+		<js>webjar:SecuritySrvProvider.js</js>
+		<js>webjar:QFormValidationProvider.js</js>
+
+		<css minimize="false">/css-vendor/font-awesome.min.css</css>
+	</group>
+
+</groups>

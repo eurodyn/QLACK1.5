@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.0.0" xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.0.0"
+	xmlns:jaxrs="http://cxf.apache.org/blueprint/jaxrs">
+
+	<bean id="BlogServiceImpl"
+		  class="com.eurodyn.qlack2.fuse.blog.impl.BlogServiceImpl">
+			<jpa:context property="em" unitname="fuse-blog" />
+			<tx:transaction method="*" value="Required" />
+			<property name="postService" ref="PostServiceImpl"/>
+	</bean>
+	<bean id="CategoryServiceImpl"
+		  class="com.eurodyn.qlack2.fuse.blog.impl.CategoryServiceImpl">
+			<jpa:context property="em" unitname="fuse-blog" />
+			<tx:transaction method="*" value="Required" />
+	</bean>
+	<bean id="CommentServiceImpl"
+		  class="com.eurodyn.qlack2.fuse.blog.impl.CommentServiceImpl">
+			<jpa:context property="em" unitname="fuse-blog" />
+			<tx:transaction method="*" value="Required" />
+	</bean>
+	<bean id="LayoutServiceImpl"
+		  class="com.eurodyn.qlack2.fuse.blog.impl.LayoutServiceImpl">
+			<jpa:context property="em" unitname="fuse-blog" />
+			<tx:transaction method="*" value="Required" />
+	</bean>
+	<bean id="PostServiceImpl"
+		  class="com.eurodyn.qlack2.fuse.blog.impl.PostServiceImpl">
+			<jpa:context property="em" unitname="fuse-blog" />
+			<tx:transaction method="*" value="Required" />
+	</bean>
+	<bean id="TagServiceImpl"
+		  class="com.eurodyn.qlack2.fuse.blog.impl.TagServiceImpl">
+			<jpa:context property="em" unitname="fuse-blog" />
+			<tx:transaction method="*" value="Required" />
+	</bean>
+
+	<service id="BlogService" ref="BlogServiceImpl"
+			interface="com.eurodyn.qlack2.fuse.blog.api.BlogService"/>
+	<service id="CategoryService" ref="CategoryServiceImpl"
+			interface="com.eurodyn.qlack2.fuse.blog.api.CategoryService"/>
+	<service id="CommentService" ref="CommentServiceImpl"
+			interface="com.eurodyn.qlack2.fuse.blog.api.CommentService"/>
+	<service id="LayoutService" ref="LayoutServiceImpl"
+			interface="com.eurodyn.qlack2.fuse.blog.api.LayoutService"/>
+	<service id="PostService" ref="PostServiceImpl"
+			interface="com.eurodyn.qlack2.fuse.blog.api.PostService"/>
+	<service id="TagService" ref="TagServiceImpl"
+			interface="com.eurodyn.qlack2.fuse.blog.api.TagService"/>
+
+</blueprint>

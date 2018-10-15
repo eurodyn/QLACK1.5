@@ -1,0 +1,133 @@
+<div class="row">
+	<div class="col-lg-12">
+		<form role="form" name="userForm" ng-submit="save()" novalidate
+			ng-controller="FormValidationCtrl">
+			<div class="row">
+				<div class="col-xs-6">
+					<div class="form-group"
+						 ng-class="{'has-error has-feedback': userForm.fullname.$invalid && !userForm.fullname.$dirty}">
+						<label class="control-label" for="fullname" translate>forms.fullname</label>
+						<input type="text" class="form-control" name="fullname"
+							placeholder="{{'forms.fullname.placeholder'|translate}}"
+							ng-model="user.fullname">
+						<i ng-show="userForm.fullname.$invalid && !userForm.fullname.$dirty"
+							class="fa fa-exclamation-triangle form-control-feedback"
+							popover="{{userForm.fullname.message}}"
+							popover-placement="left"
+							popover-trigger="mouseenter"></i>
+						<span class="help-block">Direct String field validation with multiple error messages (try with 'abc')</span>
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="form-group"
+						 ng-class="{'has-error has-feedback': userForm.age.$invalid && !userForm.age.$dirty}">
+						<label class="control-label" for="age" translate>forms.age</label>
+						<input type="text" class="form-control" name="age"
+							placeholder="{{'forms.age.placeholder'|translate}}"
+							ng-model="user.age">
+						<i ng-show="userForm.age.$invalid && !userForm.age.$dirty"
+							class="fa fa-exclamation-triangle form-control-feedback"
+							popover="{{userForm.age.message}}"
+							popover-placement="left"
+							popover-trigger="mouseenter"></i>
+						<span class="help-block">Direct Numeric field validation with wrong-value injection in message</span>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-6">
+					<div class="form-group"
+						 ng-class="{'has-error has-feedback': userForm.sum.$invalid && !userForm.sum.$dirty}">
+						<label class="control-label" for="sum" translate>forms.sum</label>
+						<input type="text" class="form-control" name="sum"
+							placeholder="{{'forms.sum.placeholder'|translate}}"
+							ng-model="user.sum">
+						<i ng-show="userForm.sum.$invalid && !userForm.sum.$dirty"
+							class="fa fa-exclamation-triangle form-control-feedback"
+							popover="{{userForm.sum.message}}"
+							popover-placement="left"
+							popover-trigger="mouseenter"></i>
+						<span class="help-block">Custom-logic field validation</span>
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="form-group"
+						 ng-class="{'has-error has-feedback':
+						 	(userForm['website.address'].$invalid && !userForm['website.address'].$dirty) ||
+						 	(userForm['website.port'].$invalid && !userForm['website.port'].$dirty) ||
+						 	(userForm['website.protocol'].$invalid && !userForm['website.protocol'].$dirty)
+						 }">
+						<label class="control-label" translate>forms.website</label>
+
+						<input type="text" class="form-control" name="website.protocol"
+							placeholder="{{'forms.website.protocol.placeholder'|translate}}"
+							ng-model="user.website.protocol"
+							ng-class="{'error': userForm['website.protocol'].$invalid}">
+						<i ng-show="userForm['website.protocol'].$invalid && !userForm['website.protocol'].$dirty"
+							class="fa fa-exclamation-triangle form-control-feedback"
+							popover="{{userForm['website.protocol'].message}}"
+							popover-placement="left"
+							popover-trigger="mouseenter"></i>
+
+						<input type="text" class="form-control" name="website.port"
+							placeholder="{{'forms.website.port.placeholder'|translate}}"
+							ng-model="user.website.port" style="margin-top:5px"
+							ng-class="{'error': userForm['website.port'].$invalid}">
+						<i ng-show="userForm['website.port'].$invalid && !userForm['website.port'].$dirty"
+							class="fa fa-exclamation-triangle form-control-feedback"
+							popover="{{userForm['website.port'].message}}"
+							popover-placement="left" style="top:47px;"
+							popover-trigger="mouseenter"></i>
+
+						<input type="text" class="form-control" name="website.address"
+							placeholder="{{'forms.website.address.placeholder'|translate}}"
+							ng-model="user.website.address" style="margin-top:5px"
+							ng-class="{'error': userForm['website.address'].$invalid}">
+						<i ng-show="userForm['website.address'].$invalid && !userForm['website.address'].$dirty"
+							class="fa fa-exclamation-triangle form-control-feedback"
+							popover="{{userForm['website.address'].message}}"
+							popover-placement="left" style="top:73px;"
+							popover-trigger="mouseenter"></i>
+
+						<span class="help-block">Nested-object fields validation</span>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-3">
+					<div class="form-group"
+						 ng-class="{'has-error has-feedback': userForm.gender.$invalid && !userForm.gender.$dirty}">
+						<label class="control-label" translate>forms.gender</label>
+						<i ng-show="userForm.gender.$invalid && !userForm.gender.$dirty"
+							class="fa fa-exclamation-triangle form-control-feedback"
+							popover="{{userForm.gender.message}}"
+							popover-placement="left"
+							popover-trigger="mouseenter"></i>
+						<div class="radio">
+							<label> <input type="radio" name="gender" value="m" ng-model="user.gender"> {{'forms.gender.male'|translate}}</label>
+						</div>
+						<div class="radio">
+							<label> <input type="radio" name="gender" value="f" ng-model="user.gender"> {{'forms.gender.female'|translate}}</label>
+						</div>
+						<span class="help-block">Radio validation</span>
+					</div>
+				</div>
+				<div class="col-xs-9">
+					<div class="form-group">
+						<label class="control-label" translate>forms.kendoGrid</label>
+						<div kendo-grid="carsGrid" k-data-source="user.cars" k-editable="true" k-columns="gridColumns" ng-class="{'has-error':carsHaveError}" k-scrollable="false">
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<hr>
+			<div class="pull-right">
+				<button type="button" class="btn btn-danger" translate>forms.button.cancel</button>
+				<button type="submit" class="btn btn-success" translate>forms.button.save</button>
+			</div>
+		</form>
+	</div>
+</div>

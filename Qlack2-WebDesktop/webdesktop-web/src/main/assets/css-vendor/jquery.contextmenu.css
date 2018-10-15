@@ -1,0 +1,77 @@
+.b-m-mpanel {
+    position: absolute;
+    z-index: 999998;
+    left:0px;
+    top:0px;
+    padding:10px 10px;
+    margin: 1px 1px;
+    border:1px solid rgba(255,255,255,0.4);
+    background:-webkit-linear-gradient(-80deg,rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.7) 70%,rgba(0,0,0,0.8) 81%);
+    background:-moz-linear-gradient(-80deg,rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.7) 70%,rgba(0,0,0,0.8) 81%);
+    background:-ms-linear-gradient(-80deg,rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.7) 70%,rgba(0,0,0,0.8) 81%);
+    background:-o-linear-gradient(-80deg,rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.7) 70%,rgba(0,0,0,0.8) 81%);
+    background:linear-gradient(-80deg,rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.7) 70%,rgba(0,0,0,0.8) 81%);
+    -webkit-box-shadow:inset 0 0 1px rgba(255,255,255,0.5),0 1px 3px #000,1px 5px 12px #000;
+    -moz-box-shadow:inset 0 0 1px rgba(255,255,255,0.5),0 1px 3px #000,1px 5px 12px #000;
+    box-shadow:inset 0 0 1px rgba(255,255,255,0.5),0 1px 3px #000,1px 5px 12px #000;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:5px;
+    overflow:hidden;
+    opacity:1;
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=1 );
+}
+
+.b-m-split {
+    height: 6px;
+    font-size: 0px;
+    margin: 0 2px;
+}
+
+.b-m-item, .b-m-idisable {
+    z-index: 999998;
+    color: #fff;
+    cursor: default;
+    padding: 2px 0 2px 2px;
+}
+
+.b-m-item span, .b-m-idisable span {
+    padding-left:6px;
+}
+
+
+.b-m-ibody, .b-m-arrow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.b-m-arrow {
+    background: url(../img/m_arrow.gif) right  no-repeat;
+}
+
+.b-m-item img, .b-m-ifocus img, .b-m-idisable img {
+    vertical-align: sub;
+}
+
+.b-m-ifocus {
+    background: url(../img/m_item.gif) repeat-x bottom;
+    cursor: pointer;
+    padding: 2px 0 2px 2px;
+}
+.b-m-ifocus div span {
+    padding-left: 6px;
+}
+
+.b-m-idisable
+{
+    color:#808080;
+}
+
+.b-m-idisable .b-m-arrow
+{
+    background:none;
+}
+
+.b-m-idisable img {
+    visibility:hidden;
+}

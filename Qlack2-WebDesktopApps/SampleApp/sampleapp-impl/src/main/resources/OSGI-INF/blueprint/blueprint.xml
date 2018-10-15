@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+	xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.0.0" xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.0.0"
+	xmlns:jaxrs="http://cxf.apache.org/blueprint/jaxrs">
+
+	<!-- EXTERNAL SERVICES -->
+	<reference id="IDMService"
+		interface="com.eurodyn.qlack2.fuse.idm.api.IDMService" />
+	<reference id="EventPublisherService"
+		interface="com.eurodyn.qlack2.fuse.eventpublisher.api.EventPublisherService" />
+
+	<!-- LOCAL BEANS & SERVICES -->
+	<bean id="SampleAppServiceImpl"
+		class="com.eurodyn.qlack2.webdesktop.apps.sampleapp.impl.SampleAppServiceImpl">
+		<jpa:context property="entityManager" unitname="sampleapp" />
+		<tx:transaction method="*" value="Required" />
+		<property name="idmService" ref="IDMService"/>
+		<property name="eventPublisherService" ref="EventPublisherService"/>
+	</bean>
+	<service
+		interface="com.eurodyn.qlack2.webdesktop.apps.sampleapp.api.SampleAppService"
+		ref="SampleAppServiceImpl" />
+
+	<!-- LISTENERS -->
+
+</blueprint>

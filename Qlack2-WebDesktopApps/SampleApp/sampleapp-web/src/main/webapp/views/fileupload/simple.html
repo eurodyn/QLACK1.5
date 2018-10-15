@@ -1,0 +1,94 @@
+<div ng-controller="FileSimpleCtrl" class="fluid-container">
+	<div class="row">
+		<div class="col-lg-12">
+			<ol class="breadcrumb">
+				<li><a ui-sref="fileupload">File Upload (full)</a></li>
+				<li class="active">File Upload (simple)</li>
+			</ol>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-lg-8">
+			<div class="form-group">
+				<label for="email">Email address</label>
+				<input type="text" class="form-control" id="email"
+					placeholder="Enter email" name="email" ng-model="user.email">
+			</div>
+			<div class="form-group">
+				<label for="fullname">Full name</label>
+				<input type="text" class="form-control" id="fullname"
+					placeholder="Enter your full name" name="fullname"
+					ng-model="user.fulname">
+			</div>
+			<div class="form-group">
+				<label for="website">Website</label>
+				<input type="text" class="form-control" id="website"
+					placeholder="Enter your website's address" name="website"
+					ng-model="user.website">
+			</div>
+			<div class="form-group">
+				<label for="twitter">Twitter</label>
+				<input type="text" class="form-control" id="twitter"
+					placeholder="Enter your Twitter handle" name="twitter"
+					ng-model="user.twitter">
+			</div>
+		</div>
+		<div class="col-lg-4">
+			<!-- Attachments -->
+			<div class="form-group" flow-init flow-name="attachments.flow"
+				flow-files-submitted="$flow.upload()">
+				<label>Attachments</label>
+				<div ng-repeat="file in attachments.flow.files">
+					<span style="font-weight:bold">{{file.name}}</span>
+					<span class="filesize">({{file.size}} bytes)</span>
+					<span class="actions" ng-show="file.isComplete()"><button title="remove attachment"
+						class="btn btn-danger btn-xs" ng-click="file.cancel()">
+						<i class="fa fa-trash-o"></i></button></span>
+				</div>
+				<div class="progress" ng-show="$flow.isUploading()">
+					<div class="progress-bar" role="progressbar"
+						aria-valuenow="{{$flow.progress() * 100}}" aria-valuemin="0" aria-valuemax="100"
+						style="width: {{$flow.progress() * 100}}%;"></div>
+				</div>
+				<div>
+					<span class="btn btn-default btn-xs" flow-btn>Add attachment</span>
+					or <div style="margin-top:10px;height: 50px;border: 1px dashed #dddddd;border-radius: 5px;
+							padding-top: 15px;padding-left: 151px;color: #bbbbbb;" flow-drop
+							flow-drag-enter="class='alert-success'" flow-drag-leave="class=''"
+							ng-class="class">drop a file here</div>
+				</div>
+			</div>
+			<!-- Certificates -->
+			<div class="form-group" flow-init flow-name="certificates.flow"
+				flow-files-submitted="$flow.upload()">
+				<label>Certificates</label>
+				<div ng-repeat="file in certificates.flow.files">
+					<span style="font-weight:bold">{{file.name}}</span>
+					<span class="filesize">({{file.size}} bytes)</span>
+					<span class="actions" ng-show="file.isComplete()"><button title="remove attachment"
+						class="btn btn-danger btn-xs" ng-click="file.cancel()">
+						<i class="fa fa-trash-o"></i></button></span>
+				</div>
+				<div class="progress" ng-show="$flow.isUploading()">
+					<div class="progress-bar" role="progressbar"
+						aria-valuenow="{{$flow.progress() * 100}}" aria-valuemin="0" aria-valuemax="100"
+						style="width: {{$flow.progress() * 100}}%;"></div>
+				</div>
+				<div>
+					<span class="btn btn-default btn-xs" flow-btn>Add certificate</span>
+					or <div style="margin-top:10px;height: 50px;border: 1px dashed #dddddd;
+							border-radius: 5px;padding-top: 15px;padding-left: 151px;color: #bbbbbb;"
+							flow-drop flow-drag-enter="class='alert-success'"
+							flow-drag-leave="class=''" ng-class="class">drop a file here</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-lg-12">
+			<button type="submit" class="btn btn-primary" ng-click="submit()">Save</button>
+		</div>
+	</div>
+</div>

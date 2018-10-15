@@ -1,0 +1,23 @@
+<div id="desktop" ng-controller="LoginCtrl">
+	<div id="desktop-content">
+		<div class="login-head">
+			<div translate>welcome</div>
+		</div>
+		<!-- See bug #37651 for turning off autocomplete in login form -->
+		<form id="login" ng-submit="login()" class="glass-panel" autocomplete="off">
+			<span class="error" ng-show="authenticationError" translate>authentication_failed</span>
+			<fieldset id="inputs">
+				<input type="text" name="username" placeholder="username" ng-model="user.username">
+				<input type="password" name="password" placeholder="password" ng-model="user.password">
+			</fieldset>
+			<fieldset id="actions">
+				<input type="submit" id="submit" value="{{'log_in' | translate}}" class="glass-button" />
+				<select kendo-drop-down-list k-data-source="languageSource" 
+						k-data-text-field="'name'" k-data-value-field="'locale'" 
+						ng-model="selectedLanguage" k-on-change="selectLanguage(kendoEvent)"
+						data-bind="source: languageSource, value: selectedLanguage, events: {change: selectLanguage, dataBound: languagesLoaded}">
+				</select>
+			</fieldset>
+		</form>
+	</div>
+</div>

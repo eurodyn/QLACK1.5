@@ -1,0 +1,36 @@
+<section id="welcome" class="well" ng-controller="IndexCtrl">
+	<div class="clearfix">
+		<h3>Welcome to the Workflow component</h3>
+		<div class="description">
+			The Workflow module provides the necessary functionality for QBE users to create and manage workflows which can later be leveraged by their business applications. The Workflow Development Environment which is included in the QBE UI allows users to perform all actions related to the creation and management of workflows, such as the following:
+			<ul><li>Upload workflow definitions in BPMN2.0 format to create new workflows.</li>
+			<li>Create and manage different versions for each workflow.</li>
+			<li>Organise workflows with categories and tags to allow for easier reference.</li></ul>
+			Business applications can then use the QBE API to spawn new instances of specific workflows and perform tasks such as advancing a workflow to the next steps or retrieving and executing human tasks related to a running workflow.
+		</div>
+	</div>
+	<div class="clearfix">
+		<div class="pull-left">
+			<h3 translate>recent_projects</h3>
+		</div>
+		<div class="pull-right actions">
+			<select kendo-drop-down-list k-options="projects" k-option-label="'{{'select_project' | translate}}'" ng-model="selectedProjectId"></select>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-6 col-lg-3" ng-repeat="recentProject in recentProjects" repeat-done>
+				<div class="project bg-info">
+					<h4>{{ recentProject.name }}</h4>
+					<div class="row">
+						<div class="col-xs-8">
+							<div class="clearfix"><label translate>createdOn</label> {{ recentProject.createdOn  | qDate:'lll'}}</div>
+							<div class="clearfix"><label translate>createdBy</label> {{recentProject.createdBy.firstName}} {{recentProject.createdBy.lastName}}</div>
+						</div>
+						<div class="small-4 columns">
+							<a ui-sref='resources({projectId: recentProject.id })' class="btn btn-primary"><span translate>edit_workflows</span></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</section>

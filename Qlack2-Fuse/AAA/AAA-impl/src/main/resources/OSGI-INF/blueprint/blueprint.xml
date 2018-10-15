@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+    xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+	xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.0.0"
+	xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.0.0"
+	xmlns:jaxrs="http://cxf.apache.org/blueprint/jaxrs">
+
+	<!-- MANAGED PROPERTIES -->
+	<cm:property-placeholder
+		persistent-id="com.eurodyn.qlack2.fuse.aaa"
+		update-strategy="reload">
+		<cm:default-properties>
+			<cm:property name="permission.prioritisePositive" value="false" />
+			<cm:property name="ldap.enable" value="false" />
+			<cm:property name="ldap.url" value="ldap://localhost" />
+			<cm:property name="ldap.baseDN" value="dc=example,dc=com" />
+			<cm:property name="ldap.mapping.uid" value="uid" />
+			<cm:property name="ldap.mapping.gid" value="gid" />
+			<cm:property name="ldap.mapping.attrs" value="email-mail,firstName-givenName,lastName-sn" />
+		</cm:default-properties>
+	</cm:property-placeholder>
+
+	<!-- LOCAL BEANS & SERVICES -->
+	<bean id="AccountingServiceImpl"
+		  class="com.eurodyn.qlack2.fuse.aaa.impl.AccountingServiceImpl">
+		<jpa:context property="em" unitname="fuse-aaa" />
+		<tx:transaction method="*" value="Required" />
+	</bean>
+	<service id="AccountingService" ref="AccountingServiceImpl"
+			 interface="com.eurodyn.qlack2.fuse.aaa.api.AccountingService"/>
+
+ 	<bean id="GroupServiceImpl"
+		  class="com.eurodyn.qlack2.fuse.aaa.impl.GroupServiceImpl">
+		<jpa:context property="em" unitname="fuse-aaa" />
+		<tx:transaction method="*" value="Required" />
+	</bean>
+	<service id="GroupService" ref="GroupServiceImpl"
+			 interface="com.eurodyn.qlack2.fuse.aaa.api.GroupService"/>
+
+	<bean id="OperationServiceImpl"
+		  class="com.eurodyn.qlack2.fuse.aaa.impl.OperationServiceImpl">
+		<jpa:context property="em" unitname="fuse-aaa" />
+		<tx:transaction method="*" value="Required" />
+		<property name="prioritisePositive" value="${permission.prioritisePositive}" />
+		<cm:managed-properties persistent-id="com.eurodyn.qlack2.fuse.aaa" update-strategy="container-managed" />
+	</bean>
+	<service id="OperationService" ref="OperationServiceImpl"
+			 interface="com.eurodyn.qlack2.fuse.aaa.api.OperationService"/>
+
+	<bean id="OpTemplateServiceImpl"
+		  class="com.eurodyn.qlack2.fuse.aaa.impl.OpTemplateServiceImpl">
+		<jpa:context property="em" unitname="fuse-aaa" />
+		<tx:transaction method="*" value="Required" />
+	</bean>
+	<service id="OpTemplateService" ref="OpTemplateServiceImpl"
+			 interface="com.eurodyn.qlack2.fuse.aaa.api.OpTemplateService"/>
+
+	<bean id="ResourceServiceImpl"
+		  class="com.eurodyn.qlack2.fuse.aaa.impl.ResourceServiceImpl">
+		<jpa:context property="em" unitname="fuse-aaa" />
+		<tx:transaction method="*" value="Required" />
+	</bean>
+	<service id="ResourcesService" ref="ResourceServiceImpl"
+			 interface="com.eurodyn.qlack2.fuse.aaa.api.ResourceService"/>
+
+	<bean id="UserServiceImpl"
+		  class="com.eurodyn.qlack2.fuse.aaa.impl.UserServiceImpl">
+		<jpa:context property="em" unitname="fuse-aaa" />
+		<tx:transaction method="*" value="Required" />
+		<property name="accountingService" ref="AccountingServiceImpl"/>
+		<property name="ldapUserUtil" ref="LdapUserUtil"/>
+	</bean>
+	<service id="UserService" ref="UserServiceImpl"
+			 interface="com.eurodyn.qlack2.fuse.aaa.api.UserService"/>
+
+	<bean id="LdapUserUtil"
+		  class="com.eurodyn.qlack2.fuse.aaa.impl.LdapUserUtil">
+		<jpa:context property="em" unitname="fuse-aaa" />
+		<tx:transaction method="*" value="Required" />
+		<property name="ldapEnable" value="${ldap.enable}" />
+		<property name="ldapUrl" value="${ldap.url}" />
+		<property name="ldapBaseDN" value="${ldap.baseDN}" />
+		<property name="ldapMappingUid" value="${ldap.mapping.uid}" />
+		<property name="ldapMappingGid" value="${ldap.mapping.gid}" />
+		<property name="ldapMappingAttrs" value="${ldap.mapping.attrs}" />
+	</bean>
+
+	<reference id="tm" interface="javax.transaction.TransactionManager" />
+	<bean id="OperationsListener" init-method="init" destroy-method="destroy"
+		  class="com.eurodyn.qlack2.fuse.aaa.impl.listeners.OperationsListener">
+	  	<jpa:context property="em" unitname="fuse-aaa" />
+		<tx:transaction method="*" value="Required" />
+	  	<property name="operationService" ref="OperationServiceImpl"/>
+	  	<property name="templateService" ref="OpTemplateServiceImpl"/>
+	  	<property name="context" ref="blueprintBundleContext"/>
+	  	<property name="transactionManager" ref="tm"/>
+	</bean>
+	<service id="OperationsListenerService" ref="OperationsListener"
+ 			interface="org.osgi.service.event.EventHandler">
+        <service-properties>
+            <entry key="event.topics" value="org/osgi/framework/BundleEvent/STARTED"/>
+        </service-properties>
+	</service>
+
+</blueprint>

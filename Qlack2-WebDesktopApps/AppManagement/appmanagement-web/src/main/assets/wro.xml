@@ -1,0 +1,27 @@
+<groups xmlns="http://www.isdc.ro/wro">
+	<group name="appmanagement">
+		<js>/js/App.coffee</js>
+		<js>/js/Constants.coffee</js>
+		<js>/js/services/**.coffee</js>
+		<js>/js/controllers/**.coffee</js>
+
+		<css>/css/appmanagement.less</css>
+	</group>
+
+	<group name="appmanagement-vendor">
+		<js minimize="false">classpath:META-INF/resources/webjars/jquery/1.9.1/jquery.min.js</js>
+		<js minimize="false">webjar:angular.min.js</js>
+		<js minimize="false">/js-vendor/angular-cookies.min.js</js>
+		<js minimize="false">/js-vendor/kendo.web.min.js</js>
+		<js>/js-vendor/angular-kendo.js</js>
+		<js minimize="false">webjar:ui-bootstrap-tpls.min.js</js>
+		<js minimize="false">webjar:angular-ui-router.min.js</js>
+		<js minimize="false">webjar:angular-translate.min.js</js>
+		<js>webjar:angular-translate-storage-local.js</js>
+		<js>webjar:angular-translate-storage-cookie.js</js>
+		<js>/js-vendor/angular-translate-loader-partial.js</js>
+		<js minimize="false">webjar:SecuritySrvProvider.js</js>
+
+		<css minimize="false">webjar:font-awesome.min.css</css>
+	</group>
+</groups>

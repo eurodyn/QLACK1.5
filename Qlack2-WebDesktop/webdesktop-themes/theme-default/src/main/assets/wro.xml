@@ -1,0 +1,10 @@
+<groups xmlns="http://www.isdc.ro/wro">
+	<group name="wd-theme">
+		<css minimize="false">/css-vendor/kendo.bootstrap.min.css</css>
+		<css>/css/wd-theme.less</css>
+	</group>
+	<group name="wd-app-theme">
+		<css minimize="false">/css-vendor/kendo.bootstrap.min.css</css>
+		<css>/css/wd-app-theme.less</css>
+	</group>
+</groups>

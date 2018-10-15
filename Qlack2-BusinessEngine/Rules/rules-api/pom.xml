@@ -1,0 +1,66 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.eurodyn.qlack2.be</groupId>
+		<artifactId>rules</artifactId>
+		<version>1.2.8</version>
+		<relativePath>../</relativePath>
+	</parent>
+
+	<artifactId>rules-api</artifactId>
+	<packaging>bundle</packaging>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.eurodyn.qlack2.common</groupId>
+			<artifactId>common-lib</artifactId>
+			<version>${qlack2.common.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.eurodyn.qlack2.util</groupId>
+			<artifactId>audit-client-api</artifactId>
+			<version>${qlack2.util.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.eurodyn.qlack2.fuse</groupId>
+			<artifactId>idm-api</artifactId>
+			<version>${qlack2.fuse.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.eurodyn.qlack2.fuse</groupId>
+			<artifactId>eventpublisher-api</artifactId>
+			<version>${qlack2.fuse.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.eurodyn.qlack2.fuse</groupId>
+			<artifactId>rules-runtime-api</artifactId>
+			<version>${qlack2.fuse.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.eurodyn.qlack2.webdesktop</groupId>
+			<artifactId>webdesktop-api</artifactId>
+			<version>${qlack2.webdesktop.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.eurodyn.qlack2.be</groupId>
+			<artifactId>explorer-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<configuration>
+					<instructions>
+						<Bundle-Description>Qlack Business Engine - Rules (API)</Bundle-Description>
+					</instructions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

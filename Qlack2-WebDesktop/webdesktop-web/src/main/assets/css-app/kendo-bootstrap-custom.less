@@ -1,0 +1,148 @@
+@navbar-height: 35px;
+@h3-height: 23px;
+
+
+// Use for fixed navbars
+body.fixed-nav {
+	padding-top: @navbar-height + 15;
+}
+
+// Custom class to allow adding top margin to elements
+.top-buffer {
+	margin-top: 10px;
+}
+
+// Customise Bootstrap
+.nav, .pagination, .carousel, .panel-title a { 
+	cursor: pointer;
+}
+
+// Remove extra padding on the left of the navbar since we don't have brand
+.nav.navbar-nav {
+	margin-left: -10px;
+}
+
+// Give height to empty headings to avoid page "jumping" when
+// loading data
+h3 {
+	height: @h3-height;
+}
+
+.form-group {
+	margin-bottom: 5px;
+}
+
+.form-horizontal .control-label {
+	text-align: left;
+}
+
+input[type="radio"], input[type="checkbox"] {
+	margin-top: 0px;
+}
+
+// Customise Kendo
+// Reduce treeview size
+.k-widget.k-treeview {
+	span {
+		white-space: normal;
+		margin-top: 0;
+		margin-bottom: 0;
+		padding: 1px 2px;
+	}
+	
+	.k-icon.k-minus,
+	.k-icon.k-plus {
+		margin-left: -20px;
+	}
+}
+
+.k-textbox > input,
+.k-autocomplete .k-input,
+.k-picker-wrap .k-input,
+.k-numeric-wrap .k-input,
+.k-dropdown-wrap .k-input,
+.k-selectbox .k-input {
+	height: 1.6em;
+	line-height: 1.6em;
+}
+
+.k-picker-wrap .k-select,
+.k-numeric-wrap .k-select,
+.k-dropdown-wrap .k-select {
+	line-height: 1.8em;
+}
+
+// Reduce multi-select tab size
+.k-multiselect-wrap.k-floatwrap {
+	min-height: 20px;
+	
+	li.k-button {
+		line-height: 14px;
+	}
+}
+
+// Reduce Grid paddings and margins to reduce total size
+.k-grid {	
+	td {
+		padding-top: 1px;
+		padding-bottom: 1px;
+	}
+
+	.k-toolbar.k-grid-toolbar {
+		padding: 5px;
+	}
+	
+	.k-button {
+		min-width: 0 !important;
+		padding: 1px 5px;	
+	}
+	
+	.k-button.k-grid-edit,
+	.k-button.k-grid-delete,
+	.k-button.k-grid-update,
+	.k-button.k-grid-cancel {
+		
+		.k-icon {
+			margin: 0;
+		}
+	}
+}
+
+// Give full width to drop downs inside forms
+.form-group {
+	.k-widget.k-dropdown {
+		width: 100%;
+	}
+}
+
+// Override Kendo window styles to correctly display Bootstrap grid system
+.sizing(@type) {
+	-webkit-box-sizing: @type;
+	-moz-box-sizing: @type;
+	box-sizing: @type;
+}
+
+.k-window-content.k-content {
+	.form-control {
+		.sizing(border-box);
+	}
+	
+	.col {
+		&-xs, &-sm, &-md, &-lg {
+			&-1, &-2, &-3, &-4, &-5, &-6, &-7, &-8, &-9, &-10, &-11, &-12 {
+				.sizing(border-box);
+			}
+		}
+	}
+}
+
+// Styling for file-upload
+.uploadedFile {
+	margin-bottom: 15px;
+}
+
+div.fileUpload {
+	margin-top: 10px;
+	border-radius: 5px;
+	padding: 15px 0 15px 15px;
+}

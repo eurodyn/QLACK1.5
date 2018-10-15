@@ -1,0 +1,163 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.eurodyn.qlack2.be</groupId>
+		<artifactId>rules</artifactId>
+		<version>1.2.8</version>
+		<relativePath>../</relativePath>
+	</parent>
+
+	<artifactId>rules-impl</artifactId>
+	<packaging>bundle</packaging>
+
+	<dependencies>
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>${joda.version}</version>
+		</dependency>
+
+		<!-- Util -->
+		<dependency>
+			<groupId>com.eurodyn.qlack2.util</groupId>
+			<artifactId>validator-util</artifactId>
+			<version>${qlack2.util.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.eurodyn.qlack2.fuse</groupId>
+			<artifactId>rules-runtime-api</artifactId>
+			<version>${qlack2.fuse.version}</version>
+		</dependency>
+
+		<!-- QBE -->
+		<dependency>
+			<groupId>com.eurodyn.qlack2.be</groupId>
+			<artifactId>rules-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!-- Java EE -->
+		<dependency>
+			<groupId>org.apache.geronimo.specs</groupId>
+			<artifactId>geronimo-jta_1.1_spec</artifactId>
+			<version>${geronimo.jta.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.geronimo.specs</groupId>
+			<artifactId>geronimo-jpa_2.0_spec</artifactId>
+			<version>${geronimo.jpa2.version}</version>
+		</dependency>
+
+		<!-- OSGI -->
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.core</artifactId>
+			<version>${osgi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.felix</groupId>
+			<artifactId>org.apache.felix.eventadmin</artifactId>
+			<version>${felix.eventadmin.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.compendium</artifactId>
+			<version>${osgi.version}</version>
+		</dependency>
+
+		<!-- Javassist -->
+		<dependency>
+			<groupId>org.javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>${javassist.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>aspectj-maven-plugin</artifactId>
+				<configuration>
+					<complianceLevel>1.7</complianceLevel>
+					<verbose>true</verbose>
+					<showWeaveInfo>true</showWeaveInfo>
+					<aspectLibraries>
+						<aspectLibrary>
+							<groupId>com.eurodyn.qlack2.fuse</groupId>
+							<artifactId>idm-api</artifactId>
+						</aspectLibrary>
+					</aspectLibraries>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<configuration>
+					<instructions>
+						<Bundle-Description>Qlack Business Engine - Rules</Bundle-Description>
+						<Meta-Persistence>META-INF/persistence.xml</Meta-Persistence>
+						<!-- For hibernate runtime enhancement -->
+						<DynamicImport-Package>
+							org.hibernate.proxy,
+							javassist.util.proxy,
+							org.hibernate,
+							weblogic.jndi
+						</DynamicImport-Package>
+					</instructions>
+				</configuration>
+			</plugin>
+			<!-- Build-helper plugin used to deploy Karaf configuration file to maven repository -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>1.8</version>
+				<executions>
+					<execution>
+						<id>attach-artifacts</id>
+						<phase>package</phase>
+						<goals>
+							<goal>attach-artifact</goal>
+						</goals>
+						<configuration>
+							<artifacts>
+								<artifact>
+									<file>${basedir}/src/main/resources/OSGI-INF/karaf-config-admin.cfg</file>
+									<type>cfg</type>
+									<classifier>config-admin</classifier>
+								</artifact>
+							</artifacts>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+	</build>
+
+	<profiles>
+		<!-- JNDI context prefix for JBoss -->
+		<profile>
+			<id>qlack-jboss</id>
+			<activation>
+				<property>
+					<name>container</name>
+					<value>jboss</value>
+				</property>
+			</activation>
+			<properties>
+				<jndi.context>${jboss.jndi.context}</jndi.context>
+				<bundle.classifier>${jboss.bundle.classifier}</bundle.classifier>
+				<features.classifier>${jboss.features.classifier}</features.classifier>
+			</properties>
+		</profile>
+	</profiles>
+</project>

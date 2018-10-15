@@ -1,0 +1,64 @@
+<groups xmlns="http://www.isdc.ro/wro">
+	<group name="wd">
+		<js>/js/App.coffee</js>
+		<js>/js/Constants.coffee</js>
+		<js minimize="false">/js/controllers/**.coffee</js>
+		<js minimize="false">/js/services/**.coffee</js>
+		<js>/js/util/wd-util.coffee</js>
+
+		<css>/css/wd-reset.less</css>
+		<css>/css/wd-desktop.less</css>
+	</group>
+
+	<group name="wd-vendor">
+		<js minimize="false">webjar:modernizr.min.js</js>
+		<!-- Not using the webjar locator since multiple matches are found -->
+		<js minimize="false">classpath:META-INF/resources/webjars/jquery/1.9.1/jquery.min.js</js>
+		<js minimize="false">webjar:jquery.cookie.js</js>
+		<js minimize="false">webjar:angular.min.js</js>
+		<js minimize="false">/js-vendor/angular-cookies.min.js</js>
+		<js minimize="false">/js-vendor/kendo.web.min.js</js>
+		<js>/js-vendor/angular-kendo.js</js>
+		<js minimize="false">webjar:angular-ui-router.min.js</js>
+		<js minimize="false">webjar:SecuritySrvProvider.js</js>
+		<js>/js-vendor/jquery.clock.js</js>
+		<js>/js-vendor/jquery.contextmenu.js</js>
+		<js minimize="false">webjar:jquery.easing.min.js</js>
+		<js>/js-vendor/jquery.notifications.js</js>
+		<js>/js-vendor/jquery.md5.js</js>
+		<js minimize="false">webjar:soundmanager2-jsmin.js</js>
+		<js minimize="false">/js-vendor/jquery.qtip.min.js</js>
+		<js>webjar:jquery.form.js</js>
+		<js>webjar:cometd.js</js>
+		<js>webjar:TimeSyncExtension.js</js>
+		<js>webjar:TimeStampExtension.js</js>
+		<js>webjar:AckExtension.js</js>
+		<js>webjar:jquery.cometd.js</js>
+		<js>webjar:jquery.cometd-timesync.js</js>
+		<js>webjar:jquery.cometd-timestamp.js</js>
+		<js>webjar:jquery.cometd-ack.js</js>
+		<js>/js-vendor/jquery.serializeObject.js</js>
+		<js minimize="false">webjar:angular-translate.min.js</js>
+		<js>webjar:angular-translate-storage-local.js</js>
+		<js>webjar:/angular-translate-storage-cookie.js</js>
+		<js>/js-vendor/angular-translate-loader-partial.js</js>
+		<js>webjar:angular-translate-handler-log.js</js>
+		<js>/js-vendor/angular-animate.min.js</js>
+
+		<css>/css-vendor/H5BP.css</css>
+		<css minimize="false">webjar:font-awesome.min.css</css>
+		<css>/css-vendor/jquery.contextmenu.css</css>
+		<css>/css-vendor/jquery.notifications.css</css>
+		<css>/css-vendor/jquery.qtip.min.css</css>
+		<css>/css-vendor/kendo.common.min.css</css>
+		<css>/css-vendor/kendo.rtl.min.css</css>
+		<css>webjar:normalize.css</css>
+	</group>
+
+	<group name="wd-app">
+		<css minimize="false">/css-app/bootstrap.min.css</css>
+		<css minimize="false">/css-app/kendo.common-bootstrap.min.css</css>
+		<css minimize="false">/css-app/kendo.rtl.min.css</css>
+		<css>/css-app/kendo-bootstrap-custom.less</css>
+	</group>
+</groups>

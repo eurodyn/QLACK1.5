@@ -1,0 +1,87 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.eurodyn.qlack2.webdesktop.apps</groupId>
+		<artifactId>webdesktop-apps</artifactId>
+		<version>1.2.0</version>
+		<relativePath>../</relativePath>
+	</parent>
+
+	<artifactId>webdesktop-apps-karaf-features</artifactId>
+	<packaging>pom</packaging>
+
+	<properties>
+		<groupId>${project.groupId}</groupId>
+		<artifactId>${project.artifactId}</artifactId>
+		<version>${project.version}</version>
+		<packaging>xml</packaging>
+		<file>target/classes/features/features.xml</file>
+		<classifier>${features.classifier}</classifier>
+	</properties>
+
+	<build>
+		<plugins>
+			<!-- The resources phase is not executed with pom packaging so we need
+			to bind the resources plugin to the package phase in order to filter
+			the features.xml file before installing it in the repo -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+				<executions>
+					<execution>
+						<id>filter-resources</id>
+						<goals>
+							<goal>resources</goal>
+						</goals>
+						<phase>package</phase>
+					</execution>
+				</executions>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-install-plugin</artifactId>
+				<version>2.4</version>
+				<executions>
+					<execution>
+						<phase>install</phase>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+	</build>
+
+	<profiles>
+		<!-- JNDI context prefix for JBoss -->
+		<profile>
+			<id>qlack-jboss</id>
+			<activation>
+				<property>
+					<name>container</name>
+					<value>jboss</value>
+				</property>
+			</activation>
+			<properties>
+				<jndi.context>${jboss.jndi.context}</jndi.context>
+				<bundle.classifier>${jboss.bundle.classifier}</bundle.classifier>
+				<features.classifier>${jboss.features.classifier}</features.classifier>
+			</properties>
+		</profile>
+	</profiles>
+
+</project>

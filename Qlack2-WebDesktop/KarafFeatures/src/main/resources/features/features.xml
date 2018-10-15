@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ***************************************************************************
+N E V E R auto-format this file in Eclipse. If you break a <bundle> in more than
+a single line, Karaf 3.0.0 fails to restart.
+ *************************************************************************** -->
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.0.0"
+	name="QLACK-WEBDESKTOP">
+	<feature description="Qlack - Webdesktop" name="qlack-webdesktop" version="${project.version}">
+		<feature version="${cxf.version}">cxf</feature>
+		<feature>eventadmin</feature>
+		<feature>war</feature>
+		<feature version="${qlack2.common.version}">qlack-common</feature>
+		<feature version="${jackson.version}">qlack-repack-jackson</feature>
+		<feature version="${qlack2.fuse.version}">qlack-fuse-caching-client</feature>
+		<feature version="${qlack2.fuse.version}">qlack-fuse-idm</feature>
+		<feature version="${cometd.version}">qlack-repack-cometd</feature>
+		<feature version="${qlack2.fuse.version}">qlack-fuse-lexicon</feature>
+		<feature version="${qlack2.fuse.version}">qlack-fuse-eventpublisher</feature>
+		<feature version="${qlack2.util.version}">qlack-util-angularjs-security-idm</feature>
+		<feature version="${qlack2.util.version}">qlack-util-rest-util</feature>
+		<bundle>mvn:commons-beanutils/commons-beanutils/${commons.beanutils.version}</bundle>
+		<bundle>mvn:org.apache.commons/commons-lang3/${commons.lang3.version}</bundle>
+		<bundle>mvn:org.yaml/snakeyaml/${snakeyaml.version}</bundle>
+		<bundle>mvn:joda-time/joda-time/${joda.version}</bundle>
+		<bundle>mvn:com.eurodyn.qlack2.webdesktop/webdesktop-api/${project.version}</bundle>
+		<bundle>mvn:com.eurodyn.qlack2.webdesktop/webdesktop-impl/${project.version}/jar/${bundle.classifier}</bundle>
+		<bundle>mvn:com.eurodyn.qlack2.webdesktop/webdesktop-web/${project.version}</bundle>
+		<bundle>mvn:com.eurodyn.qlack2.webdesktop.themes/theme-default/${project.version}</bundle>
+	</feature>
+</features>

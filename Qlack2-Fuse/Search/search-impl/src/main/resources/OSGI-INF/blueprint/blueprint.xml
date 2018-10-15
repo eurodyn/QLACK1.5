@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.0.0" xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.0.0"
+	xmlns:jaxrs="http://cxf.apache.org/blueprint/jaxrs"
+	xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0">
+
+	<!-- MANAGED PROPERTIES -->
+
+	<!-- EXTERNAL SERVICES -->
+
+	<!-- LOCAL BEANS & SERVICES -->
+	<bean id="IndexServiceImpl" class="com.eurodyn.qlack2.fuse.search.impl.IndexServiceImpl" 
+		init-method="init" destroy-method="destroy">
+	</bean>
+	<service id="IndexService" ref="IndexServiceImpl"
+		interface="com.eurodyn.qlack2.fuse.search.api.IndexService" />
+		
+		<bean id="SearchServiceImpl" class="com.eurodyn.qlack2.fuse.search.impl.SearchServiceImpl" 
+		init-method="init" destroy-method="destroy">
+	</bean>
+	<service id="SearchService" ref="SearchServiceImpl"
+		interface="com.eurodyn.qlack2.fuse.search.api.SearchService" />
+
+</blueprint>

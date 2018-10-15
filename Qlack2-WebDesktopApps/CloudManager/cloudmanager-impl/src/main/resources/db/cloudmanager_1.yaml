@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: cloudmanager_1
+      author: European Dynamics SA (qlack2-dev@eurodyn.com)
+      changes:
+        - createTable:
+            tableName: clm_node
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(256)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ip
+                  type: varchar(15)
+                  constraints:
+                    nullable: false

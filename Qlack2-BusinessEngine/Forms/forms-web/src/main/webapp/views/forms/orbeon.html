@@ -1,0 +1,62 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width" />
+	<title>Forms Management</title>
+	<script src="//code.jquery.com/jquery-1.9.1.min.js" data-semver="2.0.3" data-require="jquery"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			token = sessionStorage.getItem("X-Qlack-Fuse-IDM-Token");
+			user = JSON.parse(token);
+
+			var formVersionId = getUrlVars()["formVersionId"];
+			
+			var locationURL = $(location).attr('href');
+			var index = locationURL.indexOf("apps/forms/views/forms/orbeon.html");
+			url = locationURL.substring(0, index) + "qbe-proxy/fr/orbeon/builder/edit/" + formVersionId + "?orbeon-embeddable=true";
+
+			$.ajaxPrefilter(function(requestOptions, ajaxOptions, jqXHR) {
+				jqXHR.setRequestHeader("X-Qlack-Fuse-IDM-Token", JSON.stringify(user.ticket));
+			});
+						
+			$("#internalEditor").load(url, function() {
+				console.log("ORBEON" + ORBEON);
+				console.log("url" + url);
+				if ((typeof ORBEON !== "undefined" && ORBEON !== null) && !document.all) {
+					ORBEON.xforms.Init.document();
+				}
+
+				YAHOO.util.Connect.initHeader("X-Qlack-Fuse-IDM-Token", JSON.stringify(user.ticket), true);
+
+				//TODO hide new button
+				//In order to hide this specific button you should do the following:
+				//Open the WEB-INF/lib/orbeon-form-builder.jar and edit the forms/orbeon/builder/form/form.xhtml file.
+				//Locate line <xh:div class="fr-buttons"> and add an id to the <xf:trigger> element for the New button.
+				//Repack the orbeon-form-builder.jar and the orbeon.war and update the orbeon bundle in karaf
+				$("#fr-button-summary").hide();
+				$("#fb-test-button-group").hide();
+				$("#fb-publish-button").hide();
+			});
+
+		});
+
+		function getUrlVars()
+		{
+			var vars = [], hash;
+			var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+			for(var i = 0; i < hashes.length; i++)
+			{
+				hash = hashes[i].split('=');
+				vars.push(hash[0]);
+				vars[hash[0]] = hash[1];
+			}
+			return vars;
+		}
+	</script>
+	<div id="internalEditor"></div>
+</body>
+</html>

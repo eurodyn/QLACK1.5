@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+	xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.0.0" xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.0.0"
+	xmlns:jaxrs="http://cxf.apache.org/blueprint/jaxrs">
+
+	<!-- MANAGED PROPERTIES -->
+	<cm:property-placeholder persistent-id="ZooKeeper"
+		update-strategy="reload">
+		<cm:default-properties>
+			<!-- The name of this node. Leave empty to use 
+				InetAddress.getLocalHost().getHostName(). Note that this may not
+				necessarily resolve to the "real" hostname in multihome systems.-->
+			<cm:property name="nodeName" value="" />
+			<!-- The directory to store ZooKeeper transaction log. Leave empty to 
+				use java.io.tmpdir/nodeName/zk/tx directory. Note that in some systems
+				access to the java.io.tmpdir may be restricted or denied.-->
+			<cm:property name="zkTxDir" value="" />
+			<!-- The directory to store ZooKeeper log. Leave empty to use 
+				java.io.tmpdir/nodeName/zk/log	directory. -->
+			<cm:property name="zkLogDir" value="" />
+			<!-- ZooKeeper ticktime. -->
+			<cm:property name="zkTickTime" value="2000" />
+			<!-- ZooKeeper number of connections. -->
+			<cm:property name="zkConnections" value="5000" />
+			<!-- ZooKeeper port. Leave empty to use default port. -->
+			<cm:property name="zkPort" value="" />
+			<!-- The IP Address to bind ZooKeeper on. Leave empty to bind to
+				all local IPs and use the default port. -->
+			<cm:property name="zkIPAddress" value="" />
+		</cm:default-properties>
+	</cm:property-placeholder>
+
+	<!-- LOCAL BEANS & SERVICES -->
+	<bean id="ZookeeperManagerServiceImpl" class="com.eurodyn.qlack2.fuse.zookeeper.impl.ZookeeperManagerServiceImpl"
+		init-method="init" destroy-method="destroy">
+		<property name="nodeName" value="${nodeName}" />
+		<property name="zkTxDir" value="${zkTxDir}" />
+		<property name="zkLogDir" value="${zkLogDir}" />
+		<property name="zkTickTime" value="${zkTickTime}" />
+		<property name="zkConnections" value="${zkConnections}" />
+		<property name="zkPort" value="${zkPort}" />
+		<property name="zkIPAddress" value="${zkIPAddress}" />
+	</bean>
+	<service interface="com.eurodyn.qlack2.fuse.zookeeper.api.ZookeeperManagerService" 
+		ref="ZookeeperManagerService" />
+
+	<!-- SHELL COMMANDS -->
+	<command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
+		<command name="qlack/zk-start">
+			<action class="com.eurodyn.qlack2.fuse.zookeeper.shell.StartCommand">
+				<property name="zookeeperManager" ref="ZookeeperManagerServiceImpl"/>
+			</action>
+		</command>
+		<command name="qlack/zk-stop">
+			<action class="com.eurodyn.qlack2.fuse.zookeeper.shell.StopCommand">
+				<property name="zookeeperManager" ref="ZookeeperManagerServiceImpl"/>
+			</action>
+		</command>
+	</command-bundle>
+
+
+</blueprint>

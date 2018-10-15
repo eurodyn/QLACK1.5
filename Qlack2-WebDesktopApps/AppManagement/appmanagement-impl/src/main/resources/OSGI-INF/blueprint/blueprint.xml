@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.0.0" xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.0.0">
+
+	<!-- EXTERNAL SERVICES -->
+	<reference id="DesktopService"
+		interface="com.eurodyn.qlack2.webdesktop.api.DesktopService" />
+	<reference id="IDMService" 
+		interface="com.eurodyn.qlack2.fuse.idm.api.IDMService" />
+	<reference id="SecurityService"
+		interface="com.eurodyn.qlack2.webdesktop.api.SecurityService" />
+	<reference id="DesktopGroupService"
+		interface="com.eurodyn.qlack2.webdesktop.api.DesktopGroupService" />
+	<reference id="DesktopUserService"
+		interface="com.eurodyn.qlack2.webdesktop.api.DesktopUserService" />
+	<reference id="EventPublisherService"
+		interface="com.eurodyn.qlack2.fuse.eventpublisher.api.EventPublisherService" />
+	<reference id="AuditClientService"
+		interface="com.eurodyn.qlack2.util.auditclient.api.AuditClientService" />
+		
+	<!-- LOCAL BEANS & SERVICES -->
+	<bean id="AppManagementApplication"
+		class="com.eurodyn.qlack2.webdesktop.apps.appmanagement.impl.ApplicationServiceImpl">
+		<property name="desktopService" ref="DesktopService" />
+		<property name="idmService" ref="IDMService"/>
+		<property name="eventPublisher" ref="EventPublisherService" />
+		<property name="audit" ref="AuditClientService" />
+	</bean>
+	<service id="AppManagementApplicationService" 
+		interface="com.eurodyn.qlack2.webdesktop.apps.appmanagement.api.ApplicationService"
+		ref="AppManagementApplication">
+	</service>
+	
+	<bean id="AppManagementConfigBean"
+		class="com.eurodyn.qlack2.webdesktop.apps.appmanagement.impl.ConfigServiceImpl">
+		<property name="security" ref="SecurityService" />
+		<property name="idmService" ref="IDMService"/>
+		<property name="desktopUserService" ref="DesktopUserService" />
+		<property name="desktopGroupService" ref="DesktopGroupService" />
+		<property name="audit" ref="AuditClientService" />
+		<tx:transaction method="*" value="Required" />
+	</bean>
+	<service id="AppManagementConfigService" ref="AppManagementConfigBean"
+		interface="com.eurodyn.qlack2.webdesktop.apps.appmanagement.api.ConfigService">
+	</service>
+	
+</blueprint>

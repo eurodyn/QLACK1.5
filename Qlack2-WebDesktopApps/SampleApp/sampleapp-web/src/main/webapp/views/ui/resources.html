@@ -1,0 +1,9 @@
+<div class="row" ng-controller="ResourcesCtrl">		
+	<div class="col-sm-3 col-md-2">
+		<div id="resourceList" kendo-tree-view="resourceTree" k-data-source="resourceTreeSource" 
+			k-data-image-url-field="'icon'"
+			k-on-data-bound="expandTree(kendoEvent)"  k-on-select="selectForm(kendoEvent)"></div>
+	</div>
+	
+	<div ui-view autoscroll="false"></div>
+</div>

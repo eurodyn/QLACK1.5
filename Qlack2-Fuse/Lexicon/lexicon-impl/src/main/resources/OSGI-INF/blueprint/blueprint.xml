@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.0.0" xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.0.0"
+	xmlns:jaxrs="http://cxf.apache.org/blueprint/jaxrs"
+	xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0">
+
+	<!-- MANAGED PROPERTIES -->
+	<cm:property-placeholder persistent-id="com.eurodyn.qlack2.fuse.lexicon"
+		update-strategy="reload">
+		<cm:default-properties>
+			<!-- The amount of time to cache translations for (1 day). -->
+			<cm:property name="translationsCacheTime" value="86400000" />
+		</cm:default-properties>
+	</cm:property-placeholder>
+
+	<!-- EXTERNAL SERVICES -->
+	<reference-list id="CacheServiceList"
+		interface="com.eurodyn.qlack2.fuse.caching.client.api.CacheService"
+		availability="optional" />
+
+	<!-- LOCAL BEANS & SERVICES -->
+	<bean id="GroupServiceImpl" class="com.eurodyn.qlack2.fuse.lexicon.impl.GroupServiceImpl">
+		<jpa:context property="em" unitname="fuse-lexicon" />
+		<tx:transaction method="*" value="Required" />
+		<property name="cacheServiceList" ref="CacheServiceList" />
+		<cm:managed-properties persistent-id="com.eurodyn.qlack2.fuse.lexicon" update-strategy="container-managed" />
+		<property name="translationsCacheTime" value="${translationsCacheTime}" />
+	</bean>
+	<service id="GroupService" ref="GroupServiceImpl"
+		interface="com.eurodyn.qlack2.fuse.lexicon.api.GroupService" />
+
+	<bean id="KeyServiceImpl" class="com.eurodyn.qlack2.fuse.lexicon.impl.KeyServiceImpl">
+		<jpa:context property="em" unitname="fuse-lexicon" />
+		<tx:transaction method="*" value="Required" />
+		<property name="cacheServiceList" ref="CacheServiceList" />
+		<cm:managed-properties persistent-id="com.eurodyn.qlack2.fuse.lexicon" update-strategy="container-managed" />
+		<property name="translationsCacheTime" value="${translationsCacheTime}" />
+	</bean>
+	<service id="KeyService" ref="KeyServiceImpl"
+		interface="com.eurodyn.qlack2.fuse.lexicon.api.KeyService" />
+
+	<bean id="LanguageServiceImpl"
+		class="com.eurodyn.qlack2.fuse.lexicon.impl.LanguageServiceImpl">
+		<jpa:context property="em" unitname="fuse-lexicon" />
+		<tx:transaction method="*" value="Required" />
+		<property name="keyService" ref="KeyServiceImpl" />
+		<property name="cacheServiceList" ref="CacheServiceList" />
+	</bean>
+	<service id="LanguageService" ref="LanguageServiceImpl"
+		interface="com.eurodyn.qlack2.fuse.lexicon.api.LanguageService" />
+
+	<bean id="TemplateServiceImpl"
+		class="com.eurodyn.qlack2.fuse.lexicon.impl.TemplateServiceImpl">
+		<jpa:context property="em" unitname="fuse-lexicon" />
+		<tx:transaction method="*" value="Required" />
+	</bean>
+	<service id="TemplateService" ref="TemplateServiceImpl"
+		interface="com.eurodyn.qlack2.fuse.lexicon.api.TemplateService" />
+
+	<reference id="tm" interface="javax.transaction.TransactionManager" />
+	<bean id="TranslationsListener" init-method="init" destroy-method="destroy"
+		class="com.eurodyn.qlack2.fuse.lexicon.impl.listener.TranslationsListener">
+		<jpa:context property="em" unitname="fuse-lexicon" />
+		<tx:transaction method="*" value="Required" />
+		<property name="groupService" ref="GroupServiceImpl" />
+		<property name="languageService" ref="LanguageServiceImpl" />
+		<property name="keyService" ref="KeyServiceImpl" />
+		<property name="context" ref="blueprintBundleContext" />
+		<property name="transactionManager" ref="tm" />
+	</bean>
+	<service id="TranslationsListenerService" ref="TranslationsListener"
+		interface="org.osgi.service.event.EventHandler">
+		<service-properties>
+			<entry key="event.topics" value="org/osgi/framework/BundleEvent/STARTED" />
+		</service-properties>
+	</service>
+
+
+</blueprint>

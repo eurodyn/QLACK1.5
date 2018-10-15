@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.0.0" xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.0.0"
+	xmlns:jaxrs="http://cxf.apache.org/blueprint/jaxrs"
+	xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0">
+
+	<!-- MANAGED PROPERTIES -->
+	<cm:property-placeholder persistent-id="com.eurodyn.qlack2.util.fileuploadimpl"
+		update-strategy="reload">
+		<cm:default-properties>
+			<!-- Enables the abandoned files cleanup service -->
+			<cm:property name="enableCleanup" value="true" />
+			<!-- How often should we try to clean files (msec)? -->
+			<cm:property name="cleanupInterval" value="60000" />
+			<!-- The threshold to consider a file as abandoned (msec) -->
+			<cm:property name="cleanupThreshold" value="3600000" />
+			<!-- The listening address of ClamAV -->
+			<cm:property name="clamAV" value="localhost:3310" />
+		</cm:default-properties>
+	</cm:property-placeholder>
+
+	<!-- EXTERNAL SERVICES -->
+	<reference id="IDMService" interface="com.eurodyn.qlack2.fuse.idm.api.IDMService" />
+	<reference id="tm" interface="javax.transaction.TransactionManager" />
+
+	<!-- LOCAL SERVICES & BEANS -->
+	<bean id="FileUploadImpl" class="com.eurodyn.qlack2.util.fileupload.impl.FileUploadImpl">
+		<jpa:context property="em" unitname="fuse-fileupload" />
+		<tx:transaction method="*" value="Required" />
+		<property name="idmService" ref="IDMService" />
+		<property name="clamAV" value="${clamAV}" />
+	</bean>
+	<service interface="com.eurodyn.qlack2.util.fileupload.api.FileUpload"
+		ref="FileUploadImpl" />
+
+	<bean id="CleanupBean"
+		class="com.eurodyn.qlack2.util.fileupload.impl.cleanup.CleanupBean"
+		init-method="init" destroy-method="destroy">
+		<jpa:context property="entityManager" unitname="fuse-fileupload" />
+		<tx:transaction method="*" value="Required" />
+		<property name="transactionManager" ref="tm" />
+		<cm:managed-properties persistent-id="com.eurodyn.qlack2.util.fileuploadimpl" 
+				update-strategy="container-managed" />
+		<property name="enableCleanup" value="${enableCleanup}" />
+		<property name="cleanupInterval" value="${cleanupInterval}" />
+		<property name="cleanupThreshold" value="${cleanupThreshold}" />
+	</bean>
+</blueprint>

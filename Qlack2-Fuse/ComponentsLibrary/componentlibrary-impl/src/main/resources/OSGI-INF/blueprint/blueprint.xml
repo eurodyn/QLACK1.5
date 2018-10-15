@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.0.0" xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.0.0"
+	xmlns:jaxrs="http://cxf.apache.org/blueprint/jaxrs">
+
+	<bean id="DirectoryServiceImpl"
+		class="com.eurodyn.qlack2.fuse.componentlibrary.impl.DirectoryServiceImpl">
+		<jpa:context property="em" unitname="fuse-componentlibrary" />
+		<tx:transaction method="*" value="Required" />
+	</bean>
+	<service id="DirectoryService" ref="DirectoryServiceImpl"
+		interface="com.eurodyn.qlack2.fuse.componentlibrary.api.DirectoryService" />
+		
+	<bean id="PermissionsServiceImpl"
+		class="com.eurodyn.qlack2.fuse.componentlibrary.impl.PermissionsServiceImpl">
+		<jpa:context property="em" unitname="fuse-componentlibrary" />
+		<tx:transaction method="*" value="Required" />
+	</bean>
+	<service id="PermissionsService" ref="PermissionsServiceImpl"
+		interface="com.eurodyn.qlack2.fuse.componentlibrary.api.PermissionsService" />
+		
+	<bean id="RegistrationServiceImpl"
+		class="com.eurodyn.qlack2.fuse.componentlibrary.impl.RegistrationServiceImpl">
+		<jpa:context property="em" unitname="fuse-componentlibrary" />
+		<tx:transaction method="*" value="Required" />
+	</bean>
+	<service id="RegistrationService" ref="RegistrationServiceImpl"
+		interface="com.eurodyn.qlack2.fuse.componentlibrary.api.RegistrationService" />
+		
+	<bean id="UserInteractionServiceImpl"
+		class="com.eurodyn.qlack2.fuse.componentlibrary.impl.UserInteractionServiceImpl">
+		<jpa:context property="em" unitname="fuse-componentlibrary" />
+		<tx:transaction method="*" value="Required" />
+		<property name="gadgetDirectoryService" ref="DirectoryServiceImpl" />
+	</bean>
+	<service id="UserInteractionService" ref="UserInteractionServiceImpl"
+		interface="com.eurodyn.qlack2.fuse.componentlibrary.api.UserInteractionService" />
+</blueprint>

@@ -1,0 +1,28 @@
+<div class="row" ng-controller="LocalisationCtrl">
+
+	<script id="dropDownTemplate" type="text/x-kendo-template">
+		<span translate>#=key#</span>
+	</script>
+
+	<span translate>static_translation</span>
+	<br/>
+	<span>{{translationKey | translate}}</span>
+	<br>
+	An attribute translation: <img src="/apps/sampleapp/img/app-sampleapp-icon-small.png" title="{{'attribute_translation' | translate}}" />
+	<br/>
+	<span translate translate-value-number="10">value_translation</span>
+	<br/>
+	Or via the controller: <span translate translate-values="{{translationValue}}">value_translation</span>
+	<br/>
+	Or in a dynamic translation: <span>{{dynamicTranslationKey | translate: '{number: 5}'}}</span>
+	<button ng-click="translationAlert()">Click me</button>
+	<br/>
+	<span translate>missing_translation</span>
+	<br/><br/>
+	<div kendo-drop-down-list k-data-source="dataSource" 
+		k-template="dropDownTemplate" k-value-template="dropDownTemplate"></div>
+		
+	<br/><br/>
+	And a date: {{ 1304375948024 | qDate:'l' }}
+	<button ng-click="dateAlert()">Click me</button>
+</div>

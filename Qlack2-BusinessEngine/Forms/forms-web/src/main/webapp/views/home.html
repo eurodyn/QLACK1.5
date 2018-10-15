@@ -1,0 +1,38 @@
+<section id="welcome" class="well" ng-controller="HomeCtrl">
+	<div class="row">
+		<h3>Welcome to the Forms component</h3>
+		<div class="description">
+			The Forms module combines all the functionalities necessary to define and use custom XForms in a business application. As with other QBE components users can use the Forms Development Environment to create and edit available forms. The Forms Development Environment provides a text editor for editing the XForms source, while a forms editor is also available for editing forms graphically. This editor is provided by Orbeon, which is used to provide XForms functionalities to the Forms Runtime, and therefore support all functionalities supported by the Orbeon Form Builder. The Forms Development environment can therefore be used by QBE users in order to:
+			<ul><li>Create and edit forms.</li>
+			<li>Create form templates which can be used as building blocks of other forms.</li>
+			<li>Manage form versions.</li>
+			<li>Organise forms using categories and tags.</li></ul>
+			QBE also supports defining a set of business rules which should be used during form validation in order to provide more advanced forms processing.	
+		</div>
+	</div>
+	<div class="clearfix">
+		<div class="pull-left">
+			<h3 translate>recent_projects</h3>
+		</div>
+		<div class="pull-right actions">
+			<select kendo-drop-down-list="projectsDropDownList" k-data-source="projectsDataSource" k-data-text-field="'name'" k-data-value-field="'id'"
+					k-option-label="selectProjectTitle" k-rebind="selectProjectTitle" k-on-change="selectProject(kendoEvent)"></select>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-6 col-lg-3" ng-repeat="recentProject in recentProjects" repeat-done>
+			<div class="project bg-info">
+				<h4>{{ recentProject.name }}</h4>
+				<div class="row">
+					<div class="col-xs-8">
+						<div class="clearfix"><label translate>createdOn</label> {{ recentProject.createdOn  | qDate:'lll'}}</div>
+						<div class="clearfix"><label translate>createdBy</label> {{recentProject.createdBy.firstName}} {{recentProject.createdBy.lastName}}</div>
+					</div>
+					<div class="col-xs-4">
+						<button class="btn btn-primary" ng-click="editProject(recentProject.id)"><i class="fa fa-pencil"></i> <span translate>edit</span></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<blueprint
+	xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+	xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.0.0"
+	xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.0.0"
+	xmlns:jaxrs="http://cxf.apache.org/blueprint/jaxrs"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ext="http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.0.0"
+	xsi:schemaLocation="
+		http://www.osgi.org/xmlns/blueprint/v1.0.0
+		http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+		http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0
+		http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0/blueprint-cm-1.0.0.xsd">
+
+	<!-- Allow the use of system properties -->
+    <ext:property-placeholder placeholder-prefix="$[" placeholder-suffix="]"/>
+	
+	<!-- MANAGED PROPERTIES -->
+	<cm:property-placeholder persistent-id="com.eurodyn.qlack2.be.forms.proxy" update-strategy="reload">
+		<cm:default-properties>
+            <cm:property name="allowed.origins" value="$[allowed.origins]" />
+        </cm:default-properties>
+	</cm:property-placeholder>
+
+	<!-- LOCAL BEANS & SERVICES -->
+	<bean id="ConfigServiceImpl"
+		class="com.eurodyn.qlack2.be.forms.proxy.impl.ConfigServiceImpl">
+		<property name="allowedOrigins" value="${allowed.origins}" />
+	</bean>
+	<service id="ConfigService" ref="ConfigServiceImpl"
+		interface="com.eurodyn.qlack2.be.forms.proxy.api.ConfigService">
+	</service>
+
+	<bean id="proxyServlet" class="com.eurodyn.qlack2.be.forms.proxy.servlet.ProxyServlet">
+		<property name="configService" ref="ConfigServiceImpl" />
+	</bean>
+	<service id="proxyService" ref="proxyServlet" interface="javax.servlet.Servlet">
+		<service-properties>
+			<!-- XXX must prepend context path here -->
+			<!-- <entry key="alias" value="/qbe-proxy/*" />
+			<entry key="init.targetUri" value="http://localhost:8181/orbeon" />
+			<entry key="init.proxy" value="/qbe-proxy/" />
+			<entry key="target.proxy" value="/emapis/qbe/qbe-proxy/"/> -->
+			<entry key="alias" value="$[qbe.alias]" />
+			<entry key="init.targetUri" value="$[init.targetUri]" />
+			<entry key="init.proxy" value="$[init.proxy]" />
+			<entry key="init.targetProxy" value="$[target.proxy]" />
+		</service-properties>
+	</service>
+</blueprint>

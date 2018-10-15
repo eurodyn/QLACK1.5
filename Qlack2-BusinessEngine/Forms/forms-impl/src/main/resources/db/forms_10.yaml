@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: forms_10
+      author: egian
+      changes:
+        - addColumn:
+            tableName: fmn_form_version_request_info
+            columns:
+              - column:
+                  name: view_mode
+                  type: boolean
+                  defaultValue: false
+                  constraints:
+                    nullable: false

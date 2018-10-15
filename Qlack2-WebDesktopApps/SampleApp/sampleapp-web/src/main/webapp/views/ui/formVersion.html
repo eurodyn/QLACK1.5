@@ -1,0 +1,42 @@
+<div class="well inner-well top-buffer" ng-controller="FormVersionCtrl">
+	<div class="row">
+		<div class="col-sm-6">
+			<script id="versionsListTemplate" type="text/x-kendo-template">
+				<div>
+					<i class="fa fa-circle-o"></i> <span>#=data.name#</span>
+				</div>
+			</script>
+			<select kendo-drop-down-list k-data-source="versionsDataSource" 
+				k-data-value-field="'id'" k-data-text-field="'name'" k-template="versionsListTemplate" 
+				ng-model="formVersion.id"
+				k-on-select="selectVersion(kendoEvent)">
+			</select>
+			<i id="lock-status" class="fa fa-lock fa-lg" tooltip="{{'locked_by'|translate: '{user: \'' + formVersion.lockedBy + '\', date: \'' + lockedOn + '\'}'}}"></i>
+			<p class="form-control-static text-muted small">Created by John Doe on {{ 1304375948024 | qDate:'lll' }}</p>
+			<p class="form-control-static text-muted small">Last modified by John Doe on {{ 1304375948024 | qDate:'lll' }}</p>
+		</div>
+		<div class="col-sm-6">
+			<div class="form-group">
+				<label for="version-description" class="col-sm-4 control-label">Description</label>
+				<div class="col-sm-8">
+					<textarea class="form-control" id="version-description"></textarea>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="clearfix top-buffer">
+		<tabset>
+			<tab heading="Form">
+				<div class="top-buffer">
+					<textarea class="form-control"></textarea>
+				</div>
+			</tab>
+			<tab heading="Conditions">
+				<div class="top-buffer">
+					<div kendo-grid k-data-source="conditionsDataSource" k-sortable="true" k-resizable="false" 
+						k-editable='{"mode": "inline"}' k-toolbar='conditionsToolbar' k-columns='conditionsColumns'></div>
+				</div>
+			</tab>
+		</tabset>
+	</div>
+</div>

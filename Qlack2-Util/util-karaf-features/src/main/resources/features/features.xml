@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ***************************************************************************
+* Copyright 2014 EUROPEAN DYNAMICS SA <info@eurodyn.com>
+*
+* Licensed under the EUPL, Version 1.1 only (the "License").
+* You may not use this work except in compliance with the Licence.
+* You may obtain a copy of the Licence at:
+* https://joinup.ec.europa.eu/software/page/eupl/licence-eupl
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the Licence is distributed on an "AS IS" basis,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the Licence for the specific la
+ *************************************************************************** -->
+<!-- ***************************************************************************
+N E V E R auto-format this file in Eclipse. If you break a <bundle> in more than
+a single line, Karaf 3.0.0 fails to restart.
+ *************************************************************************** -->
+
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.2.0"
+	name="QLACK-UTIL">
+	<feature description="Qlack Util - REST Exception Mapper" name="qlack-util-rest-util"
+		version="${project.version}">
+		<feature version="${cxf.version}">cxf-jaxrs</feature>
+		<feature version="${qlack2.common.version}">qlack-common</feature>
+		<feature version="${project.version}">qlack-util-validator-util</feature>
+		<bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.aspectj/${aspectj.servicemix.version}</bundle>
+		<!-- bundle>mvn:org.aspectj/com.springsource.org.aspectj.runtime/${aspectj.springsource.version}</bundle -->
+		<bundle>mvn:com.eurodyn.qlack2.fuse/idm-api/${qlack2.fuse.version}</bundle>
+		<bundle>mvn:com.eurodyn.qlack2.fuse/ticketserver-api/${qlack2.fuse.version}</bundle>
+		<bundle>mvn:com.eurodyn.qlack2.util/rest-util/${project.version}</bundle>
+	</feature>
+
+	<feature description="Qlack Util - File Upload" name="qlack-util-fileupload" version="${project.version}">
+		<configfile finalname="/etc/com.eurodyn.qlack2.util.fileuploadrest.cfg">mvn:com.eurodyn.qlack2.util/fileupload-impl-rest/${project.version}/cfg/config-admin</configfile>
+		<configfile finalname="/etc/com.eurodyn.qlack2.util.fileuploadimpl.cfg">mvn:com.eurodyn.qlack2.util/fileupload-impl/${project.version}/cfg/config-admin</configfile>
+		<feature version="${qlack2.common.version}">qlack-common</feature>
+		<feature>jndi</feature>
+		<feature>transaction</feature>
+		<bundle>mvn:commons-io/commons-io/${commons.io.version}</bundle>
+		<bundle>mvn:com.eurodyn.qlack2.util/fileupload-api/${project.version}</bundle>
+		<bundle>mvn:com.eurodyn.qlack2.util/fileupload-api-rest/${project.version}</bundle>
+		<bundle>mvn:com.eurodyn.qlack2.util/fileupload-impl/${project.version}/jar/${bundle.classifier}</bundle>
+		<bundle>mvn:com.eurodyn.qlack2.util/fileupload-impl-rest/${project.version}</bundle>
+		<bundle>mvn:com.eurodyn.qlack2.util/fileupload-commands/${project.version}</bundle>
+		<bundle>wrap:mvn:io.sensesecure/clamav4j/${clamav4j.version}</bundle>
+	</feature>
+
+	<feature description="Qlack Util - File Upload" name="qlack-util-fileupload-no-rest" version="${project.version}">		
+		<configfile finalname="/etc/com.eurodyn.qlack2.util.fileuploadimpl.cfg">mvn:com.eurodyn.qlack2.util/fileupload-impl/${project.version}/cfg/config-admin</configfile>
+		<feature version="${qlack2.common.version}">qlack-common</feature>		
+		<feature>transaction</feature>
+		<bundle>mvn:commons-io/commons-io/${commons.io.version}</bundle>
+		<bundle>mvn:com.eurodyn.qlack2.util/fileupload-api/${project.version}</bundle>		
+		<bundle>mvn:com.eurodyn.qlack2.util/fileupload-impl/${project.version}/jar/${bundle.classifier}</bundle>
+		<bundle>mvn:com.eurodyn.qlack2.util/fileupload-commands/${project.version}</bundle>
+	</feature>
+
+	<feature description="Qlack - Datasource - MySQL (XA)" name="qlack-util-datasource-mysql-xa" version="${project.version}">
+		<configfile finalname="/etc/com.eurodyn.qlack2.util.datasourcegeneric.cfg">mvn:com.eurodyn.qlack2.util/datasource-mysql-xa/${project.version}/cfg/config-admin</configfile>
+		<feature version="${mysql.connector.version}">qlack-repack-mysql</feature>
+		<feature version="${project.version}">qlack-util-datasource-generic</feature>
+		<bundle>mvn:com.eurodyn.qlack2.util/datasource-mysql-xa/${project.version}</bundle>
+	</feature>
+
+	<feature description="Qlack - Datasource - Generic" name="qlack-util-datasource-generic" version="${project.version}">
+		<feature>jpa</feature>
+		<feature>transaction</feature>
+		<bundle>mvn:commons-pool/commons-pool/${commons.pool.version}</bundle>
+		<bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.commons-dbcp/${commons.dbcp.servicemix.version}</bundle>
+		<bundle>mvn:commons-collections/commons-collections/${commons.collections.version}</bundle>
+		<bundle>mvn:commons-beanutils/commons-beanutils/${commons.beanutils.version}</bundle>
+		<bundle start="false">mvn:com.eurodyn.qlack2.util/datasource-generic/${project.version}</bundle>
+	</feature>
+
+	<!-- qlack-util-angularjs-security feature is split, so that projects can only use the API if they do not need the IMPL part -->
+	<feature description="Qlack Util - AngularJS security with IDM (API only)" name="qlack-util-angularjs-security-idm-api" version="${project.version}">
+		<bundle>mvn:javax.ws.rs/jsr311-api/${javax.ws.rs.version}</bundle>
+		<bundle>mvn:com.eurodyn.qlack2.util/angularjs-security-idm-api/${project.version}</bundle>
+	</feature>
+	<feature description="Qlack Util - AngularJS security with IDM" name="qlack-util-angularjs-security-idm" version="${project.version}">
+		<configfile finalname="/etc/com.eurodyn.qlack2.util.angularjssecurityidm.cfg">mvn:com.eurodyn.qlack2.util/angularjs-security-idm-impl/${project.version}/cfg/config-admin</configfile>
+		<feature>qlack-util-angularjs-security-idm-api</feature>
+		<bundle>mvn:com.eurodyn.qlack2.util/angularjs-security-idm-impl/${project.version}</bundle>
+	</feature>
+
+	<feature description="Qlack Util - Validator Util" name="qlack-util-validator-util" version="${project.version}">
+		<feature version="${hibernate.validator.version}">hibernate-validator</feature>
+		<bundle>mvn:com.eurodyn.qlack2.util/validator-util/${project.version}</bundle>
+	</feature>
+
+	<feature description="Qlack Util - Audit client" name="qlack-util-audit-client" version="${project.version}">
+		<configfile finalname="/etc/com.eurodyn.qlack2.util.auditclient.cfg">mvn:com.eurodyn.qlack2.util/audit-client-impl/${project.version}/cfg/config-admin</configfile>
+		<feature version="${qlack2.fuse.version}">qlack-fuse-auditing</feature>
+		<feature version="${qlack2.fuse.version}">qlack-fuse-eventpublisher</feature>
+		<bundle>mvn:com.eurodyn.qlack2.util/audit-client-api/${project.version}</bundle>
+		<bundle>mvn:com.eurodyn.qlack2.util/audit-client-impl/${project.version}</bundle>
+	</feature>
+
+	<feature name="qlack-util-jbpm-runtime" version="${project.version}" description="Qlack Util - jBPM Runtime">
+		<feature version="${jbpm.version}">qlack-repack-drools-common</feature>
+		<feature version="${jbpm.version}">qlack-repack-jbpm-commons</feature>
+		<bundle>mvn:com.eurodyn.qlack2.util/jbpm-runtime/${project.version}/jar/jbpm-runtime</bundle>
+	</feature>
+	
+	<feature name="qlack2-util-cxf-util" version="${project.version}" description="Qlack Util - CXF Util">
+		<bundle>mvn:com.eurodyn.qlack2.util/qlack2-util-cxf-util/${project.version}</bundle>
+	</feature>
+	
+</features>

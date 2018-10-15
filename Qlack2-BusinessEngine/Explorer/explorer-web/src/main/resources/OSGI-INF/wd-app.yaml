@@ -1,0 +1,28 @@
+!!WDApplication:
+  identification:
+    uniqueId:           a059a169-2247-408b-a25f-34b9a74d3dd3
+    titleKey:           application_title
+    descriptionKey:     application_description
+    version:            1.0-SNAPSHOT
+  instantiation:
+    path:               apps/explorer/
+    index:              /
+    multipleInstances:  false
+    restrictAccess:     true
+    translationsGroup:  explorer
+  menu:
+    icon:               /img/app-explorer-icon.png
+    iconSmall:          /img/app-explorer-icon-small.png
+    type:
+      displayOn:        group
+      groupKey:         a_components
+  window:
+    width:              800
+    minWidth:           650
+    height:             550
+    minHeight:          450
+    resizable:          true
+    maximizable:        true
+    minimizable:        true
+    closable:           true
+    draggable:          true

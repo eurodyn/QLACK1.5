@@ -1,0 +1,89 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.eurodyn.qlack2.fuse</groupId>
+		<artifactId>calendar</artifactId>
+		<version>1.5.6</version>
+		<relativePath>../</relativePath>
+	</parent>
+
+	<artifactId>calendar-impl</artifactId>
+	<packaging>bundle</packaging>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<configuration>
+					<instructions>
+						<Bundle-Description>Qlack Fuse - Calendar (implementation)</Bundle-Description>
+						<Meta-Persistence>META-INF/persistence.xml</Meta-Persistence>
+						<!-- For hibernate runtime enhancement -->
+						<DynamicImport-Package>
+							org.hibernate.proxy,
+							javassist.util.proxy,
+							org.hibernate,
+							weblogic.jndi
+						</DynamicImport-Package>
+					</instructions>
+				</configuration>
+			</plugin>
+		</plugins>
+
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+	</build>
+
+	<profiles>
+		<!-- JNDI context prefix for JBoss -->
+		<profile>
+			<id>qlack-jboss</id>
+			<activation>
+				<property>
+					<name>container</name>
+					<value>jboss</value>
+				</property>
+			</activation>
+			<properties>
+				<jndi.context>${jboss.jndi.context}</jndi.context>
+				<bundle.classifier>${jboss.bundle.classifier}</bundle.classifier>
+				<features.classifier>${jboss.features.classifier}</features.classifier>
+			</properties>
+		</profile>
+	</profiles>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.eurodyn.qlack2.fuse</groupId>
+			<artifactId>calendar-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.geronimo.specs</groupId>
+			<artifactId>geronimo-jpa_2.0_spec</artifactId>
+			<version>${geronimo.jpa2.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.geronimo.specs</groupId>
+			<artifactId>geronimo-jta_1.1_spec</artifactId>
+			<version>${geronimo.jta.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mnode.ical4j</groupId>
+			<artifactId>ical4j</artifactId>
+			<version>${ical4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons.lang3.version}</version>
+		</dependency>
+	</dependencies>
+</project>

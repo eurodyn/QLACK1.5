@@ -1,0 +1,523 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.eurodyn.qlack2</groupId>
+	<artifactId>qlack2</artifactId>
+	<version>1.3.1</version>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>Qlack2-Common</module>
+	</modules>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<osgi.jndi.context>osgi:service</osgi.jndi.context>
+		<osgi.bundle.classifier></osgi.bundle.classifier>
+		<osgi.features.classifier>features</osgi.features.classifier>
+
+		<jboss.jndi.context>java:jboss</jboss.jndi.context>
+		<jboss.bundle.classifier>jboss</jboss.bundle.classifier>
+		<jboss.features.classifier>jboss-features</jboss.features.classifier>
+
+		<jndi.context>${osgi.jndi.context}</jndi.context>
+		<bundle.classifier>${osgi.bundle.classifier}</bundle.classifier>
+		<features.classifier>${osgi.features.classifier}</features.classifier>
+
+		<!-- The default behavior is not to update the local DB, unless the user
+			manually executes liquibase:update. -->
+		<skipLiquibase>true</skipLiquibase>
+
+		<!-- Versions used throughout the applications -->
+		<!-- OSGi -->
+		<osgi.version>4.3.1</osgi.version>
+		<karaf.version>3.0.1</karaf.version>
+		<felix.eventadmin.version>1.3.2</felix.eventadmin.version>
+		<karaf.shell.version>2.3.2</karaf.shell.version>
+		<transaction.feature.version>1.0.1</transaction.feature.version>
+		<jpa.feature.version>1.0.1</jpa.feature.version>
+		<!--  Persistence -->
+		<hibernate.jpa21.version>4.3.1.Final</hibernate.jpa21.version>
+		<hibernate.jpa20.version>4.2.15.Final</hibernate.jpa20.version>
+		<mysql.connector.version>5.1.29</mysql.connector.version>
+		<liquibase.version>3.1.1</liquibase.version>
+		<geronimo.jpa2.version>1.1</geronimo.jpa2.version>
+		<geronimo.jta.version>1.1.1</geronimo.jta.version>
+		<!-- Web and REST -->
+		<cxf.version>2.7.9</cxf.version>
+		<cxf.dosgi.version>1.6.0</cxf.dosgi.version>
+		<geronimo.servlet3.version>1.0</geronimo.servlet3.version>
+		<jackson.version>1.9.13</jackson.version>
+		<javax.ws.rs.version>1.1.1</javax.ws.rs.version>
+		<jersey.version>1.17.1</jersey.version>
+		<!--  Utility libraries -->
+		<apache.poi.version>3.9</apache.poi.version>
+		<apache.poi.servicemix.version>3.9_2</apache.poi.servicemix.version>
+		<asm.version>4.1</asm.version>
+		<aspectj.version>1.8.5</aspectj.version>
+		<aspectj.springsource.version>1.8.5.RELEASE</aspectj.springsource.version> <!-- old - should be removed -->
+		<aspectj.servicemix.version>1.8.5_1</aspectj.servicemix.version>
+		
+		<beanshell.version>2.0b5</beanshell.version>
+		<cometd.version>2.6.0</cometd.version>
+		<commons.beanutils.version>1.9.2</commons.beanutils.version>
+		<commons.codec.version>1.8</commons.codec.version>
+		<commons.collections.version>3.2.1</commons.collections.version>
+		<commons.dbcp.version>1.4</commons.dbcp.version>
+		<commons.dbcp.servicemix.version>1.4_3</commons.dbcp.servicemix.version>
+		<commons.io.version>2.4</commons.io.version>
+		<commons.lang3.version>3.5</commons.lang3.version>
+		<commons.lang.version>2.6</commons.lang.version>
+		<commons.pool.version>1.5.4</commons.pool.version>
+		<javassist.version>3.18.2-GA</javassist.version>
+		<jbpm.version>6.4.0.Final</jbpm.version>
+		<joda.version>2.2</joda.version>
+		<quartz.version>2.2.1</quartz.version>
+		<snakeyaml.version>1.12</snakeyaml.version>
+		<!-- Testing dependencies versions -->
+		<junit.version>4.8.1</junit.version>
+		<pax.exam.version>3.5.0</pax.exam.version>
+		<pax.url.aether.version>1.3.7</pax.url.aether.version>
+		<javax.inject.version>1</javax.inject.version>
+		<!-- Webjar versions -->
+		<angular.translate.version>2.1.0-1</angular.translate.version>
+		<clamav4j.version>0.5</clamav4j.version>
+	</properties>
+
+	<repositories>
+		<repository>
+			<id>com.springsource.repository.bundles.release</id>
+			<name>SpringSource Enterprise Bundle Repository - SpringSource Bundle Releases</name>
+			<url>http://repository.springsource.com/maven/bundles/release</url>
+		</repository>
+		<repository>
+			<id>com.springsource.repository.bundles.external</id>
+			<name>SpringSource Enterprise Bundle Repository - External Bundle Releases</name>
+			<url>http://repository.springsource.com/maven/bundles/external</url>
+		</repository>
+	</repositories>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<!-- Global configuration for the compiler -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.1</version>
+					<configuration>
+						<showDeprecation>true</showDeprecation>
+						<source>1.7</source>
+						<target>1.7</target>
+						<encoding>${project.build.sourceEncoding}</encoding>
+					</configuration>
+				</plugin>
+
+				<!-- Global configuration for the OSGi bundle plugin -->
+				<plugin>
+					<groupId>org.apache.felix</groupId>
+					<artifactId>maven-bundle-plugin</artifactId>
+					<version>2.4.0</version>
+					<extensions>true</extensions>
+					<configuration>
+						<classifier>${bundle.classifier}</classifier>
+						<instructions>
+							<Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
+							<Bundle-Name>${project.name}</Bundle-Name>
+							<Bundle-Version>${project.version}</Bundle-Version>
+						</instructions>
+					</configuration>
+				</plugin>
+
+				<!-- Global configuration for Liquibase plugin -->
+				<plugin>
+					<groupId>org.liquibase</groupId>
+					<artifactId>liquibase-maven-plugin</artifactId>
+					<version>${liquibase.version}</version>
+					<configuration>
+						<driver>${liquibase.driver}</driver>
+						<url>${liquibase.url}</url>
+						<username>${liquibase.username}</username>
+						<password>${liquibase.password}</password>
+						<changeLogFile>src/main/resources/db/${project.artifactId}.liquibase.changelog.xml</changeLogFile>
+						<promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+						<skip>${skipLiquibase}</skip>
+					</configuration>
+					<executions>
+						<execution>
+							<id>main-db</id>
+							<phase>none</phase>
+							<goals>
+								<goal>update</goal>
+							</goals>
+						</execution>
+					</executions>
+					<dependencies>
+						<dependency>
+							<groupId>${liquibase.driver.groupId}</groupId>
+							<artifactId>${liquibase.driver.artifactId}</artifactId>
+							<version>${liquibase.driver.version}</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+
+				<!-- Global configuration for WRO4J plugin -->
+				<plugin>
+					<groupId>ro.isdc.wro4j</groupId>
+					<artifactId>wro4j-maven-plugin</artifactId>
+					<version>1.7.5</version>
+					<configuration>
+						<skip>${skipWro4j}</skip>
+						<contextFolder>${basedir}/src/main/assets/</contextFolder>
+						<wroManagerFactory>ro.isdc.wro.maven.plugin.manager.factory.ConfigurableWroManagerFactory</wroManagerFactory>
+						<cssDestinationFolder>${project.build.directory}/wro/css</cssDestinationFolder>
+						<jsDestinationFolder>${project.build.directory}/wro/js</jsDestinationFolder>
+						<ignoreMissingResources>false</ignoreMissingResources>
+					</configuration>
+				</plugin>
+
+				<!-- Global configuration for jRebel plugin -->
+				<plugin>
+					<groupId>org.zeroturnaround</groupId>
+					<artifactId>jrebel-maven-plugin</artifactId>
+					<version>1.1.5</version>
+					<configuration>
+						<alwaysGenerate>true</alwaysGenerate>
+						<classpath>
+							<resources>
+								<resource>
+									<excludes>
+										<exclude>**\model\*</exclude>
+									</excludes>
+								</resource>
+							</resources>
+						</classpath>
+					</configuration>
+				</plugin>
+
+				<!-- Global configuration for AspectJ plugin -->
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>aspectj-maven-plugin</artifactId>
+					<version>1.7</version>
+					<executions>
+						<execution>
+							<goals>
+								<goal>compile</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<complianceLevel>1.7</complianceLevel>
+						<verbose>true</verbose>
+						<showWeaveInfo>true</showWeaveInfo>
+					</configuration>
+					<dependencies>
+						<dependency>
+							<groupId>org.aspectj</groupId>
+							<artifactId>aspectjtools</artifactId>
+							<version>${aspectj.version}</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+				
+				<!-- Override version for maven-install-plugin because there is a bug in
+				 3.0.0-M1 preventing installing of modules with packaging of feature
+				 see: https://issues.apache.org/jira/browse/MINSTALL-151 -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>2.5.2</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<!-- Various profiles to automagically activate/deactivate features during build -->
+	<profiles>
+		<!-- Generic activation of jRebel -->
+		<profile>
+			<id>qlack-jrebel</id>
+			<activation>
+				<file>
+					<exists>src</exists>
+				</file>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.zeroturnaround</groupId>
+						<artifactId>jrebel-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>generate-rebel-xml</id>
+								<phase>process-resources</phase>
+								<goals>
+									<goal>generate</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+				<pluginManagement>
+					<plugins>
+						<plugin>
+							<groupId>org.apache.felix</groupId>
+							<artifactId>maven-bundle-plugin</artifactId>
+							<configuration>
+								<instructions>
+									<Include-Resource>{maven-resources},target/classes/rebel.xml</Include-Resource>
+								</instructions>
+							</configuration>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+			</build>
+		</profile>
+		<!-- Override of jRebel's activation configuration for WABs. -->
+		<profile>
+			<id>qlack-jrebel-config-web</id>
+			<activation>
+				<file>
+					<exists>src/main/webapp</exists>
+				</file>
+			</activation>
+			<build>
+				<pluginManagement>
+					<plugins>
+						<plugin>
+							<groupId>org.apache.felix</groupId>
+							<artifactId>maven-bundle-plugin</artifactId>
+							<configuration>
+								<instructions>
+									<Include-Resource>{maven-resources},WEB-INF/classes/rebel.xml=target/classes/rebel.xml</Include-Resource>
+								</instructions>
+							</configuration>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+			</build>
+		</profile>
+		<!-- Configuration jRebel's to include WRO4J resources in rebel.xml. -->
+		<profile>
+			<id>qlack-jrebel-config-wro</id>
+			<activation>
+				<file>
+					<exists>src/main/assets</exists>
+				</file>
+			</activation>
+			<build>
+				<pluginManagement>
+					<plugins>
+						<plugin>
+							<groupId>org.zeroturnaround</groupId>
+							<artifactId>jrebel-maven-plugin</artifactId>
+							<configuration>
+								<web>
+									<resources>
+										<resource>
+											<target>/</target>
+											<directory>${basedir}/src/main/webapp</directory>
+										</resource>
+										<resource>
+											<target>/</target>
+											<directory>${project.build.directory}/wro</directory>
+										</resource>
+									</resources>
+								</web>
+							</configuration>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+			</build>
+		</profile>
+
+		<!-- Enabling automatic processing of WRO4J resources (wro-main and wro-vendor) -->
+		<profile>
+			<id>qlack-wro4j</id>
+			<activation>
+				<file>
+					<exists>src/main/assets/wro.xml</exists>
+				</file>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>ro.isdc.wro4j</groupId>
+						<artifactId>wro4j-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>main-assets</id>
+								<phase>compile</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<wroFile>${basedir}/src/main/assets/wro.xml</wroFile>
+									<extraConfigFile>${basedir}/src/main/assets/wro.properties</extraConfigFile>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<!-- Enabling automatic processing of Liquibase -->
+		<profile>
+			<id>qlack-liquibase</id>
+			<activation>
+				<file>
+					<exists>src/main/resources/db</exists>
+				</file>
+			</activation>
+			<properties>
+				<skipLiquibase>false</skipLiquibase>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>qlack-liquibase-test</id>
+			<activation>
+				<file>
+					<exists>src/test/resources/db</exists>
+				</file>
+			</activation>
+			<build>
+				<plugins>
+					<!-- Download and unpack a MySQL version to be used for testing -->
+					<plugin>
+						<artifactId>maven-dependency-plugin</artifactId>
+						<version>2.8</version>
+						<executions>
+							<execution>
+								<goals>
+									<goal>unpack</goal>
+								</goals>
+								<configuration>
+									<skip>${maven.test.skip}</skip>
+									<artifactItems>
+										<artifactItem>
+											<groupId>com.jcabi</groupId>
+											<artifactId>mysql-dist</artifactId>
+											<version>5.6.14</version>
+											<classifier>${mysql.classifier}</classifier>
+											<type>zip</type>
+											<overWrite>false</overWrite>
+											<outputDirectory>${project.build.directory}/mysql-dist</outputDirectory>
+										</artifactItem>
+									</artifactItems>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+
+					<!-- First execute the jcabi plugin to create the DB and then the liquibase plugin to populate it -->
+					<plugin>
+						<groupId>com.jcabi</groupId>
+						<artifactId>jcabi-mysql-maven-plugin</artifactId>
+						<version>0.6.1</version>
+						<configuration>
+							<skip>${maven.test.skip}</skip>
+							<port>64325</port>
+							<data>${project.build.directory}/mysql-data</data>
+						</configuration>
+						<executions>
+							<execution>
+								<id>mysql-test-db-classify</id>
+								<goals>
+									<goal>classify</goal>
+									<goal>start</goal>
+									<goal>stop</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
+					<plugin>
+						<groupId>org.liquibase</groupId>
+						<artifactId>liquibase-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>liquibase-test</id>
+								<phase>pre-integration-test</phase>
+								<goals>
+									<goal>update</goal>
+								</goals>
+								<configuration>
+									<skip>${maven.test.skip}</skip>
+									<driver>com.mysql.jdbc.Driver</driver>
+									<url>jdbc:mysql://127.0.0.1:64325/test</url>
+									<username>root</username>
+									<password>root</password>
+									<changeLogFile>src/test/resources/db/${project.artifactId}.test.liquibase.changelog.xml</changeLogFile>
+									<promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<!-- Module profiles -->
+		<profile>
+			<id>Fuse-module</id>
+			<activation>
+				<file>
+					<exists>../Qlack2-Fuse/pom.xml</exists>
+				</file>
+			</activation>
+			<modules>
+				<module>../Qlack2-Fuse</module>
+			</modules>
+		</profile>
+		<profile>
+			<id>Util-module</id>
+			<activation>
+				<file>
+					<exists>../Qlack2-Util/pom.xml</exists>
+				</file>
+			</activation>
+			<modules>
+				<module>../Qlack2-Util</module>
+			</modules>
+		</profile>
+		<profile>
+			<id>WebDesktop-module</id>
+			<activation>
+				<file>
+					<exists>../Qlack2-WebDesktop/pom.xml</exists>
+				</file>
+			</activation>
+			<modules>
+				<module>../Qlack2-WebDesktop</module>
+			</modules>
+		</profile>
+		<profile>
+			<id>WebDesktopApps-module</id>
+			<activation>
+				<file>
+					<exists>../Qlack2-WebDesktopApps/pom.xml</exists>
+				</file>
+			</activation>
+			<modules>
+				<module>../Qlack2-WebDesktopApps</module>
+			</modules>
+		</profile>
+		<profile>
+			<id>BusinessEngine-module</id>
+			<activation>
+				<file>
+					<exists>../Qlack2-BusinessEngine/pom.xml</exists>
+				</file>
+			</activation>
+			<modules>
+				<module>../Qlack2-BusinessEngine</module>
+			</modules>
+		</profile>
+	</profiles>
+
+</project>

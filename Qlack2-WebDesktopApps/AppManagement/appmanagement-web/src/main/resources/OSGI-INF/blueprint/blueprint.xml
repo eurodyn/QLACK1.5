@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:jaxrs="http://cxf.apache.org/blueprint/jaxrs">
+
+	<!-- EXTERNAL SERVICES -->
+	<reference id="ApplicationService"
+		interface="com.eurodyn.qlack2.webdesktop.apps.appmanagement.api.ApplicationService" />
+	<reference id="ConfigService"
+		interface="com.eurodyn.qlack2.webdesktop.apps.appmanagement.api.ConfigService" />
+		
+	<!-- LOCAL BEANS & SERVICES -->
+	<bean id="ApplicationRest"
+		class="com.eurodyn.qlack2.webdesktop.apps.appmanagement.web.rest.ApplicationRest">
+		<property name="applicationService" ref="ApplicationService" />
+	</bean>
+	<bean id="ConfigRest"
+		class="com.eurodyn.qlack2.webdesktop.apps.appmanagement.web.rest.ConfigRest">
+		<property name="configService" ref="ConfigService" />
+	</bean>
+
+	<!-- CXF CONFIGURATION -->
+	<bean id="jacksonMapper" class="com.eurodyn.qlack2.util.restutil.RESTObjectMapper">
+	</bean>
+	<jaxrs:server id="AppManagementRestServer" address="/apps/appmanagement">
+		<jaxrs:serviceBeans>
+			<ref component-id="ApplicationRest" />
+			<ref component-id="ConfigRest" />
+		</jaxrs:serviceBeans>
+
+		<jaxrs:providers>
+			<bean id="RESTExceptionMapper" 
+				class="com.eurodyn.qlack2.util.restutil.RESTExceptionMapper"/>
+			<bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider">
+				<property name="mapper" ref="jacksonMapper" />
+			</bean>
+		</jaxrs:providers>
+	</jaxrs:server>
+
+</blueprint>

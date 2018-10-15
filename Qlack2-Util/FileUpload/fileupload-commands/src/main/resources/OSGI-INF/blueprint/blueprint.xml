@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.0.0" xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.0.0"
+	xmlns:jaxrs="http://cxf.apache.org/blueprint/jaxrs"
+	xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0">
+
+	<!-- EXTERNAL SERVICES -->
+	<reference id="FileUploadService" interface="com.eurodyn.qlack2.util.fileupload.api.FileUpload" />
+
+	<!-- SHELL COMMANDS -->
+	<command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
+		<command name="qlack/fileupload-list-files">
+			<action class="com.eurodyn.qlack2.util.fileupload.impl.shell.ListFilesCommand">
+				<property name="fileUploadService" ref="FileUploadService" />
+			</action>
+		</command>
+		<command name="qlack/fileupload-save-file">
+			<action class="com.eurodyn.qlack2.util.fileupload.impl.shell.SaveFileCommand">
+				<property name="fileUploadService" ref="FileUploadService" />
+			</action>
+		</command>
+		<command name="qlack/fileupload-delete-file">
+			<action class="com.eurodyn.qlack2.util.fileupload.impl.shell.DeleteFileCommand">
+				<property name="fileUploadService" ref="FileUploadService" />
+			</action>
+		</command>
+	</command-bundle>
+
+
+</blueprint>

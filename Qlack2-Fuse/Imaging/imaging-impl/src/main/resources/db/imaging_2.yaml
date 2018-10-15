@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: imaging_02
+      author: European Dynamics SA (christina.kaskoura@eurodyn.com)
+      changes:
+        - dropNotNullConstraint:
+            columnName: value
+            columnDataType: varchar(255)
+            tableName: img_image_attribute

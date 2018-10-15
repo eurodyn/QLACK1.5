@@ -1,0 +1,53 @@
+﻿groups:
+  - name: sampleapp_ui
+    description: Sample Application UI
+  - name: wd_apps
+    description: Application translations required to display an application in the Web Desktop
+languages:
+  - name: English
+    locale: en
+translations:
+  - group: wd_apps
+    locale: en
+    keys:
+      - sampleapp_ui.application_title: Sample app
+      - sampleapp_ui.application_description: Provides demos of various functionality in Qlack Web Desktop.
+  - group: sampleapp_ui
+    locale: en
+    keys:
+      - static_translation: This is a static translation
+      - dynamic_translation: This is a dynamic translation
+      - attribute_translation: This is a translated attribute
+      - value_translation: The value {{number}} was passed to this translation
+      - controller_translation: This was translated in the controller
+      - forms.fullname: Full name
+      - forms.fullname.placeholder: Enter your full name
+      - forms.age: Age
+      - forms.age.placeholder: Enter your age
+      - forms.website: Website
+      - forms.website.address.placeholder: eg. google.com
+      - forms.website.protocol.placeholder: eg. http or https
+      - forms.website.port.placeholder: eg. 80
+      - forms.gender: Gender
+      - forms.gender.male: Male
+      - forms.gender.female: Female
+      - forms.button.save: Save
+      - forms.button.cancel: Cancel
+      - forms.sum: Math test
+      - forms.sum.placeholder: What is the result of 1+1?
+      - forms.kendoGrid: Kendo Grid
+      - forms.address: Address
+      - forms.address.street.placeholder: Your street
+      - forms.address.number.placeholder: Your street number
+      - delete.resource: Delete
+      - create.resource.version: Create version
+      - locked_by: Locked by {{user}} on {{date}}
+      - org.hibernate.validator.constraints.NotEmpty: Can not be empty
+        forceUpdate: true
+      - javax.validation.constraints.Min: Value {{InvalidValue}} is less than the minimum value of {{value}}
+        forceUpdate: true
+      - javax.validation.constraints.Pattern: Should match pattern {{regexp}}
+        forceUpdate: true
+      - org.hibernate.validator.constraints.Length: Should be between {{min}} - {{max}} characters long
+        forceUpdate: true
+      - validation.error.wrongSum: Provide a correct sum

@@ -1,0 +1,35 @@
+<groups xmlns="http://www.isdc.ro/wro">
+
+	<group name="sampleapp">
+		<js>/js/App.coffee</js>
+		<js>/js/Constants.coffee</js>
+		<js>/js/services/**.coffee</js>
+		<js>/js/controllers/**.coffee</js>
+
+		<css>/css/**.less</css>
+	</group>
+
+	<group name="sampleapp-vendor">
+		<js minimize="false">/js-vendor/jquery.min.js</js>
+		<js>/js-vendor/jquery.cookie.js</js>
+		<js minimize="false">/js-vendor/angular.min.js</js>
+		<js minimize="false">/js-vendor/kendo.web.min.js</js>
+		<js minimize="false">/js-vendor/angular-kendo.js</js>
+		<js minimize="false">/js-vendor/ui-bootstrap-tpls.min.js</js>
+		<js minimize="false">/js-vendor/angular-cookies.min.js</js>
+		<js minimize="false">/js-vendor/angular-ui-router.min.js</js>
+		<js minimize="false">/js-vendor/angular-translate.min.js</js>
+		<js minimize="false">/js-vendor/angular-translate-handler-log.js</js>
+		<js minimize="false">/js-vendor/angular-translate-loader-partial.js</js>
+		<js minimize="false">/js-vendor/angular-translate-storage-local.min.js</js>
+		<js minimize="false">/js-vendor/angular-translate-storage-cookie.min.js</js>
+		<js minimize="false">/js-vendor/ng-flow-standalone.min.js</js>
+		<js minimize="false">/js-vendor/moment-with-langs.min.js</js>
+		<js>webjar:QDateProvider.js</js>
+		<js>webjar:SecuritySrvProvider.js</js>
+		<js>webjar:QFormValidationProvider.js</js>
+
+		<css minimize="false">/css-vendor/font-awesome.min.css</css>
+	</group>
+
+</groups>

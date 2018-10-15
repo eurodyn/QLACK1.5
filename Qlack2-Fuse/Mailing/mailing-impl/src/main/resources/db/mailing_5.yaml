@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: mailing_05
+      author: European Dynamics SA (apostolos.samaras@eurodyn.com)
+      changes:
+        - addColumn:
+            tableName: mai_email
+            columns:
+              - column:
+                  name: sign
+                  type: boolean

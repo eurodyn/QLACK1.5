@@ -1,0 +1,40 @@
+<groups xmlns="http://www.isdc.ro/wro">
+	<group name="forms">
+		<js minimize="false">/js/App.coffee</js>
+		<js minimize="false">/js/Constants.coffee</js>
+		<js minimize="false">/js/services/**.coffee</js>
+		<js minimize="false">/js/controllers/**.coffee</js>
+		<js minimize="false">/js/controllers/categories/**.coffee</js>
+		<js minimize="false">/js/controllers/forms/**.coffee</js>
+
+		<css>/css/**.less</css>
+	</group>
+
+	<group name="forms-vendor">
+		<js minimize="false">classpath:META-INF/resources/webjars/jquery/1.9.1/jquery.min.js</js>
+		<js minimize="false">webjar:angular.min.js</js>
+		<js minimize="false">webjar:angular-ui-router.min.js</js>
+		<js minimize="false">/js-vendor/angular-cookies.min.js</js>
+		<js minimize="false">/js-vendor/kendo.web.min.js</js>
+		<js minimize="false">/js-vendor/angular-kendo.js</js>
+		<js minimize="false">webjar:ui-bootstrap-tpls.min.js</js>
+		<js minimize="false">webjar:angular-ui-router.min.js</js>
+		<js minimize="false">webjar:angular-translate.min.js</js>
+		<js>webjar:angular-translate-storage-local.js</js>
+		<js>webjar:angular-translate-storage-cookie.js</js>
+		<js>/js-vendor/angular-translate-loader-partial.js</js>
+		<js minimize="false">webjar:moment-with-langs.min.js</js>
+		<js minimize="false">webjar:QDateProvider.js</js>
+		<js minimize="false">webjar:SecuritySrvProvider.js</js>
+		<js minimize="false">webjar:QFormValidationProvider.js</js>
+		<js minimize="false">classpath:META-INF/resources/webjars/ace/01.08.2014/src-min-noconflict/ace.js</js>
+		<js minimize="false">/js-vendor/ng-flow-standalone.min.js</js>
+		<js minimize="false">/js-vendor/ui-ace.min.js</js>
+
+		<css minimize="false">webjar:font-awesome.min.css</css>
+	</group>
+
+	<group name="mode-xml">
+		<js minimize="false">classpath:META-INF/resources/webjars/ace/01.08.2014/src-min-noconflict/mode-xml.js</js>
+	</group>
+</groups>

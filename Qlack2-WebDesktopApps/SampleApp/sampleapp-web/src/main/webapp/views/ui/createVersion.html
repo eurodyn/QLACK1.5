@@ -1,0 +1,32 @@
+<div class="container-fluid" ng-controller="CreateVersionCtrl">
+	<form class="form-horizontal" role="form">
+		<div class="form-group">
+			<label for="name" class="col-xs-4 control-label">Version name:</label>
+			<div class="col-xs-8">
+				<input type="text" class="form-control" id="name" ng-model="version.name">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="based_on" class="col-xs-4 control-label">Based on:</label>
+			<div class="col-xs-8">
+				<select kendo-drop-down-list k-data-source="versionsDataSource" 
+					k-data-value-field="'id'" k-data-text-field="'name'"
+					ng-model="version.baseVersion">
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="description" class="col-xs-4 control-label">Description:</label>
+			<div class="col-xs-8">
+				<textarea class="form-control" id="description" ng-model="version.description"></textarea>
+			</div>
+		</div>		
+		
+		<div class="clearfix top-buffer">
+			<div class="pull-right">
+				<button class="btn btn-danger" ng-click="cancel()"><i class="fa fa-ban"></i> Cancel</button>
+				<button class="btn btn-success" ng-click="create()"><i class="fa fa-check"></i> Create</button>
+			</div>
+		</div>
+	</form>
+</div>

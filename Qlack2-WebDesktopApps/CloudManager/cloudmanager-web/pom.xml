@@ -1,0 +1,93 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.eurodyn.qlack2.webdesktop.apps</groupId>
+		<artifactId>cloudmanager</artifactId>
+		<version>1.1.8</version>
+	</parent>
+	<artifactId>cloudmanager-web</artifactId>
+	<packaging>bundle</packaging>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-bundle-jaxrs</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.eurodyn.qlack2.webdesktop.apps</groupId>
+			<artifactId>cloudmanager-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.eurodyn.qlack2.util</groupId>
+			<artifactId>validator-util</artifactId>
+			<version>${qlack2.util.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.eurodyn.qlack2.util</groupId>
+			<artifactId>angularjs-i18n-moment</artifactId>
+			<version>${qlack2.util.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.eurodyn.qlack2.util</groupId>
+			<artifactId>angularjs-security-idm</artifactId>
+			<version>${qlack2.util.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.eurodyn.qlack2.util</groupId>
+			<artifactId>angularjs-validation</artifactId>
+			<version>${qlack2.util.version}</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<configuration>
+					<instructions>
+						<Bundle-Description>Cloud Manager Web Desktop application (Web)</Bundle-Description>
+						<Web-ContextPath>apps/cloudmanager</Web-ContextPath>
+						<_wab>src/main/webapp,${project.build.directory}/wro</_wab>
+					</instructions>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.zeroturnaround</groupId>
+				<artifactId>jrebel-maven-plugin</artifactId>
+				<configuration>
+					<web>
+						<resources>
+							<resource>
+								<target>/apps/cloudmanager</target>
+								<directory>${basedir}/src/main/webapp</directory>
+							</resource>
+							<resource>
+								<target>/apps/cloudmanager</target>
+								<directory>${project.build.directory}/wro</directory>
+							</resource>
+						</resources>
+					</web>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>aspectj-maven-plugin</artifactId>
+				<configuration>
+					<complianceLevel>1.7</complianceLevel>
+					<aspectLibraries>
+						<aspectLibrary>
+							<groupId>com.eurodyn.qlack2.util</groupId>
+							<artifactId>validator-util</artifactId>
+						</aspectLibrary>
+					</aspectLibraries>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

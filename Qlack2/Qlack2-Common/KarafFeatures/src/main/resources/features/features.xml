@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ***************************************************************************
+* Copyright 2014 EUROPEAN DYNAMICS SA <info@eurodyn.com>
+*
+* Licensed under the EUPL, Version 1.1 only (the "License").
+* You may not use this work except in compliance with the Licence.
+* You may obtain a copy of the Licence at:
+* https://joinup.ec.europa.eu/software/page/eupl/licence-eupl
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the Licence is distributed on an "AS IS" basis,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the Licence for the specific language governing permissions and
+* limitations under the Licence.
+ *************************************************************************** -->
+
+<!-- ***************************************************************************
+N E V E R auto-format this file in Eclipse. If you break a <bundle> in more than
+a single line, Karaf fails to restart.
+ *************************************************************************** -->
+
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.2.0"	name="QLACK-COMMON">
+	<feature description="Qlack - Common" name="qlack-common" version="${project.version}">
+		<feature version="${jackson.version}">qlack-repack-jackson</feature>
+		<bundle>mvn:commons-collections/commons-collections/${commons.collections.version}</bundle>
+		<bundle>mvn:commons-beanutils/commons-beanutils/${commons.beanutils.version}</bundle>
+		<bundle>mvn:com.eurodyn.qlack2.common/common-lib/${project.version}</bundle>
+	</feature>
+</features>

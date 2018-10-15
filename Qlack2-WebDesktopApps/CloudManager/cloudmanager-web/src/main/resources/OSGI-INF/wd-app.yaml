@@ -1,0 +1,28 @@
+!!WDApplication:
+  identification:
+    uniqueId:           f2926582-7075-4213-8812-811b6212d8c3
+    titleKey:           application_title
+    descriptionKey:     application_description
+    version:            1.0-SNAPSHOT
+  instantiation:
+    path:               apps/cloudmanager
+    index:              /
+    multipleInstances:  false
+    restrictAccess:     false
+    translationsGroup:  cloudmanager_ui
+  menu:
+    icon:               /img/app-cloudmanager-icon.png
+    iconSmall:          /img/app-cloudmanager-icon-small.png
+    type:
+      displayOn:        group
+      groupKey:         x_administration
+  window:
+    width:              1205
+    minWidth:           200
+    height:             500
+    minHeight:          300
+    resizable:          true
+    maximizable:        true
+    minimizable:        true
+    closable:           true
+    draggable:          true

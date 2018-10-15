@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<blueprint
+	xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+	xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.0.0"
+	xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.0.0"
+	xmlns:jaxrs="http://cxf.apache.org/blueprint/jaxrs"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.osgi.org/xmlns/blueprint/v1.0.0
+		http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+		http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0
+		http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0/blueprint-cm-1.0.0.xsd">
+
+	<!-- EXTERNAL SERVICES -->
+	<reference-list id="CacheServiceList"
+		interface="com.eurodyn.qlack2.fuse.caching.client.api.CacheService"
+		availability="optional" />
+	<reference id="IDMService"
+		interface="com.eurodyn.qlack2.fuse.idm.api.IDMService" />
+	<reference id="DesktopService"
+		interface="com.eurodyn.qlack2.webdesktop.api.DesktopService" />
+	<reference id="LanguageService"
+		interface="com.eurodyn.qlack2.fuse.lexicon.api.LanguageService" />
+	<reference id="KeyService"
+		interface="com.eurodyn.qlack2.fuse.lexicon.api.KeyService" />
+	<reference id="GroupService"
+		interface="com.eurodyn.qlack2.fuse.lexicon.api.GroupService" />
+	<reference id="SecurityProxyService"
+		interface="com.eurodyn.qlack2.util.angularjssecidm.api.SecurityProxy" />
+
+	<!-- LOCAL BEANS & SERVICES -->
+	<bean id="Utils" class="com.eurodyn.qlack2.webdesktop.web.util.Utils">
+		<property name="idmService" ref="IDMService"/>
+	</bean>
+
+	<bean id="DesktopRest"
+		class="com.eurodyn.qlack2.webdesktop.web.rest.DesktopRest">
+		<property name="desktopService" ref="DesktopService" />
+		<property name="utils" ref="Utils" />
+	</bean>
+	<bean id="I18nRest"
+		class="com.eurodyn.qlack2.webdesktop.web.rest.I18nRest">
+		<property name="languageService" ref="LanguageService" />
+		<property name="keyService" ref="KeyService" />
+		<property name="groupService" ref="GroupService" />
+	</bean>
+
+	<bean id="bayeuxSecurityPolicy"
+		class="com.eurodyn.qlack2.webdesktop.web.rt.security.BayeuxSecurityPolicy">
+		<property name="mapper" ref="jacksonMapper" />
+		<property name="idmService" ref="IDMService"/>
+		<property name="cacheServiceList" ref="CacheServiceList" />
+	</bean>
+	<bean id="bayeuxInitialiser" class="com.eurodyn.qlack2.webdesktop.web.rt.init.BayeuxInitialiser">
+		<property name="securityPolicy" ref="bayeuxSecurityPolicy" />
+	</bean>
+
+	<bean id="cometdServlet" class="com.eurodyn.qlack2.webdesktop.web.rt.server.WebDesktopCometdServlet">
+		<property name="initialiser" ref="bayeuxInitialiser" />
+	</bean>
+	<service id="cometdService" ref="cometdServlet" interface="javax.servlet.Servlet">
+		<service-properties>
+			<!-- XXX must prepend context path here -->
+			<entry key="alias" value="/rt/*" />
+			<entry key="init.transports" value="org.cometd.websocket.server.WebSocketTransport" />
+		</service-properties>
+	</service>
+
+	<!-- CXF CONFIGURATION -->
+	<bean id="jacksonMapper" class="com.eurodyn.qlack2.util.restutil.RESTObjectMapper">
+	</bean>
+	<jaxrs:server id="WebDesktopRestServices" address="/">
+		<jaxrs:serviceBeans>
+			<ref component-id="DesktopRest" />
+			<ref component-id="I18nRest" />
+			<ref component-id="SecurityProxyService" />
+		</jaxrs:serviceBeans>
+
+		<jaxrs:providers>
+			<bean class="com.eurodyn.qlack2.util.restutil.RESTExceptionMapper"/>
+			<bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider">
+				<property name="mapper" ref="jacksonMapper" />
+			</bean>
+		</jaxrs:providers>
+	</jaxrs:server>
+
+	<!-- LISTENERS -->
+	<!-- Listener for EventAdmin messages -->
+	<bean id="EventAdminListener" class="com.eurodyn.qlack2.webdesktop.web.rt.EventAdminListener">
+		<property name="cacheServiceList" ref="CacheServiceList" />
+		<property name="cometdService" ref="cometdServlet" />
+	</bean>
+	<service ref="EventAdminListener" interface="org.osgi.service.event.EventHandler">
+		<service-properties>
+			<entry key="event.topics" value="QLACK2/WD/RT"/>
+		</service-properties>
+	</service>
+
+</blueprint>

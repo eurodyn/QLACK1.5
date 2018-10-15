@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ***************************************************************************
+N E V E R auto-format this file in Eclipse. If you break a <bundle> in more than
+a single line, Karaf 3.0.0 fails to restart.
+ *************************************************************************** -->
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.0.0"
+	name="QLACK-WEBDESKTOP-APPS">
+
+	<feature description="Qlack - WebDesktop - AppManagement" name="qlack-webdesktop-appmanagement" version="${project.version}">
+		<feature version="${qlack2.fuse.version}">qlack-fuse-idm</feature>
+		<feature version="${qlack2.util.version}">qlack-util-audit-client</feature>
+		<feature version="${qlack2.fuse.version}">qlack-fuse-auditing</feature>
+		<bundle>mvn:com.eurodyn.qlack2.webdesktop/webdesktop-api/${qlack2.webdesktop.version}</bundle>
+		<bundle>mvn:org.yaml/snakeyaml/${snakeyaml.version}</bundle>
+		<bundle start-level="100">mvn:com.eurodyn.qlack2.webdesktop.apps/appmanagement-api/${project.version}</bundle>
+		<bundle start-level="100">mvn:com.eurodyn.qlack2.webdesktop.apps/appmanagement-impl/${project.version}</bundle>
+		<bundle start-level="100">mvn:com.eurodyn.qlack2.webdesktop.apps/appmanagement-web/${project.version}</bundle>
+	</feature>
+
+	<feature description="Qlack - WebDesktop - UserManagement" name="qlack-webdesktop-usermanagement" version="${project.version}">
+		<feature version="${qlack2.fuse.version}">qlack-fuse-idm</feature>
+		<feature version="${qlack2.util.version}">qlack-util-validator-util</feature>
+		<feature version="${qlack2.util.version}">qlack-util-audit-client</feature>
+		<feature version="${qlack2.fuse.version}">qlack-fuse-auditing</feature>
+		<bundle>mvn:com.eurodyn.qlack2.webdesktop/webdesktop-api/${qlack2.webdesktop.version}</bundle>
+		<bundle>mvn:org.yaml/snakeyaml/${snakeyaml.version}</bundle>
+		<bundle>mvn:org.apache.commons/commons-lang3/${commons.lang3.version}</bundle>
+		<bundle start-level="100">mvn:com.eurodyn.qlack2.webdesktop.apps/usermanagement-api/${project.version}</bundle>
+		<bundle start-level="100">mvn:com.eurodyn.qlack2.webdesktop.apps/usermanagement-impl/${project.version}</bundle>
+		<bundle start-level="100">mvn:com.eurodyn.qlack2.webdesktop.apps/usermanagement-web/${project.version}</bundle>
+	</feature>
+
+	<feature description="Qlack - WebDesktop - SampleApp" name="qlack-webdesktop-sampleapp" version="${project.version}">
+		<feature version="${qlack2.fuse.version}">qlack-fuse-idm</feature>
+		<feature version="${qlack2.util.version}">qlack-util-validator-util</feature>
+		<feature version="${qlack2.util.version}">qlack-util-fileupload</feature>
+		<bundle>mvn:com.eurodyn.qlack2.webdesktop/webdesktop-api/${qlack2.webdesktop.version}</bundle>
+		<bundle start-level="100">mvn:com.eurodyn.qlack2.webdesktop.apps/sampleapp-api/${project.version}</bundle>
+		<bundle start-level="100">mvn:com.eurodyn.qlack2.webdesktop.apps/sampleapp-impl/${project.version}/jar/${bundle.classifier}</bundle>
+		<bundle start-level="100">mvn:com.eurodyn.qlack2.webdesktop.apps/sampleapp-web/${project.version}</bundle>
+	</feature>
+
+	<feature description="Qlack - WebDesktop - Cloud Manager" name="qlack-webdesktop-cloudmanager" version="${project.version}">
+		<feature version="${qlack2.fuse.version}">qlack-fuse-idm</feature>
+		<feature version="${qlack2.util.version}">qlack-util-validator-util</feature>
+		<bundle>mvn:com.eurodyn.qlack2.webdesktop/webdesktop-api/${qlack2.webdesktop.version}</bundle>
+		<bundle start-level="100">mvn:com.eurodyn.qlack2.webdesktop.apps/cloudmanager-api/${project.version}</bundle>
+		<bundle start-level="100">mvn:com.eurodyn.qlack2.webdesktop.apps/cloudmanager-impl/${project.version}/jar/${bundle.classifier}</bundle>
+		<bundle start-level="100">mvn:com.eurodyn.qlack2.webdesktop.apps/cloudmanager-web/${project.version}</bundle>
+	</feature>
+
+</features>

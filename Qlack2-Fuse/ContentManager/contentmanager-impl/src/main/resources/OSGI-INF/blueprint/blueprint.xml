@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.0.0" xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.0.0"
+	xmlns:jaxrs="http://cxf.apache.org/blueprint/jaxrs">
+
+	<!-- LOCAL BEANS & SERVICES -->
+	<bean id="DocumentServiceImpl" class="com.eurodyn.qlack2.fuse.cm.impl.DocumentServiceImpl">
+		<jpa:context property="em" unitname="fuse-contentmanager" />
+		<tx:transaction method="*" value="Required" />
+		<property name="versionService" ref="VersionServiceImpl" />
+	</bean>
+	<service id="DocumentService" ref="DocumentServiceImpl"
+		interface="com.eurodyn.qlack2.fuse.cm.api.DocumentService" />
+		
+	<bean id="VersionServiceImpl" class="com.eurodyn.qlack2.fuse.cm.impl.VersionServiceImpl">
+		<jpa:context property="em" unitname="fuse-contentmanager" />
+		<tx:transaction method="*" value="Required" />
+	</bean>
+	<service id="VersionService" ref="VersionServiceImpl"
+		interface="com.eurodyn.qlack2.fuse.cm.api.VersionService" />
+		
+	<bean id="ConcurrencyControlServiceImpl" class="com.eurodyn.qlack2.fuse.cm.impl.ConcurrencyControlServiceImpl">
+		<jpa:context property="em" unitname="fuse-contentmanager" />
+		<tx:transaction method="*" value="Required" />
+	</bean>
+	<service id="ConcurrencyControlService" ref="ConcurrencyControlServiceImpl"
+		interface="com.eurodyn.qlack2.fuse.cm.api.ConcurrencyControlService" />
+</blueprint>

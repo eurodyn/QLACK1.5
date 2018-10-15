@@ -1,0 +1,123 @@
+<div ng-controller="DesktopCtrl">
+	<script id="menuGroupTemplate" type="text/x-kendo-template">
+		<li class="appgroup" data-id="#=data#">
+			<span translate>#=data#</span>
+		</li>
+	</script>
+	<script id="noGroupAppTemplate" type="text/x-kendo-template">
+		<li class="applink" data-application-uuid="#=data.identification.uniqueId#">
+			<div data-bind="click: openApplication">
+				<span translate>#=instantiation.translationsGroup#.#=identification.titleKey#</span>
+			</div>
+		</li>
+	</script>
+	<script id="appTemplate" type="text/x-kendo-template">
+		<div class="appicon" data-application-uuid="#=data.identification.uniqueId#">
+			<!-- Inner div used to bind the click event which will open the application since binding it to the parent div
+			which is also a kendoDraggable does not work -->
+			<div ng-click="openApplication($event)">
+				<div><img ng-src='#=data.instantiation.path##=data.menu.icon#'/></div>
+				<div class="appicon-description"><span translate>#=instantiation.translationsGroup#.#=identification.titleKey#</span></div>
+			</div>
+		</div>
+	</script>
+
+	<!-- Navigation system -->
+	<div id="startbar">
+
+		<!-- Menu -->
+		<div id="oval-button" ng-click="openMenu()">
+			<div id="start-button" title=""><i class="fa fa-power-off fa-lg"></i></div>
+		</div>
+
+		<!-- Taskbar -->
+		<div id="tasklist" ng-controller="TaskbarCtrl">
+			<div ng-repeat="item in taskbarItems" data-application-uuid="{{item.applicationUuid}}" data-instance-uuid="{{item.instanceUuid}}"
+				class="taskbar-item" ng-class="{'taskbar-item-active': item.active}"
+				ng-click="selectItem($event)">
+				<div style='background-image: url("{{item.imageUrl}}")'>{{item.title | translate}}</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+
+		<!-- Tray -->
+		<div id="tray" ng-controller="TrayCtrl">
+			<ul id="trayApps">
+				<li ng-repeat="i in trayApps">
+					<div id="tray_{{i.name}}" title="{{i.tooltip|translate}}"
+						class="fa-stack" ng-class="i.onClick != undefined ? 'soft-button' : ''"
+						ng-style="{cursor: i.onClick != undefined ? 'pointer' : 'default'}"
+						ng-mouseenter="i.onMouseEnter != undefined ? mouseEnter(i.name) : null"
+						ng-mouseleave="i.onMouseLeave != undefined ? mouseLeave(i.name) : null"
+						ng-click="i.onClick != undefined ? click(i.name) : null">
+						<i class="fa {{i.icon}} fa-stack-1x"></i>
+						<i ng-style="{color: i.iconStackedColor != undefined
+							? i.iconStackedColor : 'inherit'}"
+							ng-show="i.iconStacked != undefined"
+							class="fa fa-stack-2x {{i.iconStacked}}"></i>
+						<i ng-show="getBadge(i.name) > 0" class="badge">{{getBadge(i.name)}}</i>
+					</div>
+				</li>
+			</ul>
+			<div class="glass-panel" ng-show="panelVisible" id="trayPanel" ng-mouseleave="closePanel()">
+				<div id="trayPanelMessages">
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+
+	<!-- Start menu -->
+	<div id="menu" ng-mouseleave="closeMenu()">
+		<!-- Icons -->
+		<div id="left-menu">
+			<div id="appicons-list" kendo-list-view k-data-source="menuAppSource"
+				k-template="appTemplate" k-selectable="false"
+				k-on-data-bound="makeAppDraggable(kendoEvent)"></div>
+			<div id="appicons-pages"></div>
+			<!-- Void action in form to avoid form submission on enter -->
+			<form id="search" action="javascript:void(0);">
+				<input id="qsearchterm" type="text"	placeholder="{{'filter' | translate}}"
+					data-bind="value: filter, events:{change: filterMenu}" />
+			</form>
+			<br clear="left">
+		</div>
+		<!-- Links -->
+		<div id="right-menu">
+			<ul id="groupList" kendo-list-view="groupList" k-data-source="groupSource"
+				k-template="menuGroupTemplate" k-selectable="true"
+				k-on-change="selectMenuGroup(kendoEvent)" k-on-data-bound="selectFirstMenuGroup(kendoEvent)"></ul>
+			<ul id="noGroupAppList" kendo-list-view k-data-source="noGroupAppSource"
+				k-template="noGroupAppTemplate" k-selectable="false"></ul>
+			<div class="soft-button logout-button">
+				<div ng-click="logout()"><i class="fa fa-power-off fa-lg"></i> &nbsp;<span translate>logout</span></div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+
+	<!-- The desktop container -->
+	<div id="desktop">
+		<div id="desktop-content" kendo-list-view k-data-source="desktopAppSource"
+			k-on-data-bound="initAppContextMenu(kendoEvent)"
+			k-template="appTemplate">
+		</div>
+	</div>
+
+	<!--  Desktop applications -->
+	<!-- TODO k-animation does not seem to work -->
+	<div ng-controller="WindowCtrl">
+		<div ng-repeat="app in wdApps">
+			<div kendo-window id="wdapp"
+				k-visible="false" k-iframe="true"
+				data-instance-uuid="{{app.instanceUuid}}" data-application-uuid="{{app.applicationUuid}}"
+				k-title="'{{app.title | translate}}'" k-content="app.content + '?instanceUUID=' + app.instanceUuid + '&' + app.urlParams" k-draggable = "app.draggable" k-resizable="app.resizable"
+				k-width="app.width" k-min-width="app.minWidth" k-max-width="app.maxWidth"
+				k-height="app.height" k-min-height="app.minHeight" k-max-height="app.maxHeight"
+				k-actions="app.actions" k-animation="{close: {effects: 'fade:out', duration: 500}}"
+				k-on-refresh="windowRefresh(kendoEvent)" k-on-close="windowClose(kendoEvent)"
+				k-on-resize="windowResize(kendoEvent)" k-on-dragend="windowResize(kendoEvent)"></div>
+		</div>
+	</div>
+</div>

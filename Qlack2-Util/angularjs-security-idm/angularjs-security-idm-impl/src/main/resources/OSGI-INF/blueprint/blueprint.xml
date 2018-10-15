@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+    xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+	xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.0.0"
+	xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.0.0"
+	xmlns:jaxrs="http://cxf.apache.org/blueprint/jaxrs">
+
+	<!-- MANAGED PROPERTIES -->
+	<cm:property-placeholder
+		persistent-id="com.eurodyn.qlack2.util.angularjssecurityidm"
+		update-strategy="reload">
+		<cm:default-properties>
+			<cm:property name="ticket.headerName" value="X-Qlack-Fuse-IDM-Token" />
+		</cm:default-properties>
+	</cm:property-placeholder>
+
+	<!-- EXTERNAL SERVICES -->
+	<reference id="IDMService"
+		interface="com.eurodyn.qlack2.fuse.idm.api.IDMService" />
+	<reference id="OperationService"
+		interface="com.eurodyn.qlack2.fuse.aaa.api.OperationService" />
+	<reference id="UserService"
+		interface="com.eurodyn.qlack2.fuse.aaa.api.UserService" />
+
+	<!-- LOCAL BEANS & SERVICES -->
+	<bean id="SecurityProxyImpl"
+		class="com.eurodyn.qlack2.util.angularjssecidm.impl.SecurityProxyImpl">
+		<property name="idm" ref="IDMService" />
+		<property name="operationService" ref="OperationService" />
+		<property name="userService" ref="UserService" />
+		<property name="ticketHeaderName" value="${ticket.headerName}"/>
+		<cm:managed-properties persistent-id="com.eurodyn.qlack2.util.angularjssecurityidm" update-strategy="container-managed" />
+	</bean>
+	<service id="SecurityProxyService" ref="SecurityProxyImpl"
+		interface="com.eurodyn.qlack2.util.angularjssecidm.api.SecurityProxy"/>
+
+</blueprint>

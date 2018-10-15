@@ -1,0 +1,18 @@
+﻿groups:
+  - name: cloudmanager_ui
+    description: Cloud Manager application
+  - name: wd_apps
+    description: Application translations required to display an application in the Web Desktop
+languages:
+  - name: English
+    locale: en
+translations:
+  - group: wd_apps
+    locale: en
+    keys:
+      - cloudmanager_ui.application_title: Cloud Manager
+      - cloudmanager_ui.application_description: Manages a cluster of interconnected Qlack Web Dekstop based applications.
+  - group: cloudmanager_ui
+    locale: en
+    keys:
+      - static_translation: This is a static translation

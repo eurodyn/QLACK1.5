@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:jaxrs="http://cxf.apache.org/blueprint/jaxrs">
+
+	<!-- EXTERNAL SERVICES -->
+	<reference id="CloudService"
+		interface="com.eurodyn.qlack2.webdesktop.apps.cloudmanager.api.CloudService" />
+
+	<!-- LOCAL BEANS & SERVICES -->
+	<bean id="CloudManagerRest"
+		class="com.eurodyn.qlack2.webdesktop.apps.cloudmanager.web.rest.CloudManagerRest">
+		<property name="cloudService" ref="CloudService" />
+	</bean>
+
+	<!-- CXF CONFIGURATION -->
+	<jaxrs:server id="CloudRestServer" address="/apps/cloudmanager/service">
+		<jaxrs:serviceBeans>
+			<!-- <ref component-id="CloudManagerRest" /> -->
+		</jaxrs:serviceBeans>
+
+		<jaxrs:providers>
+			<bean id="RESTExceptionMapper"
+				class="com.eurodyn.qlack2.util.restutil.RESTExceptionMapper"/>
+			<bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider">
+				<property name="mapper">
+					<bean id="jacksonMapper" class="com.eurodyn.qlack2.util.restutil.RESTObjectMapper" />
+				</property>
+			</bean>
+		</jaxrs:providers>
+	</jaxrs:server>
+
+</blueprint>

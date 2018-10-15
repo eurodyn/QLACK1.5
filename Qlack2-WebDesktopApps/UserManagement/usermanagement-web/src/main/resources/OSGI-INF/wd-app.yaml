@@ -1,0 +1,28 @@
+!!WDApplication:
+  identification:
+    uniqueId:           2848276f-7292-4e93-8ff1-8827709907e8
+    titleKey:           application_title
+    descriptionKey:     application_description
+    version:            1.0-SNAPSHOT
+  instantiation:
+    path:               apps/usermanagement/
+    index:              /
+    multipleInstances:  false
+    restrictAccess:     true
+    translationsGroup:  usermanagement
+  menu:
+    icon:               /img/app-usermanagement-icon.png
+    iconSmall:          /img/app-usermanagement-icon-small.png
+    type:
+      displayOn:        group
+      groupKey:         x_administration
+  window:
+    width:              800
+    minWidth:           470
+    height:             500
+    minHeight:          450
+    resizable:          true
+    maximizable:        true
+    minimizable:        true
+    closable:           true
+    draggable:          true

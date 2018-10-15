@@ -1,0 +1,45 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.eurodyn.qlack2</groupId>
+		<artifactId>qlack2</artifactId>
+		<version>1.3.1</version>
+		<relativePath>../Qlack2</relativePath>
+	</parent>
+
+	<groupId>com.eurodyn.qlack2.webdesktop</groupId>
+	<artifactId>webdesktop</artifactId>
+	<version>1.2.0</version>
+	<packaging>pom</packaging>
+	
+	<modules>
+		<module>webdesktop-api</module>
+		<module>webdesktop-impl</module>
+		<module>webdesktop-web</module>
+		<module>webdesktop-themes</module>
+	</modules>
+	
+	<properties>
+		<qlack2.common.version>1.3.1</qlack2.common.version>
+		<qlack2.fuse.version>1.5.6</qlack2.fuse.version>
+		<qlack2.util.version>1.6.7</qlack2.util.version>
+		<jetty.websocket.version>7.6.8.v20121106</jetty.websocket.version>
+	</properties>
+
+	<profiles>
+		<profile>
+			<id>webdesktop-karaf-features</id>
+			<activation>
+				<file>
+					<exists>KarafFeatures/pom.xml</exists>
+				</file>
+			</activation>
+			<modules>
+				<module>KarafFeatures</module>
+			</modules>
+		</profile>
+	</profiles>
+	
+</project>

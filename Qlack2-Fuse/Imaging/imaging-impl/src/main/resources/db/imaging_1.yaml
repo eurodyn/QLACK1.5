@@ -1,0 +1,227 @@
+databaseChangeLog:
+  - changeSet:
+      id: imaging_01
+      author: European Dynamics SA (stephan.schreck@eurodyn.com)
+      changes:
+        - createTable:
+            tableName: img_folder
+            columns:
+              - column:
+                  name: id
+                  type: varchar(36)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name  
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: parent_id
+                  type: varchar(36)
+              - column:
+                  name: description
+                  type: varchar(1024)
+              - column:
+                  name: owner_id
+                  type: varchar(36)
+                  constraints:
+                    nullable: false 						
+        - createIndex:
+              indexName: fk_img_folder_img_folder
+              tableName: img_folder
+              columns:
+                - column:
+                   name: parent_id
+        - createIndex:
+              indexName: fld_name_INDEX
+              tableName: img_folder
+              columns:
+                - column:
+                   name: name 
+        - createIndex:
+              indexName: owner_INDEX
+              tableName: img_folder
+              columns:
+                - column:
+                   name: owner_id 
+        - addForeignKeyConstraint:
+              constraintName: fk_img_folder_img_folder
+              baseTableName: img_folder
+              baseColumnNames: parent_id
+              referencedTableName: img_folder
+              referencedColumnNames: id
+              onDelete: cascade
+              onUpdate: cascade
+        - addUniqueConstraint:
+            columnNames: parent_id, name
+            constraintName: fld_parent_id_name_unique
+            tableName: img_folder
+        - createTable:
+            tableName: img_image
+            columns:
+              - column:
+                  name: id
+                  type: varchar(36)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name  
+                  type: varchar(255)
+                  constraints:
+                    nullable: false  
+              - column:
+                  name: folder_id
+                  type: varchar(36)
+                  constraints:
+                    nullable: false  
+              - column:
+                  name: filename
+                  type: varchar(255)
+                  constraints:
+                    nullable: false  
+              - column:
+                  name: mimetype
+                  type: varchar(255)
+                  constraints:
+                    nullable: false  
+              - column:
+                  name: content
+                  type: longblob
+                  constraints:
+                    nullable: false    
+              - column:
+                  name: thumbnail
+                  type: longblob
+                  constraints:
+                    nullable: false  	
+              - column:
+                  name: description
+                  type: varchar(1024)
+              - column:
+                  name: owner_id
+                  type: varchar(36)
+                  constraints:
+                    nullable: false  
+        - createIndex:
+              indexName: fk_img_image_img_folder1
+              tableName: img_image
+              columns:
+                - column:
+                   name: folder_id
+        - createIndex:
+              indexName: img_name_INDEX
+              tableName: img_image
+              columns:
+                - column:
+                   name: name 
+        - addForeignKeyConstraint:
+              constraintName: fk_img_image_img_folder1
+              baseTableName: img_image
+              baseColumnNames: folder_id
+              referencedTableName: img_folder
+              referencedColumnNames: id
+              onDelete: cascade
+              onUpdate: cascade 
+        - addUniqueConstraint:
+            columnNames: folder_id, name
+            constraintName: img_folder_id_name_unique
+            tableName: img_image 
+        - createTable:
+            tableName: img_image_attribute
+            columns:
+              - column:
+                  name: id
+                  type: varchar(36)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name  
+                  type: varchar(255)
+                  constraints:
+                    nullable: false  
+              - column:
+                  name: value
+                  type: varchar(255)
+                  constraints:
+                    nullable: false  
+              - column:
+                  name: image_id
+                  type: varchar(36)
+                  constraints:
+                    nullable: false  			
+        - createIndex:
+              indexName: fk_img_attribute_img_image1
+              tableName: img_image_attribute
+              columns:
+                - column:
+                   name: image_id
+        - createIndex:
+              indexName: img_attr_name_INDEX
+              tableName: img_image_attribute
+              columns:
+                - column:
+                   name: name 
+        - addForeignKeyConstraint:
+              constraintName: fk_img_attr_img
+              baseTableName: img_image_attribute
+              baseColumnNames: image_id
+              referencedTableName: img_image
+              referencedColumnNames: id
+              onDelete: cascade
+              onUpdate: cascade	
+        - addUniqueConstraint:
+            columnNames: image_id, name
+            constraintName: attr_image_id_name_unique
+            tableName: img_image_attribute  
+        - createTable:
+            tableName: img_folder_attribute
+            columns:
+              - column:
+                  name: id
+                  type: varchar(36)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: value
+                  type: varchar(255)
+                  constraints:
+                    nullable: false	
+              - column:
+                  name: folder_id
+                  type: varchar(36)
+                  constraints:
+                    nullable: false	
+        - createIndex:
+              indexName: fld_id_INDEX
+              tableName: img_folder_attribute
+              columns:
+                - column:
+                   name: folder_id
+        - createIndex:
+              indexName: fld_attr_name_INDEX
+              tableName: img_folder_attribute
+              columns:
+                - column:
+                   name: name
+        - addForeignKeyConstraint:
+              constraintName: fk_fld_attr_fld
+              baseTableName: img_folder_attribute
+              baseColumnNames: folder_id
+              referencedTableName: img_folder
+              referencedColumnNames: id
+              onDelete: cascade
+              onUpdate: cascade
+        - addUniqueConstraint:
+            columnNames: folder_id, name
+            constraintName: attr_folder_id_name_unique
+            tableName: img_folder_attribute  
