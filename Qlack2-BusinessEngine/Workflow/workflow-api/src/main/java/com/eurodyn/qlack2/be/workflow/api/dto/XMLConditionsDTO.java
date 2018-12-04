@@ -15,6 +15,7 @@ public class XMLConditionsDTO {
 	private List<XMLConditionDTO> conditions;
 
 	public XMLConditionsDTO() {
+		//empty no arg DTO Constructor
 	}
 	
 	public List<XMLConditionDTO> getConditions() {

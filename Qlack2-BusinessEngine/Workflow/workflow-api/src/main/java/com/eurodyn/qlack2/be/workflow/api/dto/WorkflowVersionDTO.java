@@ -25,6 +25,7 @@ public class WorkflowVersionDTO {
 	private List<ConditionDTO> conditions = new ArrayList<>();
 
 	public WorkflowVersionDTO() {
+		//empty no arg DTO Constructor
 	}
 
 	public String getId() {

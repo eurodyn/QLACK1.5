@@ -28,6 +28,7 @@ public class TaskSummaryDTO {
     private Date completionTime;
 
     public TaskSummaryDTO() {
+        //empty no arg DTO Constructor
     }
 
     public long getId() {

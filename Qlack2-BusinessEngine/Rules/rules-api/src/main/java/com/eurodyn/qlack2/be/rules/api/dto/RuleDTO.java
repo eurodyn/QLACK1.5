@@ -26,6 +26,7 @@ public class RuleDTO {
 	// -- Constructors
 
 	public RuleDTO() {
+		//empty no arg DTO Constructor
 	}
 
 	// -- Accessors

@@ -11,6 +11,7 @@ import java.util.jar.Manifest;
 public class JarGenerator {
 
 	public JarGenerator() {
+		//empty no arg Constructor
 	}
 
 	public byte[] generate(List<JarDataModelVersion> classes) {

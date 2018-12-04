@@ -27,6 +27,7 @@ public class XMLConditionDTO {
 	private String parentCondition;
 
 	public XMLConditionDTO() {
+		//empty no arg DTO Constructor
 	}
 
 	public String getName() {

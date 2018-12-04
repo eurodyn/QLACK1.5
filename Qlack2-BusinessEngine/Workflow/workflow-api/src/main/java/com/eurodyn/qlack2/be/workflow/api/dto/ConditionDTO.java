@@ -15,6 +15,7 @@ public class ConditionDTO {
 	private ConditionDTO parentCondition;
 
 	public ConditionDTO() {
+		//empty no arg DTO Constructor
 	}
 
 	public String getId() {

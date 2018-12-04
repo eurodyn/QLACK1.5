@@ -18,7 +18,7 @@ public class NodeInstanceDTO {
     private Long workItemId;
 
     public NodeInstanceDTO() {
-
+      //empty no arg DTO Constructor
     }
 
     public Long getId() {

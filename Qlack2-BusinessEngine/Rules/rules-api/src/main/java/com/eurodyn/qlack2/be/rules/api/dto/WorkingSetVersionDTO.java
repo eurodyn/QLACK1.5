@@ -27,6 +27,7 @@ public class WorkingSetVersionDTO {
 	// -- Constructors
 
 	public WorkingSetVersionDTO() {
+		//empty no arg DTO Constructor
 	}
 
 	// -- Accessors

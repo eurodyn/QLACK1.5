@@ -17,6 +17,7 @@ public class WorkflowInstanceDTO {
     private String statusDesc;
 
 	public WorkflowInstanceDTO() {
+		//empty no arg DTO Constructor
 	}
 
 	public Long getId() {

@@ -11,6 +11,7 @@ public class WorkflowRuntimeErrorLogDTO {
     private String traceData;
 
 	public WorkflowRuntimeErrorLogDTO() {
+		//empty no arg DTO Constructor
 	}
 
 	public String getId() {

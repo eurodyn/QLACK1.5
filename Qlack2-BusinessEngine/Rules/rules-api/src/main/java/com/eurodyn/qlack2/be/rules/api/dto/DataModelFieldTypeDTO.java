@@ -8,6 +8,7 @@ public class DataModelFieldTypeDTO {
 	// -- Constructors
 
 	public DataModelFieldTypeDTO() {
+		//empty no arg DTO Constructor
 	}
 
 	// -- Accessors

@@ -8,6 +8,7 @@ public class AuditWorkflowInstanceDTO {
     private String versionId;
 
 	public AuditWorkflowInstanceDTO() {
+		//empty no arg DTO Constructor
 	}
 
 	public String getProcessId() {

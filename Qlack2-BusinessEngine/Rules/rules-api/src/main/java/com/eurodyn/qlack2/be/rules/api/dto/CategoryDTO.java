@@ -18,6 +18,7 @@ public class CategoryDTO {
 	// -- Constructors
 
 	public CategoryDTO() {
+		//empty no arg DTO Constructor
 	}
 
 	// -- Accessors

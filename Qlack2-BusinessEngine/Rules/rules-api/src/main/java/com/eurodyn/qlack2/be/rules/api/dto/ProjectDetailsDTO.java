@@ -18,6 +18,7 @@ public class ProjectDetailsDTO {
 	// -- Constructors
 
 	public ProjectDetailsDTO() {
+		//empty no arg DTO Constructor
 	}
 
 	// -- Accessors

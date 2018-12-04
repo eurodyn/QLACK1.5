@@ -25,6 +25,7 @@ public class WorkflowDTO {
 	// -- Constructors
 
 	public WorkflowDTO() {
+		//empty no arg DTO Constructor
 	}
 
 	// -- Accessors

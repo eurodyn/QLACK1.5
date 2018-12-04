@@ -13,6 +13,7 @@ public class RuleVersionIdentifierDTO {
 	// -- Constructors
 
 	public RuleVersionIdentifierDTO() {
+		//empty no arg DTO Constructor
 	}
 
 	// -- Accessors

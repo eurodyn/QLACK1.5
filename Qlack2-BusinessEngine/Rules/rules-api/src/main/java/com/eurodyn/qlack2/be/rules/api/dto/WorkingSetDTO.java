@@ -26,6 +26,7 @@ public class WorkingSetDTO {
 	// -- Constructors
 
 	public WorkingSetDTO() {
+		//empty no arg DTO Constructor
 	}
 
 	// -- Accessors

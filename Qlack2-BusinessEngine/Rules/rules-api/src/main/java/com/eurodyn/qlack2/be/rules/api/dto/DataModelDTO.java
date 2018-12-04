@@ -26,6 +26,7 @@ public class DataModelDTO {
 	// -- Constructors
 
 	public DataModelDTO() {
+		//empty no arg DTO Constructor
 	}
 
 	// -- Accessors

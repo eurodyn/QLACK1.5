@@ -11,6 +11,7 @@ public class WorkingSetVersionIdentifierDTO {
 	// -- Constructors
 
 	public WorkingSetVersionIdentifierDTO() {
+		//empty no arg DTO Constructor
 	}
 
 	// -- Accessors

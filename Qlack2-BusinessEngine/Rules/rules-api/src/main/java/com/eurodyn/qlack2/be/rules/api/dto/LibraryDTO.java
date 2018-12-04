@@ -26,6 +26,7 @@ public class LibraryDTO {
 	// -- Constructors
 
 	public LibraryDTO() {
+		//empty no arg DTO Constructor
 	}
 
 	// -- Accessors

@@ -20,6 +20,7 @@ public class LibraryVersionDTO {
 	private UserDTO lockedBy;
 
 	public LibraryVersionDTO() {
+		//empty no arg DTO Constructor
 	}
 
 	public String getLibraryId() {

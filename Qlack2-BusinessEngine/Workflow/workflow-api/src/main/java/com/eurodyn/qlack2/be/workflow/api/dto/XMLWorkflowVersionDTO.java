@@ -20,6 +20,7 @@ public class XMLWorkflowVersionDTO {
 	private XMLConditionsDTO conditions;
 
 	public XMLWorkflowVersionDTO() {
+		//empty no arg DTO Constructor
 	}
 
 	public String getName() {

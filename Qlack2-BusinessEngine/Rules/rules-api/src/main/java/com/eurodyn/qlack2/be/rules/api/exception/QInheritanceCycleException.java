@@ -7,6 +7,7 @@ public class QInheritanceCycleException extends QException {
 	private static final long serialVersionUID = -1953961329472163683L;
 
 	public QInheritanceCycleException() {
+		//empty no arg DTO Constructor
 	}
 
 }
