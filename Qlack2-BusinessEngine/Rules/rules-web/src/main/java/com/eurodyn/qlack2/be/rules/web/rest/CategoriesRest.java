@@ -145,8 +145,8 @@ public class CategoriesRest {
 
 		ValidationFieldErrors vfe = new ValidationFieldErrors("name");
 		ValidationErrorType vet = new ValidationErrorType("qlack.validation.UniqueName");
-		vet.putAttribute(ValidationAttribute.Message, "qlack.validation.UniqueName");
-		vet.putAttribute(ValidationAttribute.InvalidValue, name);
+		vet.putAttribute(ValidationAttribute.MESSAGE, "qlack.validation.UniqueName");
+		vet.putAttribute(ValidationAttribute.INVALID_VALUE, name);
 		vfe.addError(vet);
 
 		ve.addValidationError(vfe);

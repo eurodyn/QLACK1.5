@@ -64,40 +64,6 @@ public class NotificationServiceImpl implements NotificationService {
 		notification.setNotfIcon(notificationDTO.getCustomIconURL());
 		em.persist(notification);
 
-		// Post a realtime notification about the event.
-		// if
-		// (PropertiesLoaderSingleton.getInstance().getProperty("QlackFuse.SIMM.realtime.JMS.notifications").equals("true"))
-		// {
-		// SIMMMessage jmsMessage = new SIMMMessage();
-		// jmsMessage.setType(SIMMMessage.MSGTYPE__NOTIFICATION_CREATED);
-		// jmsMessage.setSrcUserID(notificationDTO.getFromUserID());
-		// jmsMessage.setStringProperty(SIMMMessage.PRIVATE_USERID,
-		// notificationDTO.getToUserID());
-		// jmsMessage.setStringProperty(SIMMMessage.PROPERTY__NOTIFICATION_TITLE,
-		// notificationDTO.getTitle() != null ? notificationDTO.getTitle() :
-		// "");
-		// jmsMessage.setStringProperty(SIMMMessage.PROPERTY__NOTIFICATION_DESCRIPTION,
-		// notificationDTO.getDescription() != null ?
-		// notificationDTO.getDescription() : "");
-		// jmsMessage.setStringProperty(SIMMMessage.PROPERTY__NOTIFICATION_LINK,
-		// notificationDTO.getLink() != null ? notificationDTO.getLink() : "");
-		// jmsMessage.setStringProperty(SIMMMessage.PROPERTY__NOTIFICATION_CUSTOMICON_URL,
-		// notificationDTO.getCustomIconURL() != null ?
-		// notificationDTO.getCustomIconURL() : "");
-		// jmsMessage.setStringProperty(SIMMMessage.PROPERTY__NOTIFICATION_TYPE,
-		// notificationDTO.getType() != null ? notificationDTO.getType() : "");
-		// jmsMessage.setStringProperty(SIMMMessage.PROPERTY__AUTOBALLOON,
-		// notificationDTO.isShowAutoBalloon() ? "true" : "false");
-		// try {
-		// Messenger.post(connectionFactory, notificationTopic, jmsMessage);
-		// } catch (JMSException ex) {
-		// LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());
-		// throw new
-		// QlackFuseSIMMException(QlackFuseSIMMException.CODES.ERR_SIMM_0033,
-		// ex.getLocalizedMessage());
-		// }
-		// }
-
 		return (notification.getId());
 	}
 

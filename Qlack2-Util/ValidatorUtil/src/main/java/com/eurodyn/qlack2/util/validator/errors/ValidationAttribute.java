@@ -15,12 +15,12 @@
 package com.eurodyn.qlack2.util.validator.errors;
 
 public enum ValidationAttribute {
-	CheckName,
-	InvalidValue,
-	Message,
-	ValidatedObject,
-	ParentObject,
-	ErrorCode,
-	MessageTemplate,
-	Raw
+	CHECK_NAME,
+	INVALID_VALUE,
+	MESSAGE,
+	VALIDATED_OBJECT,
+	PARENT_OBJECT,
+	ERROR_CODE,
+	MESSAGE_TEMPLATE,
+	RAW
 }

@@ -78,15 +78,15 @@ public class QuartzConverters {
 		switch (trigger.getTriggerType()) {
 		case ASAP:
 			break;
-		case Daily:
+		case DAILY:
 			ce = new CronExpression("0 " + trigger.getDailyTime().substring(3) + " "
 					+ trigger.getDailyTime().substring(0, 2) + " ? * *");
 			break;
-		case Weekly:
+		case WEEKLY:
 			ce = new CronExpression("0 " + trigger.getDailyTime().substring(3) + " "
 					+ trigger.getDailyTime().substring(0, 2) + " ? * " + trigger.getWeeklyDay().toString());
 			break;
-		case Monthly:
+		case MONTHLY:
 			String dom = "";
 			switch (trigger.getMonthlyPeriod()) {
 			case FIRST:
@@ -99,7 +99,7 @@ public class QuartzConverters {
 			ce = new CronExpression("0 " + trigger.getDailyTime().substring(3) + " "
 					+ trigger.getDailyTime().substring(0, 2) + " " + dom + " * ?");
 			break;
-		case Cron:
+		case CRON:
 			ce = new CronExpression(trigger.getCronExpression());
 			break;
 		}

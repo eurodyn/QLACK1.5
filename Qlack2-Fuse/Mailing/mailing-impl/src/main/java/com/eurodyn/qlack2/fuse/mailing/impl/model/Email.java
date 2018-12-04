@@ -96,7 +96,7 @@ public class Email implements java.io.Serializable {
 		this.id = java.util.UUID.randomUUID().toString();
 	}
 
-	private static final String jpql = "SELECT m FROM Email m WHERE m.status = :status AND m.tries < :tries";
+	private static final String JPGL = "SELECT m FROM Email m WHERE m.status = :status AND m.tries < :tries";
 
 	// -- Queries
 
@@ -109,7 +109,7 @@ public class Email implements java.io.Serializable {
 		// If log4j is used, suppress above log by adding line log4j.logger.org.hibernate.loader.Loader=OFF 
 		// in org.ops4j.pax.logging.cfg file.
 		try {
-			retList = em.createQuery(jpql, Email.class)
+			retList = em.createQuery(JPGL, Email.class)
 					.setParameter("status", MailService.EMAIL_STATUS.QUEUED.toString())
 					.setParameter("tries", maxTries)
 					.setLockMode(LockModeType.PESSIMISTIC_FORCE_INCREMENT)

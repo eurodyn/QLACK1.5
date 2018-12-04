@@ -238,8 +238,8 @@ public class RulesRest {
 
 		ValidationFieldErrors vfe = new ValidationFieldErrors("name");
 		ValidationErrorType vet = new ValidationErrorType("qlack.validation.UniqueName");
-		vet.putAttribute(ValidationAttribute.Message, "qlack.validation.UniqueName");
-		vet.putAttribute(ValidationAttribute.InvalidValue, name);
+		vet.putAttribute(ValidationAttribute.MESSAGE, "qlack.validation.UniqueName");
+		vet.putAttribute(ValidationAttribute.INVALID_VALUE, name);
 		vfe.addError(vet);
 
 		ve.addValidationError(vfe);
@@ -251,8 +251,8 @@ public class RulesRest {
 
 		ValidationFieldErrors vfe = new ValidationFieldErrors("name");
 		ValidationErrorType vet = new ValidationErrorType("qlack.validation.UniqueName");
-		vet.putAttribute(ValidationAttribute.Message, "qlack.validation.UniqueName");
-		vet.putAttribute(ValidationAttribute.InvalidValue, versionName);
+		vet.putAttribute(ValidationAttribute.MESSAGE, "qlack.validation.UniqueName");
+		vet.putAttribute(ValidationAttribute.INVALID_VALUE, versionName);
 		vfe.addError(vet);
 
 		ve.addValidationError(vfe);
@@ -292,7 +292,7 @@ public class RulesRest {
 
 		ValidationFieldErrors vfe = new ValidationFieldErrors("version.content");
 		ValidationErrorType vet = new ValidationErrorType("qlack.validation.rules.NoDroolsRule");
-		vet.putAttribute(ValidationAttribute.Message, "qlack.validation.rules.NoDroolsRule");
+		vet.putAttribute(ValidationAttribute.MESSAGE, "qlack.validation.rules.NoDroolsRule");
 		vfe.addError(vet);
 
 		ve.addValidationError(vfe);
@@ -304,7 +304,7 @@ public class RulesRest {
 
 		ValidationFieldErrors vfe = new ValidationFieldErrors("version.content");
 		ValidationErrorType vet = new ValidationErrorType("qlack.validation.rules.MultipleDroolsRules");
-		vet.putAttribute(ValidationAttribute.Message, "qlack.validation.rules.MultipleDroolsRules");
+		vet.putAttribute(ValidationAttribute.MESSAGE, "qlack.validation.rules.MultipleDroolsRules");
 		vfe.addError(vet);
 
 		ve.addValidationError(vfe);
@@ -316,7 +316,7 @@ public class RulesRest {
 
 		ValidationFieldErrors vfe = new ValidationFieldErrors("version.content");
 		ValidationErrorType vet = new ValidationErrorType("qlack.validation.rules.NonUniqueDroolsRuleName");
-		vet.putAttribute(ValidationAttribute.Message, "qlack.validation.rules.NonUniqueDroolsRuleName");
+		vet.putAttribute(ValidationAttribute.MESSAGE, "qlack.validation.rules.NonUniqueDroolsRuleName");
 		vfe.addError(vet);
 
 		ve.addValidationError(vfe);
@@ -337,8 +337,8 @@ public class RulesRest {
 
 		ValidationFieldErrors vfe = new ValidationFieldErrors("file");
 		ValidationErrorType vet = new ValidationErrorType("qlack.validation.XmlFile");
-		vet.putAttribute(ValidationAttribute.Message, "qlack.validation.XmlFile");
-		vet.putAttribute(ValidationAttribute.InvalidValue, filename);
+		vet.putAttribute(ValidationAttribute.MESSAGE, "qlack.validation.XmlFile");
+		vet.putAttribute(ValidationAttribute.INVALID_VALUE, filename);
 		vfe.addError(vet);
 
 		ve.addValidationError(vfe);

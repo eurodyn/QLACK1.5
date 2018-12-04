@@ -200,7 +200,7 @@ public class DataModelsRest {
 
 		ValidationFieldErrors vfe = new ValidationFieldErrors("parent");
 		ValidationErrorType vet = new ValidationErrorType("qlack.validation.dataModel.version.parent.InheritanceCycle");
-		vet.putAttribute(ValidationAttribute.Message, "qlack.validation.dataModel.version.parent.InheritanceCycle");
+		vet.putAttribute(ValidationAttribute.MESSAGE, "qlack.validation.dataModel.version.parent.InheritanceCycle");
 		vfe.addError(vet);
 
 		ve.addValidationError(vfe);
@@ -212,7 +212,7 @@ public class DataModelsRest {
 
 		ValidationFieldErrors vfe = new ValidationFieldErrors("fields");
 		ValidationErrorType vet = new ValidationErrorType("qlack.validation.dataModel.version.fields.UniqueNames");
-		vet.putAttribute(ValidationAttribute.Message, "qlack.validation.dataModel.version.fields.UniqueNames");
+		vet.putAttribute(ValidationAttribute.MESSAGE, "qlack.validation.dataModel.version.fields.UniqueNames");
 		vfe.addError(vet);
 
 		ve.addValidationError(vfe);
@@ -270,8 +270,8 @@ public class DataModelsRest {
 
 		ValidationFieldErrors vfe = new ValidationFieldErrors("name");
 		ValidationErrorType vet = new ValidationErrorType("qlack.validation.UniqueName");
-		vet.putAttribute(ValidationAttribute.Message, "qlack.validation.UniqueName");
-		vet.putAttribute(ValidationAttribute.InvalidValue, name);
+		vet.putAttribute(ValidationAttribute.MESSAGE, "qlack.validation.UniqueName");
+		vet.putAttribute(ValidationAttribute.INVALID_VALUE, name);
 		vfe.addError(vet);
 
 		ve.addValidationError(vfe);
@@ -283,8 +283,8 @@ public class DataModelsRest {
 
 		ValidationFieldErrors vfe = new ValidationFieldErrors("name");
 		ValidationErrorType vet = new ValidationErrorType("qlack.validation.UniqueName");
-		vet.putAttribute(ValidationAttribute.Message, "qlack.validation.UniqueName");
-		vet.putAttribute(ValidationAttribute.InvalidValue, versionName);
+		vet.putAttribute(ValidationAttribute.MESSAGE, "qlack.validation.UniqueName");
+		vet.putAttribute(ValidationAttribute.INVALID_VALUE, versionName);
 		vfe.addError(vet);
 
 		ve.addValidationError(vfe);
@@ -305,8 +305,8 @@ public class DataModelsRest {
 
 		ValidationFieldErrors vfe = new ValidationFieldErrors("file");
 		ValidationErrorType vet = new ValidationErrorType("qlack.validation.XmlFile");
-		vet.putAttribute(ValidationAttribute.Message, "qlack.validation.XmlFile");
-		vet.putAttribute(ValidationAttribute.InvalidValue, filename);
+		vet.putAttribute(ValidationAttribute.MESSAGE, "qlack.validation.XmlFile");
+		vet.putAttribute(ValidationAttribute.INVALID_VALUE, filename);
 		vfe.addError(vet);
 
 		ve.addValidationError(vfe);

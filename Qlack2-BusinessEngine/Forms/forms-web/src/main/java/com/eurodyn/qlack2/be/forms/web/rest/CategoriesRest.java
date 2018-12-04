@@ -103,9 +103,9 @@ public class CategoriesRest {
 			ValidationFieldErrors vfe = new ValidationFieldErrors("name");
 			ValidationErrorType vet = new ValidationErrorType(
 					"validation.error.category.unique.name");
-			vet.putAttribute(ValidationAttribute.Message, 
+			vet.putAttribute(ValidationAttribute.MESSAGE,
 					"validation.error.category.unique.name");
-			vet.putAttribute(ValidationAttribute.InvalidValue,
+			vet.putAttribute(ValidationAttribute.INVALID_VALUE,
 					categoryRDTO.getName());
 			vfe.addError(vet);
 			ve.addValidationError(vfe);
@@ -148,9 +148,9 @@ public class CategoriesRest {
 			ValidationFieldErrors vfe = new ValidationFieldErrors("name");
 			ValidationErrorType vet = new ValidationErrorType(
 					"validation.error.category.unique.name");
-			vet.putAttribute(ValidationAttribute.Message, 
+			vet.putAttribute(ValidationAttribute.MESSAGE,
 					"validation.error.category.unique.name");
-			vet.putAttribute(ValidationAttribute.InvalidValue,
+			vet.putAttribute(ValidationAttribute.INVALID_VALUE,
 					categoryRDTO.getName());
 			vfe.addError(vet);
 			ve.addValidationError(vfe);

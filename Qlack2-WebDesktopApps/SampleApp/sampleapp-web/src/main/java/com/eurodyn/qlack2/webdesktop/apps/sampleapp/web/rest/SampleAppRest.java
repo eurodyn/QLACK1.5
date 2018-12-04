@@ -52,8 +52,8 @@ public class SampleAppRest {
 			ValidationErrors ve = new ValidationErrors();
 			ValidationFieldErrors vfe = new ValidationFieldErrors("sum");
 			ValidationErrorType vet = new ValidationErrorType("validation.error.wrongSum");
-			vet.putAttribute(ValidationAttribute.Message, "validation.error.wrongSum");
-			vet.putAttribute(ValidationAttribute.InvalidValue, user.getSum());
+			vet.putAttribute(ValidationAttribute.MESSAGE, "validation.error.wrongSum");
+			vet.putAttribute(ValidationAttribute.INVALID_VALUE, user.getSum());
 			vfe.addError(vet);
 			ve.addValidationError(vfe);
 			throw new QValidationException(ve);

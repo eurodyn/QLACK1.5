@@ -33,10 +33,8 @@ import com.sun.media.jai.codec.ByteArraySeekableStream;
 public class ImageIOUtil {
 	private static final Logger LOGGER = Logger.getLogger(ImageIOUtil.class
 			.getName());
-	private static final String default_format = "jpeg";
+	private static final String DEFAULT_FORMAT = "jpeg";
 	private static final String DEFAULT_MIME_TYPE = "application/octet-stream";
-	private static final int thumbnail_width = 70;
-	private static final int thumbnail_height = 70;
 
 	/**
 	 * 
@@ -74,7 +72,7 @@ public class ImageIOUtil {
 	 * @return
 	 */
 	public static String getFormat(byte[] image) {
-		String format = default_format;
+		String format = DEFAULT_FORMAT;
 		Collection mimeTypeCollection = MimeTypeFinder.findMimeTypes(image);
 		if (mimeTypeCollection.size() == 0) {
 			LOGGER.log(Level.WARNING,

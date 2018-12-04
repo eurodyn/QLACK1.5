@@ -83,24 +83,6 @@ public class FriendsServiceImpl implements FriendsService {
 			friends.setCreatedOn(new Date().getTime());
 			em.persist(friends);
 
-			// Post a notification about the event.
-//			if (PropertiesLoaderSingleton.getInstance()
-//					.getProperty("QlackFuse.SIMM.realtime.JMS.notifications")
-//					.equals("true")) {
-//				SIMMMessage message = new SIMMMessage();
-//				message.setType(SIMMMessage.MSGTYPE__FRIENDSHIP_REQUESTED);
-//				message.setSrcUserID(userID);
-//				message.setStringProperty(SIMMMessage.PRIVATE_USERID, friendID);
-//				try {
-//					Messenger.post(connectionFactory, notificationTopic,
-//							message);
-//				} catch (JMSException ex) {
-//					LOGGER.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
-//					throw new QSIMMException(
-//							QSIMMException.CODES.ERR_SIMM_0033,
-//							ex.getLocalizedMessage());
-//				}
-//			}
 		} catch (EntityExistsException e) {
 			throw new QAlreadyMember("User is already present in friend list.");
 		} catch (IllegalArgumentException e) {
@@ -190,28 +172,6 @@ public class FriendsServiceImpl implements FriendsService {
 			em.remove(inverseFriend);
 		}
 
-		// Post a notification about the event.
-//		if (PropertiesLoaderSingleton.getInstance()
-//				.getProperty("QlackFuse.SIMM.realtime.JMS.notifications")
-//				.equals("true")) {
-//			SIMMMessage message = new SIMMMessage();
-//			message.setType(SIMMMessage.MSGTYPE__FRIENDSHIP_REJECTED);
-//			message.setSrcUserID(userID);
-//			message.setStringProperty(SIMMMessage.PROPERTY__FRIEND_ID, friendID);
-//			message.setStringProperty(
-//					SIMMMessage.PROPERTY__FRIENDSHIP_CONFIRMED_ON,
-//					confirmationDate);
-//			message.setStringProperty(SIMMMessage.PRIVATE_USERID, friendID);
-//			try {
-//				Messenger.post(connectionFactory, notificationTopic, message);
-//				message.setStringProperty(SIMMMessage.PRIVATE_USERID, userID);
-//				Messenger.post(connectionFactory, notificationTopic, message);
-//			} catch (JMSException ex) {
-//				LOGGER.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
-//				throw new QSIMMException(QSIMMException.CODES.ERR_SIMM_0033,
-//						ex.getLocalizedMessage());
-//			}
-//		}
 	}
 
 	/**
@@ -267,29 +227,6 @@ public class FriendsServiceImpl implements FriendsService {
 		trgFriend.setCreatedOn(now);
 		trgFriend.setConfirmedOn(now);
 		em.persist(trgFriend);
-
-		// Post a notification about the event.
-//		if (PropertiesLoaderSingleton.getInstance()
-//				.getProperty("QlackFuse.SIMM.realtime.JMS.notifications")
-//				.equals("true")) {
-//			SIMMMessage message = new SIMMMessage();
-//			message.setType(SIMMMessage.MSGTYPE__FRIENDSHIP_ACCEPTED);
-//			message.setSrcUserID(userID);
-//			message.setStringProperty(SIMMMessage.PROPERTY__FRIEND_ID, friendID);
-//			message.setStringProperty(
-//					SIMMMessage.PROPERTY__FRIENDSHIP_CONFIRMED_ON,
-//					String.valueOf(now));
-//			message.setStringProperty(SIMMMessage.PRIVATE_USERID, userID);
-//			try {
-//				Messenger.post(connectionFactory, notificationTopic, message);
-//				message.setStringProperty(SIMMMessage.PRIVATE_USERID, friendID);
-//				Messenger.post(connectionFactory, notificationTopic, message);
-//			} catch (JMSException ex) {
-//				LOGGER.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
-//				throw new QSIMMException(QSIMMException.CODES.ERR_SIMM_0033,
-//						ex.getLocalizedMessage());
-//			}
-//		}
 
 		return ConverterUtil.convertFriendsModelToDTO(srcFriend, userID);
 	}

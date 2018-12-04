@@ -28,11 +28,11 @@ public class ValidationHelper {
 			ValidationFieldErrors vfe = new ValidationFieldErrors(fields[i]);
 			ValidationErrorType vet = new ValidationErrorType(messages[i]);
 			if (wrongValues[i] != null) {
-				vet.putAttribute(ValidationAttribute.InvalidValue, wrongValues[i]);
+				vet.putAttribute(ValidationAttribute.INVALID_VALUE, wrongValues[i]);
 			}
 
 			if (messages[i] != null) {
-				vet.putAttribute(ValidationAttribute.Message, messages[i]);
+				vet.putAttribute(ValidationAttribute.MESSAGE, messages[i]);
 			}
 			vfe.addError(vet);
 			ve.addValidationError(vfe);

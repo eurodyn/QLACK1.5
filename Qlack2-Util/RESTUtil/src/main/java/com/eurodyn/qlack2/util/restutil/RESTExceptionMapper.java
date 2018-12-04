@@ -71,7 +71,7 @@ public class RESTExceptionMapper implements ExceptionMapper<Throwable> {
 			ValidationErrors errors = new ValidationErrors();
 			ValidationFieldErrors vfe = new ValidationFieldErrors(fieldName);
 			ValidationErrorType vet = new ValidationErrorType("org.codehaus.jackson.map.JsonMappingException");
-			vet.putAttribute(ValidationAttribute.Message, "org.codehaus.jackson.map.JsonMappingException");
+			vet.putAttribute(ValidationAttribute.MESSAGE, "org.codehaus.jackson.map.JsonMappingException");
 			vfe.addError(vet);
 			errors.addValidationError(vfe);
 			return Response.status(Response.Status.BAD_REQUEST)

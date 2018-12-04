@@ -235,19 +235,19 @@ public class SchedulerTriggerBuilder {
 		switch (triggerType) {
 		case ASAP:
 			break;
-		case Daily:
+		case DAILY:
 			checkDailyTrigger();
 			break;
-		case Weekly:
+		case WEEKLY:
 			checkWeeklyTrigger();
 			break;
-		case Monthly:
+		case MONTHLY:
 			checkMonthlyTrigger();
 			break;
-		case Cron:
+		case CRON:
 			if (StringUtils.isEmpty(cronExpression)) {
 				throw new IllegalArgumentException(
-						"Trigger type 'Cron' requires a 'cronExpression' attribute defined.");
+						"Trigger type 'CRON' requires a 'cronExpression' attribute defined.");
 			}
 			break;
 		}
@@ -256,33 +256,33 @@ public class SchedulerTriggerBuilder {
 	private void checkMonthlyTrigger() {
 		if (StringUtils.isEmpty(dailyTime)) {
 			throw new IllegalArgumentException(
-					"Trigger type 'Monthly' requires a 'dailyTime' attribute defined.");
+					"Trigger type 'MONTHLY' requires a 'dailyTime' attribute defined.");
 		}
 		if (monthlyPeriod == null) {
 			throw new IllegalArgumentException(
-					"Trigger type 'Monthly' requires a 'monthlyPeriod' attribute defined.");
+					"Trigger type 'MONTHLY' requires a 'monthlyPeriod' attribute defined.");
 		}
 	}
 
 	private void checkWeeklyTrigger() {
 		if (StringUtils.isEmpty(dailyTime)) {
 			throw new IllegalArgumentException(
-					"Trigger type 'Weekly' requires a 'dailyTime' attribute defined.");
+					"Trigger type 'WEEKLY' requires a 'dailyTime' attribute defined.");
 		}
 		if (weeklyDay == null) {
 			throw new IllegalArgumentException(
-					"Trigger type 'Weekly' requires a 'weeklyDay' attribute defined.");
+					"Trigger type 'WEEKLY' requires a 'weeklyDay' attribute defined.");
 		}
 	}
 
 	private void checkDailyTrigger() {
 		if (StringUtils.isEmpty(dailyTime)) {
 			throw new IllegalArgumentException(
-					"Trigger type 'Daily' requires a 'dailyTime' attribute defined.");
+					"Trigger type 'DAILY' requires a 'dailyTime' attribute defined.");
 		}
 		if ((dailyTime.length() < 5) || (dailyTime.indexOf(":") != 2)) {
 			throw new IllegalArgumentException(
-					"Trigger type 'Daily' requires a 'dailyTime' attribute defined as HH:mi, i.e. 07:19.");
+					"Trigger type 'DAILY' requires a 'dailyTime' attribute defined as HH:mi, i.e. 07:19.");
 		}
 	}
 }

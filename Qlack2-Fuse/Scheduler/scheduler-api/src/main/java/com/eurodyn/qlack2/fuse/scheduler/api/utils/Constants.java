@@ -21,28 +21,28 @@ public class Constants {
 	/**
 	 * Enumeration of the week days.
 	 */
-	public static enum TRIGGER_DAYS {
+	public enum TRIGGER_DAYS {
 		MON, TUE, WED, THU, FRI, SAT, SUN
 	};
 
 	/**
 	 * Enumeration of the month period.
 	 */
-	public static enum TRIGGER_MONTH_PERIOD {
+	public enum TRIGGER_MONTH_PERIOD {
 		FIRST, LAST
 	};
 
 	/**
 	 * Enumeration of the trigger fire types.
 	 */
-	public static enum TRIGGERS {
-		ASAP, Daily, Weekly, Monthly, Cron
+	public enum TRIGGERS {
+		ASAP, DAILY, WEEKLY, MONTHLY, CRON
 	}
 
 	/**
 	 * Enumeration of the trigger mis-fire policies.
 	 */
-	public static enum TRIGGER_MISFIRE {
+	public enum TRIGGER_MISFIRE {
 		/**
 		 * Instructs the Scheduler that upon a mis-fire situation, the
 		 * CronTrigger wants to have it's next-fire-time updated to the next

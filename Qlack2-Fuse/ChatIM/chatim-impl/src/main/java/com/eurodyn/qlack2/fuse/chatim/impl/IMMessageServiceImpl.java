@@ -60,26 +60,6 @@ public class IMMessageServiceImpl implements IMMessageService {
 		im.setSentOn(System.currentTimeMillis());
 		em.persist(im);
 
-		// Post a notification about the event.
-//		if (PropertiesLoaderSingleton.getInstance()
-//				.getProperty("QlackFuse.ChatIM.realtime.JMS.notifications")
-//				.equals("true")) {
-//			IMessage iMessage = new IMessage();
-//			iMessage.setType(IMessage.MSGTYPE_INCOMING_IM);
-//			iMessage.setStringProperty(IMessage.PROPERTY__SRC_USERID,
-//					messageDTO.getFromID());
-//			iMessage.setStringProperty(IMessage.PRIVATE_USERID,
-//					messageDTO.getToID());
-//			iMessage.setBody(messageDTO.getMessage());
-//			try {
-//				Messenger.post(connectionFactory, notificationTopic, iMessage);
-//			} catch (JMSException ex) {
-//				LOGGER.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
-//				throw new QChatIMException(
-//						QChatIMException.CODES.ERR_CHA_0001,
-//						ex.getMessage());
-//			}
-//		}
 
 		return im.getId();
 	}

@@ -82,25 +82,6 @@ public class RoomServiceImpl implements RoomService {
 		}
 		em.persist(chatRoom);
 
-		// Post a notification about the event.
-		// if
-		// (PropertiesLoaderSingleton.getInstance().getProperty("QlackFuse.ChatIM.realtime.JMS.notifications").equals("true"))
-		// {
-		// ChatMessage message = new ChatMessage();
-		// message.setType(ChatMessage.MSGTYPE_ROOM_CREATED);
-		// message.setStringProperty(ChatMessage.PROPERTY__ROOM_NAME,
-		// roomDTO.getTitle());
-		// message.setStringProperty(ChatMessage.PROPERTY__ROOMID,
-		// chatRoom.getId());
-		// try {
-		// Messenger.post(connectionFactory, notificationTopic, message);
-		// } catch (JMSException ex) {
-		// LOGGER.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
-		// throw new QChatIMException(QChatIMException.CODES.ERR_CHA_0001,
-		// ex.getLocalizedMessage());
-		// }
-		// }
-
 		return chatRoom.getId();
 	}
 
@@ -141,24 +122,6 @@ public class RoomServiceImpl implements RoomService {
 			em.persist(crhp);
 		}
 
-		// Post a notification about the event.
-		// if (PropertiesLoaderSingleton.getInstance()
-		// .getProperty("QlackFuse.ChatIM.realtime.JMS.notifications")
-		// .equals("true")) {
-		// ChatMessage message = new ChatMessage();
-		// message.setType(ChatMessage.MSGTYPE_JOIN_ROOM);
-		// message.setStringProperty(ChatMessage.PROPERTY__ROOMID, roomID);
-		// message.setStringProperty(ChatMessage.PROPERTY__ROOM_NAME,
-		// chatRoom.getTitle());
-		// message.setStringProperty(ChatMessage.PROPERTY__SRC_USERID, userID);
-		// try {
-		// Messenger.post(connectionFactory, notificationTopic, message);
-		// } catch (JMSException ex) {
-		// LOGGER.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
-		// throw new QChatIMException(QChatIMException.CODES.ERR_CHA_0001,
-		// ex.getLocalizedMessage());
-		// }
-		// }
 	}
 
 	/**
@@ -216,27 +179,6 @@ public class RoomServiceImpl implements RoomService {
 			ChaRoomHasParticipants crhp = i.next();
 			em.remove(crhp);
 
-			// Post a notification about the event.
-			// if (PropertiesLoaderSingleton.getInstance()
-			// .getProperty("QlackFuse.ChatIM.realtime.JMS.notifications")
-			// .equals("true")) {
-			// ChatMessage message = new ChatMessage();
-			// message.setType(ChatMessage.MSGTYPE_LEAVE_ROOM);
-			// message.setStringProperty(ChatMessage.PROPERTY__ROOMID, roomID);
-			// message.setStringProperty(ChatMessage.PROPERTY__ROOM_NAME,
-			// chatRoom.getTitle());
-			// message.setStringProperty(ChatMessage.PROPERTY__SRC_USERID,
-			// userID);
-			// try {
-			// Messenger.post(connectionFactory, notificationTopic,
-			// message);
-			// } catch (JMSException ex) {
-			// LOGGER.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
-			// throw new QChatIMException(
-			// QChatIMException.CODES.ERR_CHA_0001,
-			// ex.getLocalizedMessage());
-			// }
-			// }
 		}
 	}
 
@@ -323,24 +265,6 @@ public class RoomServiceImpl implements RoomService {
 		// remove the room
 		em.remove(chatRoom);
 
-		// Post a notification about the event.
-		// if (PropertiesLoaderSingleton.getInstance()
-		// .getProperty("QlackFuse.ChatIM.realtime.JMS.notifications")
-		// .equals("true")) {
-		// ChatMessage message = new ChatMessage();
-		// message.setType(ChatMessage.MSGTYPE_ROOM_DELETED);
-		// message.setStringProperty(ChatMessage.PROPERTY__ROOMID,
-		// roomDTO.getId());
-		// message.setStringProperty(ChatMessage.PROPERTY__ROOM_NAME,
-		// chatRoom.getTitle());
-		// try {
-		// Messenger.post(connectionFactory, notificationTopic, message);
-		// } catch (JMSException ex) {
-		// LOGGER.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
-		// throw new QChatIMException(QChatIMException.CODES.ERR_CHA_0001,
-		// ex.getLocalizedMessage());
-		// }
-		// }
 	}
 
 	/**
@@ -397,29 +321,6 @@ public class RoomServiceImpl implements RoomService {
 				roomProperty.getPropertyName(), roomProperty.getPropertyValue());
 		em.persist(chaProperty);
 
-		// Post a notification about the event.
-		// if (PropertiesLoaderSingleton.getInstance()
-		// .getProperty("QlackFuse.ChatIM.realtime.JMS.notifications")
-		// .equals("true")) {
-		// ChatMessage message = new ChatMessage();
-		// message.setType(ChatMessage.MSGTYPE_ROOM_PROPERTY_SET);
-		// message.setStringProperty(ChatMessage.PROPERTY__ROOMID,
-		// roomProperty.getRoomId());
-		// message.setStringProperty(ChatMessage.PROPERTY__ROOM_NAME,
-		// chatRoom.getTitle());
-		// message.setStringProperty(ChatMessage.PROPERTY__ROOM_PROPERTY_NAME,
-		// roomProperty.getPropertyName());
-		// message.setStringProperty(
-		// ChatMessage.PROPERTY__ROOM_PROPERTY_VALUE,
-		// roomProperty.getPropertyValue());
-		// try {
-		// Messenger.post(connectionFactory, notificationTopic, message);
-		// } catch (JMSException ex) {
-		// LOGGER.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
-		// throw new QChatIMException(QChatIMException.CODES.ERR_CHA_0001,
-		// ex.getLocalizedMessage());
-		// }
-		// }
 	}
 
 	/**
@@ -452,31 +353,6 @@ public class RoomServiceImpl implements RoomService {
 				}
 			}
 		}
-
-			// Post a notification about the event.
-//			if (PropertiesLoaderSingleton.getInstance()
-//					.getProperty("QlackFuse.ChatIM.realtime.JMS.notifications")
-//					.equals("true")) {
-//				ChatMessage message = new ChatMessage();
-//				message.setType(ChatMessage.MSGTYPE_ROOM_PROPERTY_GET);
-//				message.setStringProperty(ChatMessage.PROPERTY__ROOMID, roomId);
-//				message.setStringProperty(ChatMessage.PROPERTY__ROOM_NAME,
-//						chatRoom.getTitle());
-//				message.setStringProperty(
-//						ChatMessage.PROPERTY__ROOM_PROPERTY_NAME,
-//						dto.getPropertyName());
-//				message.setStringProperty(
-//						ChatMessage.PROPERTY__ROOM_PROPERTY_VALUE,
-//						dto.getPropertyValue());
-//				message.setStringProperty(QlackMessage.PRIVATE_USERID,
-//						recipientUserID);
-//				Messenger.post(connectionFactory, notificationTopic, message);
-//			}
-//		} catch (JMSException ex) {
-//			LOGGER.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
-//			throw new QChatIMException(QChatIMException.CODES.ERR_CHA_0001,
-//					ex.getLocalizedMessage());
-//		}
 
 		return dto;
 	}
@@ -511,30 +387,10 @@ public class RoomServiceImpl implements RoomService {
 			marshaller.marshal(dto, xml);
 			xml.flush();
 
-			// Post a notification about the event.
-			// if (PropertiesLoaderSingleton.getInstance()
-			// .getProperty("QlackFuse.ChatIM.realtime.JMS.notifications")
-			// .equals("true")) {
-			// ChatMessage message = new ChatMessage();
-			// message.setType(ChatMessage.MSGTYPE_STATISTICS);
-			// message.setStringProperty(ChatMessage.PROPERTY__ROOM_NAME,
-			// chatRoom.getTitle());
-			// message.setStringProperty(ChatMessage.PROPERTY__ROOMID,
-			// chatRoom.getId());
-			// message.setStringProperty(QlackMessage.PRIVATE_USERID,
-			// recipientUserID);
-			// message.setBody(xml.toString());
-			// Messenger.post(connectionFactory, notificationTopic, message);
-			// }
 		} catch (JAXBException ex) {
 			LOGGER.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
 			throw new QChatIMException(ex.getLocalizedMessage());
 		}
-		// catch (JMSException ex) {
-		// LOGGER.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
-		// throw new QChatIMException(QChatIMException.CODES.ERR_CHA_0001,
-		// ex.getLocalizedMessage());
-		// }
 
 		return xml.toString();
 	}
@@ -563,24 +419,6 @@ public class RoomServiceImpl implements RoomService {
 		chaWordFilter.setFilter(filter.getFilter());
 		em.persist(chaWordFilter);
 
-		// Post a notification about the event.
-		// if (PropertiesLoaderSingleton.getInstance()
-		// .getProperty("QlackFuse.ChatIM.realtime.JMS.notifications")
-		// .equals("true")) {
-		// ChatMessage message = new ChatMessage();
-		// message.setType(ChatMessage.MSGTYPE_ROOM_FILTER_SET);
-		// message.setStringProperty(ChatMessage.PROPERTY__ROOMID,
-		// filter.getRoomId());
-		// message.setStringProperty(ChatMessage.PROPERTY__ROOM_FILTER_VALUE,
-		// filter.getFilter());
-		// try {
-		// Messenger.post(connectionFactory, notificationTopic, message);
-		// } catch (JMSException ex) {
-		// LOGGER.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
-		// throw new QChatIMException(QChatIMException.CODES.ERR_CHA_0001,
-		// ex.getLocalizedMessage());
-		// }
-		// }
 	}
 
 	/**
@@ -609,26 +447,6 @@ public class RoomServiceImpl implements RoomService {
 			retVal.setFilter(((ChaWordFilter) result).getFilter());
 		}
 
-		// Post a notification about the event.
-		// if (PropertiesLoaderSingleton.getInstance()
-		// .getProperty("QlackFuse.ChatIM.realtime.JMS.notifications")
-		// .equals("true")) {
-		// ChatMessage message = new ChatMessage();
-		// message.setType(ChatMessage.MSGTYPE_ROOM_FILTER_GET);
-		// message.setStringProperty(ChatMessage.PROPERTY__ROOMID, roomId);
-		// message.setStringProperty(ChatMessage.PROPERTY__ROOM_FILTER_VALUE,
-		// retVal.getFilter());
-		// message.setStringProperty(QlackMessage.PRIVATE_USERID,
-		// recipientUserID);
-		// try {
-		// Messenger.post(connectionFactory, notificationTopic, message);
-		// } catch (JMSException ex) {
-		// LOGGER.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
-		// throw new QChatIMException(QChatIMException.CODES.ERR_CHA_0001,
-		// ex.getLocalizedMessage());
-		// }
-		// }
-
 		return retVal;
 	}
 
@@ -652,24 +470,6 @@ public class RoomServiceImpl implements RoomService {
 			em.remove(cf);
 		}
 
-		// Post a notification about the event.
-		// if (PropertiesLoaderSingleton.getInstance()
-		// .getProperty("QlackFuse.ChatIM.realtime.JMS.notifications")
-		// .equals("true")) {
-		// ChatMessage message = new ChatMessage();
-		// message.setType(ChatMessage.MSGTYPE_ROOM_FILTER_DELETED);
-		// message.setStringProperty(ChatMessage.PROPERTY__ROOMID,
-		// chatRoom.getId());
-		// message.setStringProperty(ChatMessage.PROPERTY__ROOM_NAME,
-		// chatRoom.getTitle());
-		// try {
-		// Messenger.post(connectionFactory, notificationTopic, message);
-		// } catch (JMSException ex) {
-		// LOGGER.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
-		// throw new QChatIMException(QChatIMException.CODES.ERR_CHA_0001,
-		// ex.getLocalizedMessage());
-		// }
-		// }
 	}
 
 	/**

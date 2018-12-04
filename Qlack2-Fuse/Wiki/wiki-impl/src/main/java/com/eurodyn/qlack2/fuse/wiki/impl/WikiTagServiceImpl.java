@@ -48,7 +48,6 @@ public class WikiTagServiceImpl implements WikiTagService {
 	private EntityManager em;
 	private static final Logger LOGGER = Logger
 			.getLogger(WikiTagServiceImpl.class.getName());
-	private static final String wikiTagNode = "search_wiki_tags";
 
 	public void setEm(EntityManager em) {
 		this.em = em;

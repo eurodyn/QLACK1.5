@@ -186,32 +186,6 @@ public class TopicServiceImpl implements TopicService {
 
 		topic.setId(topicEntity.getId());
 
-		// Post a notification about the event.
-		// if
-		// (PropertiesLoaderSingleton.getInstance().getProperty("QlackFuse.Forum.realtime.JMS.notifications").equals("true"))
-		// {
-		// ForumMessage jmsMessage = new ForumMessage();
-		// jmsMessage.setType(ForumMessage.MSGTYPE__TOPIC_CREATED);
-		// jmsMessage.setSrcUserID(topic.getCreatorId());
-		// jmsMessage.setStringProperty(ForumMessage.PRIVATE_USERID,
-		// topic.getCreatorId());
-		// jmsMessage.setStringProperty(ForumMessage.PROPERTY__FORUM_ID,
-		// forum.getId());
-		// jmsMessage.setStringProperty(ForumMessage.PROPERTY__FORUM_TITLE,
-		// forum.getTitle());
-		// jmsMessage.setStringProperty(ForumMessage.PROPERTY__TOPIC_TITLE,
-		// topic.getTitle());
-		// jmsMessage.setStringProperty(ForumMessage.PROPERTY__TOPIC_ID,
-		// topic.getId());
-		// try {
-		// Messenger.post(connectionFactory, notificationTopic, jmsMessage);
-		// } catch (JMSException ex) {
-		// LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());
-		// throw new QForumException(CODES.ERR_FORUM_0009,
-		// ex.getLocalizedMessage());
-		// }
-		// }
-
 		return topic;
 	}
 
@@ -540,31 +514,6 @@ public class TopicServiceImpl implements TopicService {
 					+ "' is not pending moderation.");
 		}
 
-		// Post a notification about the event.
-		// if
-		// (PropertiesLoaderSingleton.getInstance().getProperty("QlackFuse.Forum.realtime.JMS.notifications").equals("true"))
-		// {
-		// ForumMessage jmsMessage = new ForumMessage();
-		// jmsMessage.setType(ForumMessage.MSGTYPE__ACCEPT_TOPIC);
-		// jmsMessage.setSrcUserID(topic.getFrmForumId().getCreatedBy());
-		// jmsMessage.setStringProperty(ForumMessage.PRIVATE_USERID,
-		// topic.getCreatedBy());
-		// jmsMessage.setStringProperty(ForumMessage.PROPERTY__FORUM_ID,
-		// topic.getFrmForumId().getId());
-		// jmsMessage.setStringProperty(ForumMessage.PROPERTY__FORUM_TITLE,
-		// topic.getFrmForumId().getTitle());
-		// jmsMessage.setStringProperty(ForumMessage.PROPERTY__TOPIC_TITLE,
-		// topic.getTitle());
-		// jmsMessage.setStringProperty(ForumMessage.PROPERTY__TOPIC_ID,
-		// topic.getId());
-		// try {
-		// Messenger.post(connectionFactory, notificationTopic, jmsMessage);
-		// } catch (JMSException ex) {
-		// LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());
-		// throw new QForumException(CODES.ERR_FORUM_0009,
-		// ex.getLocalizedMessage());
-		// }
-		// }
 	}
 
 	/**
@@ -584,32 +533,6 @@ public class TopicServiceImpl implements TopicService {
 			throw new QOperationNotSupported("Topic with id '" + topicId
 					+ "' is not pending moderation.");
 		}
-
-		// Post a notification about the event.
-		// if
-		// (PropertiesLoaderSingleton.getInstance().getProperty("QlackFuse.Forum.realtime.JMS.notifications").equals("true"))
-		// {
-		// ForumMessage jmsMessage = new ForumMessage();
-		// jmsMessage.setType(ForumMessage.MSGTYPE__REJECT_TOPIC);
-		// jmsMessage.setSrcUserID(topic.getFrmForumId().getCreatedBy());
-		// jmsMessage.setStringProperty(ForumMessage.PRIVATE_USERID,
-		// topic.getFrmForumId().getCreatedBy());
-		// jmsMessage.setStringProperty(ForumMessage.PROPERTY__FORUM_ID,
-		// topic.getFrmForumId().getId());
-		// jmsMessage.setStringProperty(ForumMessage.PROPERTY__FORUM_TITLE,
-		// topic.getFrmForumId().getTitle());
-		// jmsMessage.setStringProperty(ForumMessage.PROPERTY__TOPIC_TITLE,
-		// topic.getTitle());
-		// jmsMessage.setStringProperty(ForumMessage.PROPERTY__TOPIC_ID,
-		// topic.getId());
-		// try {
-		// Messenger.post(connectionFactory, notificationTopic, jmsMessage);
-		// } catch (JMSException ex) {
-		// LOGGER.log(Level.SEVERE, ex.getLocalizedMessage());
-		// throw new QForumException(CODES.ERR_FORUM_0009,
-		// ex.getLocalizedMessage());
-		// }
-		// }
 	}
 
 	/**

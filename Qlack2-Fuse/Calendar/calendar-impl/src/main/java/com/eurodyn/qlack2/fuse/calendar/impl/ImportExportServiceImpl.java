@@ -77,7 +77,7 @@ public class ImportExportServiceImpl implements ImportExportService {
 	private EntityManager em;
 	private String[] participantStatus = { "DECLINED", "ACCEPTED",
 			"NEEDS-ACTION", "TENTATIVE" };
-	private static final String calSearchNode = "search_cals/";
+	private static final String CAL_SEARCH_NODE = "search_cals/";
 
 	@SuppressWarnings("unused")
 	private String exportProdID;

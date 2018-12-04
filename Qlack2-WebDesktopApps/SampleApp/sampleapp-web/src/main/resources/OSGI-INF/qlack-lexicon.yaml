@@ -44,7 +44,7 @@ translations:
       - locked_by: Locked by {{user}} on {{date}}
       - org.hibernate.validator.constraints.NotEmpty: Can not be empty
         forceUpdate: true
-      - javax.validation.constraints.Min: Value {{InvalidValue}} is less than the minimum value of {{value}}
+      - javax.validation.constraints.Min: Value {{INVALID_VALUE}} is less than the minimum value of {{value}}
         forceUpdate: true
       - javax.validation.constraints.Pattern: Should match pattern {{regexp}}
         forceUpdate: true

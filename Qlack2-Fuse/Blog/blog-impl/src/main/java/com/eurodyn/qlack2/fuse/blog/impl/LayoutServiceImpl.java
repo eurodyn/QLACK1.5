@@ -36,8 +36,6 @@ public class LayoutServiceImpl implements LayoutService {
 	private static final Logger LOGGER = Logger.getLogger(LayoutServiceImpl.class.getName());
 
 	private EntityManager em;
-	private static final String blogLayoutNode = "search_layouts";
-	private static final String blogRootNode = "blogs/";
 
 	public void setEm(EntityManager em) {
 		this.em = em;

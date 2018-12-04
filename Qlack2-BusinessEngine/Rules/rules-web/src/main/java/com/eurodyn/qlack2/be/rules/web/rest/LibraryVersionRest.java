@@ -106,8 +106,8 @@ public class LibraryVersionRest {
 
 		ValidationFieldErrors vfe = new ValidationFieldErrors("contentJar");
 		ValidationErrorType vet = new ValidationErrorType("qlack.validation.JarFile");
-		vet.putAttribute(ValidationAttribute.Message, "qlack.validation.JarFile");
-		vet.putAttribute(ValidationAttribute.InvalidValue, filename);
+		vet.putAttribute(ValidationAttribute.MESSAGE, "qlack.validation.JarFile");
+		vet.putAttribute(ValidationAttribute.INVALID_VALUE, filename);
 		vfe.addError(vet);
 		ve.addValidationError(vfe);
 
@@ -128,7 +128,7 @@ public class LibraryVersionRest {
 
 		ValidationFieldErrors vfe = new ValidationFieldErrors(field);
 		ValidationErrorType vet = new ValidationErrorType("qlack.validation.MaxFileSize");
-		vet.putAttribute(ValidationAttribute.Message, "qlack.validation.MaxFileSize");
+		vet.putAttribute(ValidationAttribute.MESSAGE, "qlack.validation.MaxFileSize");
 		vfe.addError(vet);
 		ve.addValidationError(vfe);
 

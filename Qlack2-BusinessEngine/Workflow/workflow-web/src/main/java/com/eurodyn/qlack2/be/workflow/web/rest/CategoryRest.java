@@ -84,8 +84,8 @@ public class CategoryRest {
 			ValidationErrors ve = new ValidationErrors();
 			ValidationFieldErrors vfe = new ValidationFieldErrors("name");
 			ValidationErrorType vet = new ValidationErrorType("validation.error.category.unique.name");
-			vet.putAttribute(ValidationAttribute.Message, "validation.error.category.unique.name");
-			vet.putAttribute(ValidationAttribute.InvalidValue, categoryRDTO.getName());
+			vet.putAttribute(ValidationAttribute.MESSAGE, "validation.error.category.unique.name");
+			vet.putAttribute(ValidationAttribute.INVALID_VALUE, categoryRDTO.getName());
 			vfe.addError(vet);
 			ve.addValidationError(vfe);
 			throw new QValidationException(ve);
@@ -115,8 +115,8 @@ public class CategoryRest {
 			ValidationErrors ve = new ValidationErrors();
 			ValidationFieldErrors vfe = new ValidationFieldErrors("name");
 			ValidationErrorType vet = new ValidationErrorType("validation.error.category.unique.name");
-			vet.putAttribute(ValidationAttribute.Message, "validation.error.category.unique.name");
-			vet.putAttribute(ValidationAttribute.InvalidValue, categoryRDTO.getName());
+			vet.putAttribute(ValidationAttribute.MESSAGE, "validation.error.category.unique.name");
+			vet.putAttribute(ValidationAttribute.INVALID_VALUE, categoryRDTO.getName());
 			vfe.addError(vet);
 			ve.addValidationError(vfe);
 			throw new QValidationException(ve);

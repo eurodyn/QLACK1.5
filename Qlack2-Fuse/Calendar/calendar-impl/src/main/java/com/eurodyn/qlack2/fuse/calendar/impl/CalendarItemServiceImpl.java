@@ -45,12 +45,6 @@ public class CalendarItemServiceImpl implements CalendarItemService {
 	private static final Logger LOGGER = Logger
 			.getLogger(CalendarItemServiceImpl.class.getName());
 	private EntityManager em;
-	private static final String calNodeRoot = "cals/";
-	private static final String calSearchNode = "search_cals/";
-	private static final String calItemsSearchNode = "/search_cal_items";
-	private static final String calItemsNode = "/items/";
-	private static final String calObjectsNode = "/search_item_objects";
-	private static final String calParticipantsNode = "/search_item_participants";
 
 	public void setEm(EntityManager em) {
 		this.em = em;
@@ -188,38 +182,6 @@ public class CalendarItemServiceImpl implements CalendarItemService {
 			}
 		}
 
-		// Post a notification about the event.
-		// if (PropertiesLoaderSingleton.getInstance()
-		// .getProperty("QlackFuse.Calendar.realtime.JMS.notifications")
-		// .equals("true")) {
-		// CalendarMessage message = new CalendarMessage();
-		// message.setType(CalendarMessage.MSGTYPE_ITEM_CREATED);
-		// message.setSrcUserID(item.getSrcUserId());
-		// message.setStringProperty(CalendarMessage.PROPERTY__CALENDAR_ID,
-		// item.getCalendarId());
-		// message.setStringProperty(CalendarMessage.PROPERTY__ITEM_ID,
-		// itemEntity.getId());
-		// message.setStringProperty(CalendarMessage.PROPERTY__ITEM_NAME,
-		// itemEntity.getName());
-		// message.setStringProperty(
-		// CalendarMessage.PROPERTY__ITEM_CATEGORY_ID,
-		// itemEntity.getCategoryId());
-		// try {
-		// List<String> distinctParticipantIds = getDistinctParticipantIds(item
-		// .getId());
-		// for (String participantId : distinctParticipantIds) {
-		// message.setStringProperty(CalendarMessage.PRIVATE_USERID,
-		// participantId);
-		// Messenger.post(connectionFactory, notificationTopic,
-		// message);
-		// }
-		// } catch (JMSException ex) {
-		// LOGGER.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
-		// throw new QCalendarException(CODES.ERR_CALENDAR_0009,
-		// ex.getLocalizedMessage());
-		// }
-		// }
-
 		return item;
 	}
 
@@ -260,37 +222,6 @@ public class CalendarItemServiceImpl implements CalendarItemService {
 			itemEntity.setLastModifiedOn(item.getLastModifiedOn().getTime());
 		}
 
-		// Post a notification about the event.
-		// if (PropertiesLoaderSingleton.getInstance()
-		// .getProperty("QlackFuse.Calendar.realtime.JMS.notifications")
-		// .equals("true")) {
-		// CalendarMessage message = new CalendarMessage();
-		// message.setType(CalendarMessage.MSGTYPE_ITEM_UPDATED);
-		// message.setSrcUserID(item.getSrcUserId());
-		// message.setStringProperty(CalendarMessage.PROPERTY__CALENDAR_ID,
-		// itemEntity.getCalendarId().getId());
-		// message.setStringProperty(CalendarMessage.PROPERTY__ITEM_ID,
-		// itemEntity.getId());
-		// message.setStringProperty(CalendarMessage.PROPERTY__ITEM_NAME,
-		// itemEntity.getName());
-		// message.setStringProperty(
-		// CalendarMessage.PROPERTY__ITEM_CATEGORY_ID,
-		// itemEntity.getCategoryId());
-		// try {
-		// List<String> distinctParticipantIds = getDistinctParticipantIds(item
-		// .getId());
-		// for (String participantId : distinctParticipantIds) {
-		// message.setStringProperty(CalendarMessage.PRIVATE_USERID,
-		// participantId);
-		// Messenger.post(connectionFactory, notificationTopic,
-		// message);
-		// }
-		// } catch (JMSException ex) {
-		// LOGGER.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
-		// throw new QCalendarException(CODES.ERR_CALENDAR_0009,
-		// ex.getLocalizedMessage());
-		// }
-		// }
 	}
 
 	@Override
@@ -306,35 +237,6 @@ public class CalendarItemServiceImpl implements CalendarItemService {
 				.getId());
 
 		em.remove(itemEntity);
-
-		// Post a notification about the event.
-		// if (PropertiesLoaderSingleton.getInstance()
-		// .getProperty("QlackFuse.Calendar.realtime.JMS.notifications")
-		// .equals("true")) {
-		// CalendarMessage message = new CalendarMessage();
-		// message.setType(CalendarMessage.MSGTYPE_ITEM_DELETED);
-		// message.setSrcUserID(item.getSrcUserId());
-		// message.setStringProperty(CalendarMessage.PROPERTY__CALENDAR_ID,
-		// calendarId);
-		// message.setStringProperty(CalendarMessage.PROPERTY__ITEM_ID,
-		// itemEntity.getId());
-		// message.setStringProperty(CalendarMessage.PROPERTY__ITEM_NAME,
-		// itemName);
-		// message.setStringProperty(
-		// CalendarMessage.PROPERTY__ITEM_CATEGORY_ID, categoryId);
-		// try {
-		// for (String participantId : distinctParticipantIds) {
-		// message.setStringProperty(CalendarMessage.PRIVATE_USERID,
-		// participantId);
-		// Messenger.post(connectionFactory, notificationTopic,
-		// message);
-		// }
-		// } catch (JMSException ex) {
-		// LOGGER.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
-		// throw new QCalendarException(CODES.ERR_CALENDAR_0009,
-		// ex.getLocalizedMessage());
-		// }
-		// }
 	}
 
 	@Override
@@ -435,42 +337,6 @@ public class CalendarItemServiceImpl implements CalendarItemService {
 			item.setLastModifiedOn(new Date());
 			updateItem(item);
 		}
-
-		// Post a notification about the event.
-		// if (PropertiesLoaderSingleton.getInstance()
-		// .getProperty("QlackFuse.Calendar.realtime.JMS.notifications")
-		// .equals("true")) {
-		// CalendarMessage message = new CalendarMessage();
-		// message.setType(CalendarMessage.MSGTYPE_OBJECT_CREATED);
-		// message.setSrcUserID(object.getSrcUserId());
-		// message.setStringProperty(CalendarMessage.PROPERTY__ITEM_ID,
-		// itemEntity.getId());
-		// message.setStringProperty(CalendarMessage.PROPERTY__ITEM_NAME,
-		// itemEntity.getName());
-		// message.setStringProperty(
-		// CalendarMessage.PROPERTY__ITEM_CATEGORY_ID,
-		// itemEntity.getCategoryId());
-		// message.setStringProperty(CalendarMessage.PROPERTY__OBJECT_ID,
-		// object.getId());
-		// message.setStringProperty(
-		// CalendarMessage.PROPERTY__OBJECT_CATEGORY_ID,
-		// object.getCategoryId());
-		// try {
-		// List<String> distinctParticipantIds =
-		// getDistinctParticipantIds(itemEntity
-		// .getId());
-		// for (String participantId : distinctParticipantIds) {
-		// message.setStringProperty(CalendarMessage.PRIVATE_USERID,
-		// participantId);
-		// Messenger.post(connectionFactory, notificationTopic,
-		// message);
-		// }
-		// } catch (JMSException ex) {
-		// LOGGER.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
-		// throw new QCalendarException(CODES.ERR_CALENDAR_0009,
-		// ex.getLocalizedMessage());
-		// }
-		// }
 
 		return object;
 	}
@@ -574,31 +440,6 @@ public class CalendarItemServiceImpl implements CalendarItemService {
 			itemEntity.setLastModifiedBy(participant.getSrcUserId());
 			itemEntity.setLastModifiedOn(System.currentTimeMillis());
 		}
-
-		// Post a notification about the event.
-		// if (PropertiesLoaderSingleton.getInstance()
-		// .getProperty("QlackFuse.Calendar.realtime.JMS.notifications")
-		// .equals("true")) {
-		// CalendarMessage message = new CalendarMessage();
-		// message.setType(CalendarMessage.MSGTYPE_PARTICIPANT_ADDED);
-		// message.setSrcUserID(participant.getSrcUserId());
-		// message.setStringProperty(CalendarMessage.PRIVATE_USERID,
-		// participant.getId());
-		// message.setStringProperty(CalendarMessage.PROPERTY__ITEM_ID,
-		// itemEntity.getId());
-		// message.setStringProperty(CalendarMessage.PROPERTY__ITEM_NAME,
-		// itemEntity.getName());
-		// message.setStringProperty(
-		// CalendarMessage.PROPERTY__ITEM_CATEGORY_ID,
-		// itemEntity.getCategoryId());
-		// try {
-		// Messenger.post(connectionFactory, notificationTopic, message);
-		// } catch (JMSException ex) {
-		// LOGGER.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
-		// throw new QCalendarException(CODES.ERR_CALENDAR_0009,
-		// ex.getLocalizedMessage());
-		// }
-		// }
 
 		return participant;
 	}
@@ -716,42 +557,6 @@ public class CalendarItemServiceImpl implements CalendarItemService {
 		}
 
 		participantEntity.setStatus(status);
-
-		// Post a notification about the event.
-		// if (PropertiesLoaderSingleton.getInstance()
-		// .getProperty("QlackFuse.Calendar.realtime.JMS.notifications")
-		// .equals("true")) {
-		// CalendarMessage message = new CalendarMessage();
-		// message.setType(CalendarMessage.MSGTYPE_PARTICIPANT_STATUS_MODIFIED);
-		// message.setSrcUserID(participantEntity.getParticipantId());
-		// message.setStringProperty(CalendarMessage.PROPERTY__ITEM_ID,
-		// participantEntity.getItemId().getId());
-		// message.setStringProperty(CalendarMessage.PROPERTY__ITEM_NAME,
-		// participantEntity.getItemId().getName());
-		// message.setStringProperty(
-		// CalendarMessage.PROPERTY__ITEM_CATEGORY_ID,
-		// participantEntity.getItemId().getCategoryId());
-		// message.setStringProperty(CalendarMessage.PROPERTY__PARTICIPANT_ID,
-		// participantEntity.getId());
-		// message.setStringProperty(
-		// CalendarMessage.PROPERTY__PARTICIPANT_STATUS,
-		// String.valueOf(status));
-		// try {
-		// List<String> participants =
-		// getDistinctParticipantIds(participantEntity
-		// .getItemId().getId());
-		// for (String participant : participants) {
-		// message.setStringProperty(CalendarMessage.PRIVATE_USERID,
-		// participant);
-		// Messenger.post(connectionFactory, notificationTopic,
-		// message);
-		// }
-		// } catch (JMSException ex) {
-		// LOGGER.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
-		// throw new QCalendarException(CODES.ERR_CALENDAR_0009,
-		// ex.getLocalizedMessage());
-		// }
-		// }
 
 		return true;
 	}

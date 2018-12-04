@@ -81,61 +81,6 @@ public class PostingServiceImpl implements PostingService {
             }
         }
 
-        // Post a notification about the event.
-//        if (PropertiesLoaderSingleton.getInstance().getProperty("QlackFuse.SIMM.realtime.JMS.notifications").equals("true")) {
-//            SIMMMessage message = new SIMMMessage();
-//            message.setType(SIMMMessage.MSGTYPE__ACTIVITY_CREATED);
-//            message.setSrcUserID(pi.getCreatedByUserID());
-//            message.setStringProperty(SIMMMessage.PROPERTY__HOMEPAGE_ID, pi.getHomepageID());
-//            message.setStringProperty(SIMMMessage.PROPERTY__ACTIVITY_ID, pi.getId());
-//            if (pi.getParentHomepageID() != null) {
-//                message.setStringProperty(SIMMMessage.PROPERTY__PARENT_ACTIVITY_ID, pi.getParentHomepageID());
-//                message.setStringProperty(SIMMMessage.PROPERTY__PARENT_ACTIVITY_TITLE, homepageActivity.getParentHpageActvtId().getTitle());
-//            }
-//            message.setStringProperty(SIMMMessage.PROPERTY__ACTIVITY_CATEGORY_ID, pi.getCategoryID());
-//            message.setStringProperty(SIMMMessage.PROPERTY__ACTIVITY_TITLE, pi.getTitle());
-//            if (!org.apache.commons.lang.StringUtils.isEmpty(pi.getDescription())) {
-//                message.setBody(pi.getDescription());
-//            }
-//            message.setStringProperty(SIMMMessage.PRIVATE_USERID, pi.getHomepageID());
-//            try {
-//                // First we publish a message for the owner of the homepage.
-//                Messenger.post(connectionFactory, notificationTopic, message);
-//                //Then to the creator of the activity if not the same as the owner
-//                if (!pi.getCreatedByUserID().equals(pi.getHomepageID())) {
-//                    message.setStringProperty(SIMMMessage.PRIVATE_USERID, pi.getCreatedByUserID());
-//                    Messenger.post(connectionFactory, notificationTopic, message);
-//                }
-//                // And then to all other users that are associated with that particular activity.
-//                // Association is determined from the remaining 'createdByUserId' that may have
-//                // provided contribution to this particular activity. Users already notified are not
-//                // notified twice.
-//                if (pi.getParentHomepageID() != null) {
-//                    String parentUserId = homepageActivity.getParentHpageActvtId().getCreatedByUserId();
-//                    if ((!parentUserId.equals(pi.getCreatedByUserID())) && (!parentUserId.equals(pi.getHomepageID()))) {
-//                        message.setStringProperty(SIMMMessage.PRIVATE_USERID, parentUserId);
-//                        Messenger.post(connectionFactory, notificationTopic, message);
-//                    }
-//                    Query q = em.createQuery(
-//                            "select distinct sha.createdByUserId from SimHomepageActivity sha "
-//                            + "where sha.parentHpageActvtId = :parentID ");
-//                    q.setParameter("parentID", homepageActivity.getParentHpageActvtId());
-//                    Iterator<String> recipientsIterator = q.getResultList().iterator();
-//                    while (recipientsIterator.hasNext()) {
-//                        String userId = recipientsIterator.next();
-//                        if ((!userId.equals(pi.getCreatedByUserID())) && (!userId.equals(pi.getHomepageID()))
-//                                && (!userId.equals(parentUserId))) {
-//                            message.setStringProperty(SIMMMessage.PRIVATE_USERID, userId);
-//                            Messenger.post(connectionFactory, notificationTopic, message);
-//                        }
-//                    }
-//                }
-//            } catch (JMSException ex) {
-//                LOGGER.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
-//                throw new QSIMMException(QSIMMException.CODES.ERR_SIMM_0033, ex.getLocalizedMessage());
-//            }
-//        }
-
         return pi;
     }
 
@@ -341,25 +286,6 @@ public class PostingServiceImpl implements PostingService {
             }
         }
 
-        // Post a notification about the event.
-//        if (PropertiesLoaderSingleton.getInstance().getProperty("QlackFuse.SIMM.realtime.JMS.notifications").equals("true")) {
-//            SIMMMessage message = new SIMMMessage();
-//            message.setType(SIMMMessage.MSGTYPE__ACTIVITY_UPDATED);
-//            message.setSrcUserID(pi.getCreatedByUserID());
-//            message.setStringProperty(SIMMMessage.PROPERTY__HOMEPAGE_ID, pi.getHomepageID());
-//            message.setStringProperty(SIMMMessage.PROPERTY__ACTIVITY_CATEGORY_ID, pi.getCategoryID());
-//            message.setStringProperty(SIMMMessage.PROPERTY__ACTIVITY_TITLE, pi.getTitle());
-//            if (!org.apache.commons.lang.StringUtils.isEmpty(pi.getDescription())) {
-//                message.setBody(pi.getDescription());
-//            }
-//            message.setStringProperty(SIMMMessage.PRIVATE_USERID, pi.getHomepageID());
-//            try {
-//                Messenger.post(connectionFactory, notificationTopic, message);
-//            } catch (JMSException ex) {
-//                LOGGER.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
-//                throw new QSIMMException(QSIMMException.CODES.ERR_SIMM_0033, ex.getLocalizedMessage());
-//            }
-//        }
     }
 
     /**
@@ -374,31 +300,6 @@ public class PostingServiceImpl implements PostingService {
         String parentTitle = homePageActivity.getParentHpageActvtId() == null ? null : homePageActivity.getParentHpageActvtId().getTitle();
 
         em.remove(homePageActivity);
-
-        // Post a notification about the event.
-//        if (PropertiesLoaderSingleton.getInstance().getProperty("QlackFuse.SIMM.realtime.JMS.notifications").equals("true")) {
-//            SIMMMessage message = new SIMMMessage();
-//            message.setType(SIMMMessage.MSGTYPE__ACTIVITY_DELETED);
-//            message.setSrcUserID(activity.getSrcUserId());
-//            message.setStringProperty(SIMMMessage.PROPERTY__HOMEPAGE_ID, homePageActivity.getHomepageId());
-//            message.setStringProperty(SIMMMessage.PROPERTY__ACTIVITY_ID, homePageActivity.getId());
-//            message.setStringProperty(SIMMMessage.PROPERTY__PARENT_ACTIVITY_ID, parentId);
-//            message.setStringProperty(SIMMMessage.PROPERTY__PARENT_ACTIVITY_TITLE, parentTitle);
-//            message.setStringProperty(SIMMMessage.PROPERTY__ACTIVITY_CATEGORY_ID, homePageActivity.getCategoryId());
-//            message.setStringProperty(SIMMMessage.PRIVATE_USERID, homePageActivity.getHomepageId());
-//            try {
-//                // First we publish a message for the owner of the homepage.
-//                Messenger.post(connectionFactory, notificationTopic, message);
-//                //Then to the creator of the activity if not the same as the owner
-//                if (!homePageActivity.getCreatedByUserId().equals(homePageActivity.getHomepageId())) {
-//                    message.setStringProperty(SIMMMessage.PRIVATE_USERID, homePageActivity.getCreatedByUserId());
-//                    Messenger.post(connectionFactory, notificationTopic, message);
-//                }
-//            } catch (JMSException ex) {
-//                LOGGER.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
-//                throw new QSIMMException(QSIMMException.CODES.ERR_SIMM_0033, ex.getLocalizedMessage());
-//            }
-//        }
     }
 
     @Override

@@ -4,8 +4,6 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.math.BigDecimal;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +12,6 @@ import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-
-import org.kie.api.runtime.process.ProcessInstance;
 
 import com.eurodyn.qlack2.be.rules.api.RulesRuntimeManagementService;
 import com.eurodyn.qlack2.be.rules.api.request.runtime.StatelessMultiExecuteRequest;

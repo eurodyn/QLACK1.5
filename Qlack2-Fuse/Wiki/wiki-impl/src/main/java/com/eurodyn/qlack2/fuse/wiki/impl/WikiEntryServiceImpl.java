@@ -193,28 +193,6 @@ public class WikiEntryServiceImpl implements WikiEntryService {
 			}
 		}
 
-		// Post a notification about the event.
-//		if (PropertiesLoaderSingleton.getInstance()
-//				.getProperty("QlackFuse.Wiki.realtime.JMS.notifications")
-//				.equals("true")) {
-//			WikiMessage jmsMessage = new WikiMessage();
-//			jmsMessage.setType(WikiMessage.MSGTYPE__WIKI_ENTRY_UPDATED);
-//			jmsMessage.setSrcUserID(modifiedBy);
-//			jmsMessage.setStringProperty(WikiMessage.PRIVATE_USERID,
-//					entity.getCreatedBy());
-//			jmsMessage.setStringProperty(WikiMessage.PROPERTY__WIKI_ENTRY_ID,
-//					entity.getId());
-//			jmsMessage.setStringProperty(
-//					WikiMessage.PROPERTY__WIKI_ENTRY_TITLE, entity.getTitle());
-//			try {
-//				Messenger
-//						.post(connectionFactory, notificationTopic, jmsMessage);
-//			} catch (JMSException ex) {
-//				LOGGER.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
-//				throw new QWikiException(CODES.ERR_WIKI_0012,
-//						ex.getLocalizedMessage());
-//			}
-//		}
 	}
 
 	private int deleteTags(String entryId) {

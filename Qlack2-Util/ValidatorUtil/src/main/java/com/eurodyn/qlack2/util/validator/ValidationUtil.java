@@ -53,9 +53,9 @@ public class ValidationUtil {
 			ValidationFieldErrors fieldError = new ValidationFieldErrors(v
 					.getPropertyPath().toString());
 			ValidationErrorType vet = new ValidationErrorType(v.getConstraintDescriptor().getAnnotation().annotationType().getName());
-//			vet.putAttribute(ValidationAttribute.CheckName, v
+//			vet.putAttribute(ValidationAttribute.CHECK_NAME, v
 //					.getConstraintDescriptor().getAnnotation().toString());
-			vet.putAttribute(ValidationAttribute.InvalidValue, v.getInvalidValue());
+			vet.putAttribute(ValidationAttribute.INVALID_VALUE, v.getInvalidValue());
 			
 			String message = v.getMessage();
 			if(message != null && message.startsWith("{") &&
@@ -65,13 +65,13 @@ public class ValidationUtil {
 				message = message.substring(0, message.lastIndexOf(".message}"));
 			}
 			
-			vet.putAttribute(ValidationAttribute.Message, message);
-			vet.putAttribute(ValidationAttribute.ValidatedObject, v.getLeafBean().toString());
-			vet.putAttribute(ValidationAttribute.Raw, v.getConstraintDescriptor().getAttributes());
+			vet.putAttribute(ValidationAttribute.MESSAGE, message);
+			vet.putAttribute(ValidationAttribute.VALIDATED_OBJECT, v.getLeafBean().toString());
+			vet.putAttribute(ValidationAttribute.RAW, v.getConstraintDescriptor().getAttributes());
 
 			if (v.getRootBean() != null && v.getRootBean() != v
 					.getLeafBean()) {
-				vet.putAttribute(ValidationAttribute.ParentObject, v
+				vet.putAttribute(ValidationAttribute.PARENT_OBJECT, v
 						.getRootBean().toString());
 			}
 

@@ -28,7 +28,6 @@ import com.eurodyn.qlack2.fuse.chatim.api.dto.ActionOnUserDTO;
 import com.eurodyn.qlack2.fuse.chatim.api.exception.QChatIMException;
 import com.eurodyn.qlack2.fuse.chatim.impl.model.ChaActionOnUser;
 import com.eurodyn.qlack2.fuse.chatim.impl.model.ChaRooms;
-import com.eurodyn.qlack2.fuse.chatim.impl.util.ChatMessage;
 import com.eurodyn.qlack2.fuse.chatim.impl.util.LookupHelper;
 
 /**
@@ -78,36 +77,6 @@ public class ChatUserServiceImpl implements ChatUserService {
 			action.setActionPeriod(System.currentTimeMillis() + period);
 		}
 		em.persist(action);
-
-		// Post a notification about the event.
-		// if
-		// (PropertiesLoaderSingleton.getInstance().getProperty("QlackFuse.ChatIM.realtime.JMS.notifications").equals("true"))
-		// {
-		// ChatMessage message = new ChatMessage();
-		// message.setType(ChatMessage.MSGTYPE_ACTION_ON_USER);
-		// message.setStringProperty(ChatMessage.PROPERTY__ROOMID, roomID);
-		// message.setStringProperty(ChatMessage.PROPERTY__ACTIONID, actionID);
-		// message.setStringProperty(ChatMessage.PROPERTY__ACTION_FOR_USERID,
-		// userID);
-		// message.setStringProperty(ChatMessage.PROPERTY__ACTION_FOR_USERFULLNAME,
-		// userFullname);
-		// if (!org.apache.commons.lang.StringUtils.isEmpty(reason)) {
-		// message.setStringProperty(ChatMessage.PROPERTY__ACTION_DESCRIPTION,
-		// reason);
-		// }
-		// if (period != 0) {
-		// message.setStringProperty(ChatMessage.PROPERTY__ACTION_PERIOD,
-		// String.valueOf(action.getActionPeriod()));
-		// }
-		//
-		// try {
-		// Messenger.post(connectionFactory, notificationTopic, message);
-		// } catch (JMSException ex) {
-		// LOGGER.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
-		// throw new QChatIMException(QChatIMException.CODES.ERR_CHA_0001,
-		// ex.getMessage());
-		// }
-		// }
 
 		return convertActionOnUserTODTO(action);
 	}
@@ -193,26 +162,6 @@ public class ChatUserServiceImpl implements ChatUserService {
 			em.remove(action);
 		}
 
-		// Post a notification about the event.
-		// if
-		// (PropertiesLoaderSingleton.getInstance().getProperty("QlackFuse.ChatIM.realtime.JMS.notifications").equals("true"))
-		// {
-		// ChatMessage message = new ChatMessage();
-		// message.setType(ChatMessage.MSGTYPE_ACTION_ON_USER_REMOVED);
-		// message.setStringProperty(ChatMessage.PROPERTY__ROOMID, roomID);
-		// message.setStringProperty(ChatMessage.PROPERTY__ACTIONID, actionID);
-		// message.setStringProperty(ChatMessage.PROPERTY__ACTION_FOR_USERID,
-		// userID);
-		// message.setStringProperty(ChatMessage.PROPERTY__ACTION_FOR_USERFULLNAME,
-		// userFullname);
-		// try {
-		// Messenger.post(connectionFactory, notificationTopic, message);
-		// } catch (JMSException ex) {
-		// LOGGER.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
-		// throw new QChatIMException(QChatIMException.CODES.ERR_CHA_0001,
-		// ex.getMessage());
-		// }
-		// }
 	}
 
 	/**

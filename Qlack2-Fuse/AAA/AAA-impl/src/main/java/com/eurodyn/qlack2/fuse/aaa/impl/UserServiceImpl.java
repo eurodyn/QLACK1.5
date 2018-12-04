@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
 	private EntityManager em;
 	private AccountingService accountingService;
 	private LdapUserUtil ldapUserUtil;
-	private static final int saltLength = 16;
+	private static final int SALT_LENGTH = 16;
 
 	public void setEm(EntityManager em) {
 		this.em = em;
@@ -85,7 +85,7 @@ public class UserServiceImpl implements UserService {
 		User user = ConverterUtil.userDTOToUser(dto);
 
 		// Generate salt and hash password
-		user.setSalt(RandomStringUtils.randomAlphanumeric(saltLength));
+		user.setSalt(RandomStringUtils.randomAlphanumeric(SALT_LENGTH));
 		String password = user.getSalt() + dto.getPassword();
 		user.setPassword(DigestUtils.md5Hex(password));
 
@@ -104,7 +104,7 @@ public class UserServiceImpl implements UserService {
 		User user = User.find(dto.getId(), em);
 		user.setUsername(dto.getUsername());
 		if (updatePassword) {
-			user.setSalt(RandomStringUtils.randomAlphanumeric(saltLength));
+			user.setSalt(RandomStringUtils.randomAlphanumeric(SALT_LENGTH));
 			String password = user.getSalt() + dto.getPassword();
 			user.setPassword(DigestUtils.md5Hex(password));
 		}
@@ -279,7 +279,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public String updatePassword(String username, String newPassword) {
 		User user = User.findByUsername(username, em);
-		user.setSalt(RandomStringUtils.randomAlphanumeric(saltLength));
+		user.setSalt(RandomStringUtils.randomAlphanumeric(SALT_LENGTH));
 		if (StringUtils.isBlank(newPassword)) {
 			newPassword = RandomStringUtils.randomAlphanumeric(8);
 		}

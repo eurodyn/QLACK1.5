@@ -114,9 +114,9 @@ public class FormsRest {
 			ValidationFieldErrors vfe = new ValidationFieldErrors("name");
 			ValidationErrorType vet = new ValidationErrorType(
 					"validation.error.form.unique.name");
-			vet.putAttribute(ValidationAttribute.Message,
+			vet.putAttribute(ValidationAttribute.MESSAGE,
 					"validation.error.form.unique.name");
-			vet.putAttribute(ValidationAttribute.InvalidValue,
+			vet.putAttribute(ValidationAttribute.INVALID_VALUE,
 					formRDTO.getName());
 			vfe.addError(vet);
 			ve.addValidationError(vfe);
@@ -159,9 +159,9 @@ public class FormsRest {
 			ValidationFieldErrors vfe = new ValidationFieldErrors("name");
 			ValidationErrorType vet = new ValidationErrorType(
 					"validation.error.form.unique.name");
-			vet.putAttribute(ValidationAttribute.Message,
+			vet.putAttribute(ValidationAttribute.MESSAGE,
 					"validation.error.form.unique.name");
-			vet.putAttribute(ValidationAttribute.InvalidValue,
+			vet.putAttribute(ValidationAttribute.INVALID_VALUE,
 					formDetailsRDTO.getName());
 			vfe.addError(vet);
 			vErrors.addValidationError(vfe);
@@ -238,9 +238,9 @@ public class FormsRest {
 						"versionConditions[" + index + "].name");
 				ValidationErrorType vet = new ValidationErrorType(
 						"validation.error.condition.unique.name");
-				vet.putAttribute(ValidationAttribute.Message,
+				vet.putAttribute(ValidationAttribute.MESSAGE,
 						"validation.error.condition.unique.name");
-				vet.putAttribute(ValidationAttribute.InvalidValue,
+				vet.putAttribute(ValidationAttribute.INVALID_VALUE,
 						condition.getName());
 				vfe.addError(vet);
 				vErrors.addValidationError(vfe);
@@ -254,9 +254,9 @@ public class FormsRest {
 							"versionConditions[" + index + "].parentCondition");
 					ValidationErrorType vet = new ValidationErrorType(
 							"validation.error.condition.parent.not.exists");
-					vet.putAttribute(ValidationAttribute.Message,
+					vet.putAttribute(ValidationAttribute.MESSAGE,
 							"validation.error.condition.parent.not.exists");
-					vet.putAttribute(ValidationAttribute.InvalidValue,
+					vet.putAttribute(ValidationAttribute.INVALID_VALUE,
 							condition.getParentCondition().getName());
 					vfe.addError(vet);
 					vErrors.addValidationError(vfe);
@@ -284,7 +284,7 @@ public class FormsRest {
 					"conditionCyclicDependency");
 			ValidationErrorType vet = new ValidationErrorType(
 					"validation.error.condition.cyclic.dependency");
-			vet.putAttribute(ValidationAttribute.Message,
+			vet.putAttribute(ValidationAttribute.MESSAGE,
 					"validation.error.condition.cyclic.dependency");
 			vfe.addError(vet);
 			vErrors.addValidationError(vfe);
@@ -322,9 +322,9 @@ public class FormsRest {
 						"versionTranslations[" + index + "].key");
 				ValidationErrorType vet = new ValidationErrorType(
 						"validation.error.translation.unique.name");
-				vet.putAttribute(ValidationAttribute.Message,
+				vet.putAttribute(ValidationAttribute.MESSAGE,
 						"validation.error.translation.unique.name");
-				vet.putAttribute(ValidationAttribute.InvalidValue,
+				vet.putAttribute(ValidationAttribute.INVALID_VALUE,
 						translation.getKey());
 				vfe.addError(vet);
 				vErrors.addValidationError(vfe);
@@ -344,9 +344,9 @@ public class FormsRest {
 						"versionTranslations[" + index + "].value");
 				ValidationErrorType vet = new ValidationErrorType(
 						"validation.error.translation.unique.language");
-				vet.putAttribute(ValidationAttribute.Message,
+				vet.putAttribute(ValidationAttribute.MESSAGE,
 						"validation.error.translation.unique.language");
-				vet.putAttribute(ValidationAttribute.InvalidValue,
+				vet.putAttribute(ValidationAttribute.INVALID_VALUE,
 						translation.getLanguage());
 				vfe.addError(vet);
 				vErrors.addValidationError(vfe);
@@ -420,9 +420,9 @@ public class FormsRest {
 			ValidationFieldErrors vfe = new ValidationFieldErrors("name");
 			ValidationErrorType vet = new ValidationErrorType(
 					"validation.error.form.version.unique.name");
-			vet.putAttribute(ValidationAttribute.Message,
+			vet.putAttribute(ValidationAttribute.MESSAGE,
 					"validation.error.form.version.unique.name");
-			vet.putAttribute(ValidationAttribute.InvalidValue,
+			vet.putAttribute(ValidationAttribute.INVALID_VALUE,
 					formVersionRDTO.getName());
 			vfe.addError(vet);
 			ve.addValidationError(vfe);
@@ -585,9 +585,9 @@ public class FormsRest {
 					"file");
 			ValidationErrorType vet = new ValidationErrorType(
 					"validation.error.upload.xml");
-			vet.putAttribute(ValidationAttribute.Message,
+			vet.putAttribute(ValidationAttribute.MESSAGE,
 					"validation.error.upload.xml");
-			vet.putAttribute(ValidationAttribute.InvalidValue, fileResponse
+			vet.putAttribute(ValidationAttribute.INVALID_VALUE, fileResponse
 					.getFile().getFilename());
 			vfe.addError(vet);
 			ve.addValidationError(vfe);

@@ -250,8 +250,8 @@ public class WorkingSetsRest {
 
 		ValidationFieldErrors vfe = new ValidationFieldErrors("name");
 		ValidationErrorType vet = new ValidationErrorType("qlack.validation.UniqueName");
-		vet.putAttribute(ValidationAttribute.Message, "qlack.validation.UniqueName");
-		vet.putAttribute(ValidationAttribute.InvalidValue, name);
+		vet.putAttribute(ValidationAttribute.MESSAGE, "qlack.validation.UniqueName");
+		vet.putAttribute(ValidationAttribute.INVALID_VALUE, name);
 		vfe.addError(vet);
 
 		ve.addValidationError(vfe);
@@ -263,8 +263,8 @@ public class WorkingSetsRest {
 
 		ValidationFieldErrors vfe = new ValidationFieldErrors("name");
 		ValidationErrorType vet = new ValidationErrorType("qlack.validation.UniqueName");
-		vet.putAttribute(ValidationAttribute.Message, "qlack.validation.UniqueName");
-		vet.putAttribute(ValidationAttribute.InvalidValue, versionName);
+		vet.putAttribute(ValidationAttribute.MESSAGE, "qlack.validation.UniqueName");
+		vet.putAttribute(ValidationAttribute.INVALID_VALUE, versionName);
 		vfe.addError(vet);
 
 		ve.addValidationError(vfe);
@@ -336,8 +336,8 @@ public class WorkingSetsRest {
 
 		ValidationFieldErrors vfe = new ValidationFieldErrors("ruleVersionIds");
 		ValidationErrorType vet = new ValidationErrorType("qlack.validation.workingSet.version.RuleNotFound");
-		vet.putAttribute(ValidationAttribute.Message, "qlack.validation.workingSet.version.RuleNotFound");
-		vet.putAttribute(ValidationAttribute.InvalidValue, versionId);
+		vet.putAttribute(ValidationAttribute.MESSAGE, "qlack.validation.workingSet.version.RuleNotFound");
+		vet.putAttribute(ValidationAttribute.INVALID_VALUE, versionId);
 		vfe.addError(vet);
 
 		ve.addValidationError(vfe);
@@ -349,8 +349,8 @@ public class WorkingSetsRest {
 
 		ValidationFieldErrors vfe = new ValidationFieldErrors("dataModelVersionIds");
 		ValidationErrorType vet = new ValidationErrorType("qlack.validation.workingSet.version.DataModelNotFound");
-		vet.putAttribute(ValidationAttribute.Message, "qlack.validation.workingSet.version.DataModelNotFound");
-		vet.putAttribute(ValidationAttribute.InvalidValue, versionId);
+		vet.putAttribute(ValidationAttribute.MESSAGE, "qlack.validation.workingSet.version.DataModelNotFound");
+		vet.putAttribute(ValidationAttribute.INVALID_VALUE, versionId);
 		vfe.addError(vet);
 
 		ve.addValidationError(vfe);
@@ -362,8 +362,8 @@ public class WorkingSetsRest {
 
 		ValidationFieldErrors vfe = new ValidationFieldErrors("libraryVersionIds");
 		ValidationErrorType vet = new ValidationErrorType("qlack.validation.workingSet.version.LibraryNotFound");
-		vet.putAttribute(ValidationAttribute.Message, "qlack.validation.workingSet.version.LibraryNotFound");
-		vet.putAttribute(ValidationAttribute.InvalidValue, versionId);
+		vet.putAttribute(ValidationAttribute.MESSAGE, "qlack.validation.workingSet.version.LibraryNotFound");
+		vet.putAttribute(ValidationAttribute.INVALID_VALUE, versionId);
 		vfe.addError(vet);
 
 		ve.addValidationError(vfe);
@@ -375,8 +375,8 @@ public class WorkingSetsRest {
 
 		ValidationFieldErrors vfe = new ValidationFieldErrors("ruleVersionIds");
 		ValidationErrorType vet = new ValidationErrorType("qlack.validation.workingSet.version.RulesUnique");
-		vet.putAttribute(ValidationAttribute.Message, "qlack.validation.workingSet.version.RulesUnique");
-		vet.putAttribute(ValidationAttribute.InvalidValue, versionId);
+		vet.putAttribute(ValidationAttribute.MESSAGE, "qlack.validation.workingSet.version.RulesUnique");
+		vet.putAttribute(ValidationAttribute.INVALID_VALUE, versionId);
 		vfe.addError(vet);
 
 		ve.addValidationError(vfe);
@@ -388,8 +388,8 @@ public class WorkingSetsRest {
 
 		ValidationFieldErrors vfe = new ValidationFieldErrors("dataModelVersionIds");
 		ValidationErrorType vet = new ValidationErrorType("qlack.validation.workingSet.version.DataModelsUnique");
-		vet.putAttribute(ValidationAttribute.Message, "qlack.validation.workingSet.version.DataModelsUnique");
-		vet.putAttribute(ValidationAttribute.InvalidValue, versionId);
+		vet.putAttribute(ValidationAttribute.MESSAGE, "qlack.validation.workingSet.version.DataModelsUnique");
+		vet.putAttribute(ValidationAttribute.INVALID_VALUE, versionId);
 		vfe.addError(vet);
 
 		ve.addValidationError(vfe);
@@ -401,8 +401,8 @@ public class WorkingSetsRest {
 
 		ValidationFieldErrors vfe = new ValidationFieldErrors("libraryVersionIds");
 		ValidationErrorType vet = new ValidationErrorType("qlack.validation.workingSet.version.LibrariesUnique");
-		vet.putAttribute(ValidationAttribute.Message, "qlack.validation.workingSet.version.LibrariesUnique");
-		vet.putAttribute(ValidationAttribute.InvalidValue, versionId);
+		vet.putAttribute(ValidationAttribute.MESSAGE, "qlack.validation.workingSet.version.LibrariesUnique");
+		vet.putAttribute(ValidationAttribute.INVALID_VALUE, versionId);
 		vfe.addError(vet);
 
 		ve.addValidationError(vfe);
@@ -423,8 +423,8 @@ public class WorkingSetsRest {
 
 		ValidationFieldErrors vfe = new ValidationFieldErrors("file");
 		ValidationErrorType vet = new ValidationErrorType("qlack.validation.XmlFile");
-		vet.putAttribute(ValidationAttribute.Message, "qlack.validation.XmlFile");
-		vet.putAttribute(ValidationAttribute.InvalidValue, filename);
+		vet.putAttribute(ValidationAttribute.MESSAGE, "qlack.validation.XmlFile");
+		vet.putAttribute(ValidationAttribute.INVALID_VALUE, filename);
 		vfe.addError(vet);
 
 		ve.addValidationError(vfe);

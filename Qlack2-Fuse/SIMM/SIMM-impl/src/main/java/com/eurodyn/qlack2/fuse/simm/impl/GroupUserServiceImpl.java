@@ -186,21 +186,6 @@ public class GroupUserServiceImpl implements GroupUserService {
         groupUser.setStatus(GROUP_USER_STATUS_ACCEPTED);
         em.merge(groupUser);
 
-        // Post a notification about the event.
-//        if (PropertiesLoaderSingleton.getInstance().getProperty("QlackFuse.SIMM.realtime.JMS.notifications").equals("true")) {
-//            SIMMMessage message = new SIMMMessage();
-//            message.setType(SIMMMessage.MSGTYPE__GROUP_REQUEST_ACCEPTED);
-//            message.setStringProperty(SIMMMessage.PROPERTY__GROUP_ID, groupID);
-//            message.setStringProperty(SIMMMessage.PROPERTY__GROUP_TITLE, group.getName());
-//            message.setStringProperty(SIMMMessage.PROPERTY__GROUP_PRIVATE, String.valueOf(group.getPrivacy()));
-//            message.setStringProperty(SIMMMessage.PRIVATE_USERID, userID);
-//            try {
-//                Messenger.post(connectionFactory, notificationTopic, message);
-//            } catch (JMSException ex) {
-//                LOGGER.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
-//                throw new QSIMMException(QSIMMException.CODES.ERR_SIMM_0033, ex.getLocalizedMessage());
-//            }
-//        }
     }
 
     /**
@@ -219,21 +204,6 @@ public class GroupUserServiceImpl implements GroupUserService {
         SimGroupHasUser groupUser = findByIDs(userID, groupID);
         em.remove(groupUser);
 
-        // Post a notification about the event.
-//        if (PropertiesLoaderSingleton.getInstance().getProperty("QlackFuse.SIMM.realtime.JMS.notifications").equals("true")) {
-//            SIMMMessage message = new SIMMMessage();
-//            message.setType(SIMMMessage.MSGTYPE__GROUP_REQUEST_REJECTED);
-//            message.setStringProperty(SIMMMessage.PROPERTY__GROUP_ID, groupID);
-//            message.setStringProperty(SIMMMessage.PROPERTY__GROUP_TITLE, group.getName());
-//            message.setStringProperty(SIMMMessage.PROPERTY__GROUP_PRIVATE, String.valueOf(group.getPrivacy()));
-//            message.setStringProperty(SIMMMessage.PRIVATE_USERID, userID);
-//            try {
-//                Messenger.post(connectionFactory, notificationTopic, message);
-//            } catch (JMSException ex) {
-//                LOGGER.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
-//                throw new QSIMMException(QSIMMException.CODES.ERR_SIMM_0033, ex.getLocalizedMessage());
-//            }
-//        }
     }
 
     /**
@@ -515,23 +485,7 @@ public class GroupUserServiceImpl implements GroupUserService {
         groupUser.setUserId(userID);
         groupUser.setStatus(GROUP_USER_STATUS_INVITED);
         em.persist(groupUser);
-
-        // Post a notification about the event.
-//        if (PropertiesLoaderSingleton.getInstance().getProperty("QlackFuse.SIMM.realtime.JMS.notifications").equals("true")) {
-//            SIMMMessage message = new SIMMMessage();
-//            message.setType(SIMMMessage.MSGTYPE__GROUP_INVITATION);
-//            message.setSrcUserID(groupDTO.getSrcUserId());
-//            message.setStringProperty(SIMMMessage.PROPERTY__GROUP_ID, groupDTO.getId());
-//            message.setStringProperty(SIMMMessage.PROPERTY__GROUP_TITLE, group.getName());
-//            message.setStringProperty(SIMMMessage.PROPERTY__GROUP_PRIVATE, String.valueOf(group.getPrivacy()));
-//            message.setStringProperty(SIMMMessage.PRIVATE_USERID, userID);
-//            try {
-//                Messenger.post(connectionFactory, notificationTopic, message);
-//            } catch (JMSException ex) {
-//                LOGGER.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
-//                throw new QSIMMException(QSIMMException.CODES.ERR_SIMM_0033, ex.getLocalizedMessage());
-//            }
-//        }
+        
     }
 
 }

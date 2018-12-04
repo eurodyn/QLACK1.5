@@ -57,31 +57,6 @@ public class CommentServiceImpl implements CommentService {
 		blgComment.setPostId(BlgPost.find(em, dto.getPostId()));
 		em.persist(blgComment);
 
-		//TODO Implement notification
-		// Post a notification about the event.
-		// if
-		// (PropertiesLoaderSingleton.getInstance().getProperty("QlackFuse.Blog.realtime.JMS.notifications").equals("true"))
-		// {
-		// BlogMessage message = new BlogMessage();
-		// message.setType(BlogMessage.MSGTYPE_COMMENT_POSTED);
-		// message.setSrcUserID(dto.getUserId());
-		// message.setStringProperty(BlogMessage.PRIVATE_USERID,
-		// blgComment.getPostId().getBlogId().getUserId());
-		// message.setStringProperty(BlogMessage.PROPERTY__POST_ID,
-		// blgComment.getPostId().getId());
-		// message.setStringProperty(BlogMessage.PROPERTY__POST_TITLE,
-		// blgComment.getPostId().getTitle());
-		// message.setStringProperty(BlogMessage.PROPERTY__COMMENT_ID,
-		// blgComment.getId());
-		// try {
-		// Messenger.post(connectionFactory, notificationTopic, message);
-		// } catch (JMSException ex) {
-		// LOGGER.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
-		// throw new QBlogException(CODES.ERR_BLOG_0013,
-		// ex.getLocalizedMessage());
-		// }
-		// }
-
 		return blgComment.getId();
 	}
 

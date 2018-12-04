@@ -149,8 +149,8 @@ public class WorkflowRest {
 			ValidationErrors ve = new ValidationErrors();
 			ValidationFieldErrors vfe = new ValidationFieldErrors(myException.getInvalidDataSource());
 			ValidationErrorType vet = new ValidationErrorType(myException.getErrorCode());
-			vet.putAttribute(ValidationAttribute.Message, myException.getErrorCode());
-			vet.putAttribute(ValidationAttribute.InvalidValue, myException.getInvalidDataValue());
+			vet.putAttribute(ValidationAttribute.MESSAGE, myException.getErrorCode());
+			vet.putAttribute(ValidationAttribute.INVALID_VALUE, myException.getInvalidDataValue());
 			vfe.addError(vet);
 			ve.addValidationError(vfe);
 			throw new QValidationException(ve);
@@ -200,8 +200,8 @@ public class WorkflowRest {
 			ValidationErrors ve = new ValidationErrors();
 			ValidationFieldErrors vfe = new ValidationFieldErrors("name");
 			ValidationErrorType vet = new ValidationErrorType("validation.error.workflow.version.unique.name");
-			vet.putAttribute(ValidationAttribute.Message, "validation.error.workflow.version.unique.name");
-			vet.putAttribute(ValidationAttribute.InvalidValue, workflowVersionRDTO.getName());
+			vet.putAttribute(ValidationAttribute.MESSAGE, "validation.error.workflow.version.unique.name");
+			vet.putAttribute(ValidationAttribute.INVALID_VALUE, workflowVersionRDTO.getName());
 			vfe.addError(vet);
 			ve.addValidationError(vfe);
 			throw new QValidationException(ve);
@@ -240,8 +240,8 @@ public class WorkflowRest {
 			ValidationErrors ve = new ValidationErrors();
 			ValidationFieldErrors vfe = new ValidationFieldErrors(myException.getInvalidDataSource());
 			ValidationErrorType vet = new ValidationErrorType(myException.getErrorCode());
-			vet.putAttribute(ValidationAttribute.Message, myException.getErrorCode());
-			vet.putAttribute(ValidationAttribute.InvalidValue, myException.getInvalidDataValue());
+			vet.putAttribute(ValidationAttribute.MESSAGE, myException.getErrorCode());
+			vet.putAttribute(ValidationAttribute.INVALID_VALUE, myException.getInvalidDataValue());
 			vfe.addError(vet);
 			ve.addValidationError(vfe);
 			throw new QValidationException(ve);
@@ -274,8 +274,8 @@ public class WorkflowRest {
 			ValidationErrors ve = new ValidationErrors();
 			ValidationFieldErrors vfe = new ValidationFieldErrors("contentVersion");
 			ValidationErrorType vet = new ValidationErrorType("qlack.validation.XmlFile");
-			vet.putAttribute(ValidationAttribute.Message, "qlack.validation.XmlFile");
-			vet.putAttribute(ValidationAttribute.InvalidValue, fResponse.getFile().getFilename());
+			vet.putAttribute(ValidationAttribute.MESSAGE, "qlack.validation.XmlFile");
+			vet.putAttribute(ValidationAttribute.INVALID_VALUE, fResponse.getFile().getFilename());
 			vfe.addError(vet);
 			ve.addValidationError(vfe);
 			throw new QValidationException(ve);
@@ -292,8 +292,8 @@ public class WorkflowRest {
 			ValidationErrors ve = new ValidationErrors();
 			ValidationFieldErrors vfe = new ValidationFieldErrors(myException.getInvalidDataSource());
 			ValidationErrorType vet = new ValidationErrorType(myException.getErrorCode());
-			vet.putAttribute(ValidationAttribute.Message, myException.getErrorCode());
-			vet.putAttribute(ValidationAttribute.InvalidValue, myException.getInvalidDataValue());
+			vet.putAttribute(ValidationAttribute.MESSAGE, myException.getErrorCode());
+			vet.putAttribute(ValidationAttribute.INVALID_VALUE, myException.getInvalidDataValue());
 			vfe.addError(vet);
 			ve.addValidationError(vfe);
 			throw new QValidationException(ve);
@@ -324,8 +324,8 @@ public class WorkflowRest {
 		ValidationErrors ve = new ValidationErrors();
 		ValidationFieldErrors vfe = new ValidationFieldErrors("name");
 		ValidationErrorType vet = new ValidationErrorType("validation.error.workflow.unique.name");
-		vet.putAttribute(ValidationAttribute.Message, "validation.error.workflow.unique.name");
-		vet.putAttribute(ValidationAttribute.InvalidValue, name);
+		vet.putAttribute(ValidationAttribute.MESSAGE, "validation.error.workflow.unique.name");
+		vet.putAttribute(ValidationAttribute.INVALID_VALUE, name);
 		vfe.addError(vet);
 		ve.addValidationError(vfe);
 		throw new QValidationException(ve);

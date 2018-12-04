@@ -156,7 +156,7 @@ public class SchedulerWrappedTrigger implements Serializable {
 	}
 
 	/**
-	 * Set the trigger fire type (daily, Monthly, Weekly, etc)
+	 * Set the trigger fire type (daily, MONTHLY, WEEKLY, etc)
 	 *
 	 * @param triggerType the triggerType to set
 	 */

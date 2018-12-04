@@ -80,28 +80,6 @@ public class MessageServiceImpl implements MessageService {
 
 		em.persist(crhm);
 
-		// Post a notification about the event.
-		// if
-		// (PropertiesLoaderSingleton.getInstance().getProperty("QlackFuse.ChatIM.realtime.JMS.notifications").equals("true"))
-		// {
-		// ChatMessage chatMessage = new ChatMessage();
-		// chatMessage.setType(ChatMessage.MSGTYPE_ROOM_MESSAGE_POSTED);
-		// chatMessage.setStringProperty(ChatMessage.PROPERTY__ROOM_NAME,
-		// room.getTitle());
-		// chatMessage.setStringProperty(ChatMessage.PROPERTY__ROOMID,
-		// room.getId());
-		// chatMessage.setStringProperty(ChatMessage.PROPERTY__SRC_USERID,
-		// messageDTO.getFromID());
-		// chatMessage.setBody(message);
-		// try {
-		// Messenger.post(connectionFactory, notificationTopic, chatMessage);
-		// } catch (JMSException ex) {
-		// LOGGER.log(Level.SEVERE, ex.getLocalizedMessage(), ex);
-		// throw new QChatIMException(QChatIMException.CODES.ERR_CHA_0001,
-		// ex.getMessage());
-		// }
-		// }
-
 		return retVal;
 	}
 
