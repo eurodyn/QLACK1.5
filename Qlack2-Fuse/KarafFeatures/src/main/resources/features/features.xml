@@ -136,9 +136,9 @@ a single line, Karaf fails to restart.
 		<!-- <feature>jndi</feature> -->
 		<feature version="${qlack2.common.version}">qlack-common</feature>
 		<bundle>mvn:javax.mail/mail/1.4.7</bundle>
-		<bundle>mvn:org.bouncycastle/bcprov-jdk15on/1.54</bundle>
-		<bundle>mvn:org.bouncycastle/bcpkix-jdk15on/1.54</bundle>
-		<bundle>mvn:org.bouncycastle/bcmail-jdk15on/1.54</bundle>
+		<bundle>mvn:org.bouncycastle/bcprov-jdk15on/${bouncycastle.version}</bundle>
+		<bundle>mvn:org.bouncycastle/bcpkix-jdk15on/${bouncycastle.version}</bundle>
+		<bundle>mvn:org.bouncycastle/bcmail-jdk15on/${bouncycastle.version}</bundle>
 		<bundle>mvn:org.apache.commons/commons-lang3/${commons.lang3.version}</bundle>
 		<bundle>mvn:com.eurodyn.qlack2.fuse/mailing-api/${project.version}</bundle>
 		<bundle>mvn:com.eurodyn.qlack2.fuse/mailing-impl/${project.version}/jar/${bundle.classifier}</bundle>

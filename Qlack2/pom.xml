@@ -46,7 +46,7 @@
 		<geronimo.jpa2.version>1.1</geronimo.jpa2.version>
 		<geronimo.jta.version>1.1.1</geronimo.jta.version>
 		<!-- Web and REST -->
-		<cxf.version>2.7.9</cxf.version>
+		<cxf.version>2.7.18</cxf.version>
 		<cxf.dosgi.version>1.6.0</cxf.dosgi.version>
 		<geronimo.servlet3.version>1.0</geronimo.servlet3.version>
 		<jackson.version>1.9.13</jackson.version>
@@ -62,9 +62,9 @@
 		
 		<beanshell.version>2.0b5</beanshell.version>
 		<cometd.version>2.6.0</cometd.version>
-		<commons.beanutils.version>1.9.2</commons.beanutils.version>
+		<commons.beanutils.version>1.9.3</commons.beanutils.version>
 		<commons.codec.version>1.8</commons.codec.version>
-		<commons.collections.version>3.2.1</commons.collections.version>
+		<commons.collections.version>3.2.2</commons.collections.version>
 		<commons.dbcp.version>1.4</commons.dbcp.version>
 		<commons.dbcp.servicemix.version>1.4_3</commons.dbcp.servicemix.version>
 		<commons.io.version>2.4</commons.io.version>
@@ -84,6 +84,7 @@
 		<!-- Webjar versions -->
 		<angular.translate.version>2.1.0-1</angular.translate.version>
 		<clamav4j.version>0.5</clamav4j.version>
+		<bouncycastle.version>1.59</bouncycastle.version>
 	</properties>
 
 	<repositories>
