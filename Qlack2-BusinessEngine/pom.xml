@@ -20,7 +20,7 @@
 		<qlack2.util.version>1.6.7</qlack2.util.version>
 		<qlack2.webdesktop.version>1.2.0</qlack2.webdesktop.version>
 		<qlack2.webdesktop.apps.version>1.2.0</qlack2.webdesktop.apps.version>
-		<apache.httpcore.version>4.3</apache.httpcore.version>
+		<apache.httpcore.version>4.4.6</apache.httpcore.version>
 		<apache.httpclient.version>4.5.6</apache.httpclient.version>
 	</properties>
 
