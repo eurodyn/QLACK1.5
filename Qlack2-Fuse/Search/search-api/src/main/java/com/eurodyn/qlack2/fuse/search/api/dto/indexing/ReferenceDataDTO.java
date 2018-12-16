@@ -28,10 +28,10 @@ public class ReferenceDataDTO implements Serializable {
 
 	private static final long serialVersionUID = -3257649035551870404L;
 	private String name;
-	private Object value;
+	private transient Object value;
 
 	public ReferenceDataDTO() {
-	};
+	}
 
 	public ReferenceDataDTO(String name, String value) {
 		this.name = name;

@@ -28,7 +28,7 @@ public class IndexDTO implements Serializable {
 	private List<ReferenceDataDTO> referenceDataList;
 
 	public IndexDTO() {
-	};
+	}
 
 	public IndexDTO(String collection, String subCollection, String objectId,
 			String mainData, List<ReferenceDataDTO> referenceDataList) {
@@ -37,7 +37,7 @@ public class IndexDTO implements Serializable {
 		this.objectId = objectId;
 		this.mainData = mainData;
 		this.referenceDataList = referenceDataList;
-	};
+	}
 
 	public String getCollection() {
 		return collection;
@@ -57,7 +57,7 @@ public class IndexDTO implements Serializable {
 
 	public void addReferenceData(ReferenceDataDTO referenceData) {
 		if (this.referenceDataList == null) {
-			this.referenceDataList = new ArrayList<ReferenceDataDTO>();
+			this.referenceDataList = new ArrayList<>();
 			this.referenceDataList.add(referenceData);
 		} else {
 			this.referenceDataList.add(referenceData);

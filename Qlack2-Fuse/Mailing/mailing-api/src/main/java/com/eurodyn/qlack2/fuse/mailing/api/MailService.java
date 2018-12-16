@@ -28,7 +28,7 @@ public interface MailService {
 
 	public static enum EMAIL_STATUS {
 		QUEUED, SENT, FAILED, CANCELED
-	};
+	}
 
 	void queueEmail(EmailDTO dto);
 

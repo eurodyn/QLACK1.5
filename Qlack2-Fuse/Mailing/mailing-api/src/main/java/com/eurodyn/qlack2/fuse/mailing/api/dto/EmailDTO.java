@@ -28,7 +28,7 @@ public class EmailDTO implements Serializable {
 
 	public static enum EMAIL_TYPE {
 		TEXT, HTML
-	};
+	}
 
 	private String id;
 	private String messageId;

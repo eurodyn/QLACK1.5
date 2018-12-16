@@ -23,14 +23,14 @@ public class Constants {
 	 */
 	public enum TRIGGER_DAYS {
 		MON, TUE, WED, THU, FRI, SAT, SUN
-	};
+	}
 
 	/**
 	 * Enumeration of the month period.
 	 */
 	public enum TRIGGER_MONTH_PERIOD {
 		FIRST, LAST
-	};
+	}
 
 	/**
 	 * Enumeration of the trigger fire types.

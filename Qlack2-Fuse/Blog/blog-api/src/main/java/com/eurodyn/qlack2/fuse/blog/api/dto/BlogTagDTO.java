@@ -28,7 +28,7 @@ public class BlogTagDTO extends BlogBaseDTO {
     /**
      * empty constructor
      */
-    public BlogTagDTO() {};
+    public BlogTagDTO() {}
 
     /**
      *

@@ -29,7 +29,7 @@ public class BlogCategoryDTO extends BlogBaseDTO {
     /**
      *
      */
-    public BlogCategoryDTO() {} ;
+    public BlogCategoryDTO() {}
 
     /**
      *

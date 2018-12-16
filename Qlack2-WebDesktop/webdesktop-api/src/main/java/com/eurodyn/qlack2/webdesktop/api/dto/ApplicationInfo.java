@@ -12,7 +12,7 @@ import java.io.Serializable;
  */
 public class ApplicationInfo implements Serializable {
 	private static final long serialVersionUID = -3853756343460422928L;
-	public enum DISPLAY_ON {group, item};
+	public enum DISPLAY_ON {group, item}
 
 	private transient Identification identification;
 	private transient Instantiation instantiation;
