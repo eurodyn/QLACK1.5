@@ -112,7 +112,7 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>aspectj-maven-plugin</artifactId>
 				<configuration>
-					<complianceLevel>1.7</complianceLevel>
+					<complianceLevel>1.8</complianceLevel>
 					<aspectLibraries>
 						<aspectLibrary>
 							<groupId>com.eurodyn.qlack2.util</groupId>

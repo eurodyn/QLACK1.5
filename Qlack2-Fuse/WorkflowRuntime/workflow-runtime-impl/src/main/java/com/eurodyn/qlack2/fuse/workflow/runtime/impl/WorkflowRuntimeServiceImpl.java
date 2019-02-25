@@ -832,25 +832,26 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 	      return environment.getKieBase();
 	}
 
-	private void checkRestartWorkflowInstancesInDB() throws Exception
+	private void checkRestartWorkflowInstancesInDB()
 	{
-		try {
-			List<ProcessInstanceDesc> processInstances = null;
-	        Map<String, Object> params = new HashMap<String, Object>();
-	        List<Integer> states = new ArrayList();
-	        states.add(ProcessInstance.STATE_ACTIVE);
-	        params.put("states", states);
+		new Thread(() -> {
+			try {
+				List<ProcessInstanceDesc> processInstances = null;
+				Map<String, Object> params = new HashMap<String, Object>();
+				List<Integer> states = new ArrayList();
+				states.add(ProcessInstance.STATE_ACTIVE);
+				params.put("states", states);
 
-	        processInstances = (List<ProcessInstanceDesc>) queryStringWithParameters(params, "getProcessInstancesByStatus");
+				processInstances = (List<ProcessInstanceDesc>) queryStringWithParameters(params,
+						"getProcessInstancesByStatus");
 
-	        for (ProcessInstanceDesc instance : processInstances)
-	        	restoreActiveWorkflowInstance(instance);
-		}
-		catch (Exception e)
-		{
-			logger.log(Level.SEVERE, "checkRestartWorkflowInstancesInDB: Exception throws: " + e.toString());
-			throw e;
-		}
+				for (ProcessInstanceDesc instance : processInstances)
+					restoreActiveWorkflowInstance(instance);
+			} catch (Exception e) {
+				logger.log(Level.SEVERE,
+						"checkRestartWorkflowInstancesInDB: Exception throws: " + e.toString());
+			}
+		}).start();
 	}
 
 	@SuppressWarnings("unchecked")

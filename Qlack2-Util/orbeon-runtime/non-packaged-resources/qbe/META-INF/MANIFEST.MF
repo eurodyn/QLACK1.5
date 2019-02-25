@@ -7,12 +7,12 @@ Bundle-ClassPath: WEB-INF/classes,WEB-INF/lib/activation-1.1.1.jar,WEB-I
  -saaj.jar,WEB-INF/lib/axis_1_2_1-wsdl4j-1.5.1.jar,WEB-INF/lib/barcode4j
  -1.0.jar,WEB-INF/lib/batic-dependency-xmlgraphics-commons-1.4.jar,WEB-I
  NF/lib/batik-all-1_7.jar,WEB-INF/lib/castor-0_9_4_3-xml.jar,WEB-INF/lib
- /commons-beanutils-1_5.jar,WEB-INF/lib/commons-cli-1_0.jar,WEB-INF/lib/
- commons-codec-1.6.jar,WEB-INF/lib/commons-collections-3.2.1.jar,WEB-INF
- /lib/commons-digester-1_5.jar,WEB-INF/lib/commons-discovery-0.4.jar,WEB
- -INF/lib/commons-fileupload-1.2.2.jar,WEB-INF/lib/commons-io-2.0.1.jar,
+ /commons-beanutils-1.8.3.jar,WEB-INF/lib/commons-cli-1_0.jar,WEB-INF/lib/
+ commons-codec-1.6.jar,WEB-INF/lib/commons-collections-3.2.2.jar,WEB-INF
+ /lib/commons-digester-1.8.jar,WEB-INF/lib/commons-discovery-0.4.jar,WEB
+ -INF/lib/commons-fileupload-1.2.2.jar,WEB-INF/lib/commons-io-2.0.1.jar,WEB-INF/lib/commons-lang-1.0.jar,
  WEB-INF/lib/commons-lang3-3.1.jar,WEB-INF/lib/commons-pool-1.6.jar,WEB-INF/lib/commons-validator-1.4.0.j
- ar,WEB-INF/lib/ehcache-core-2.6.3.jar,WEB-INF/lib/exist-1_4_1_dev_orbeon_201101
+ ar,WEB-INF/lib/ehcache-core-2.6.3.jar,WEB-INF/lib/ejb-2_0.jar,WEB-INF/lib/exist-1_4_1_dev_orbeon_201101
  04.jar,WEB-INF/lib/exist-dependency-antlr-2.7.7.jar,WEB-INF/lib/exist-d
  ependency-jgroups-all-2.2.6.jar,WEB-INF/lib/exist-dependency-jta-1.1.ja
  r,WEB-INF/lib/exist-dependency-lucene-core-2.9.2.jar,WEB-INF/lib/exist-
@@ -25,28 +25,25 @@ Bundle-ClassPath: WEB-INF/classes,WEB-INF/lib/activation-1.1.1.jar,WEB-I
  ,WEB-INF/lib/exist-lucene-module-1_4_1_dev_orbeon_20110104.jar,WEB-INF/
  lib/exist-modules-1_4_1_dev_orbeon_20110104.jar,WEB-INF/lib/exist-ngram
  -module-1_4_1_dev_orbeon_20110104.jar,WEB-INF/lib/exist-optional-1_4_1_
- dev_orbeon_20110104.jar,WEB-INF/lib/exist-xqj-1.0.1.jar,WEB-INF/lib/fly
+ dev_orbeon_20110104.jar,WEB-INF/lib/exist-xqj-1.0.1.jar,WEB-INF/lib/fluent-hc-4.3.5.jar,WEB-INF/lib/fly
  ing-saucer-core-9.0.2-20140523.jar,WEB-INF/lib/flying-saucer-dependency
  -itext-2.1.7.jar,WEB-INF/lib/flying-saucer-pdf-9.0.2-20140523.jar,WEB-I
- NF/lib/fop-1_0.jar,WEB-INF/lib/httpclient-4.3.5.jar,WEB-INF/lib/httpcor
+ NF/lib/fop-1_0.jar,WEB-INF/lib/httpclient-4.3.5.jar,WEB-INF/lib/httpclient-cache-4.3.5.jar,WEB-INF/lib/httpcor
  e-4.3.2.jar,WEB-INF/lib/httpmime-4.3.5.jar,WEB-INF/lib/icepdf-core-5.1.1.jar,WEB-INF/lib/itext-bcmail-jdk
- 14-138.jar,WEB-INF/lib/itext-bcprov-jdk14-138.jar,WEB-INF/lib/jai-core-1.1.3.jar,WEB-INF/lib/jai-imageio-core-1.3.1-SNAPSHOT.jar,WEB-INF/lib/jakarta-p
- oi-1.11.0-dev-20030610.jar,WEB-INF/lib/jaxen-1_1_beta_9.jar,WEB-INF/lib
- /jcifs-1.3.14.jar,WEB-INF/lib/jcl-over-slf4j-1.7.7.jar,WEB-INF/lib/jfreechart-1.0.9.jar,WEB-INF/lib/jfreecha
+ 14-138.jar,WEB-INF/lib/itext-bcprov-jdk14-138.jar,WEB-INF/lib/jai-core-1.1.3.jar,WEB-INF/lib/jai-imageio-core-1.3.1-SNAPSHOT.jar,
+ WEB-INF/lib/jcifs-1.3.17.jar,WEB-INF/lib/jcl-over-slf4j-1.7.21.jar,WEB-INF/lib/jfreechart-1.0.9.jar,WEB-INF/lib/jfreecha
  rt-dependency-jcommon-1.0.12.jar,WEB-INF/lib/jms-api-1_1.jar,WEB-INF/li
  b/joda-time-2.1.jar,WEB-INF/lib/jsch-0.1.42.jar,WEB-INF/lib/jtidy-8.0-2
  0060801.131059-3.jar,WEB-INF/lib/log4j-1_2_17.jar,WEB-INF/lib/mail-1_3_
  2.jar,WEB-INF/lib/metadata-extractor-2.7.0.SNAPSHOT.jar,WEB-INF/lib/met
  adata-extractor-dependency-xmpcore-5.1.2.jar,WEB-INF/lib/msv-20081113-o
  rbeon.jar,WEB-INF/lib/orbeon-common.jar,WEB-INF/lib/orbeon-core.jar,WEB-INF/lib/orbeon-dom.jar,WEB-INF/lib/orbeon-errorified-20150511.jar,WEB-INF/lib/orbeon
- -form-builder-shared.jar,WEB-INF/lib/orbeon-form-builder.jar,WEB-INF/lib/orbeon-form-runner.jar,WEB-INF/lib/orbeon
- -resources-private.jar,WEB-INF/lib/orbeon-resources-public.jar,WEB-INF/
- lib/orbeon-xforms-filter.jar,WEB-INF/lib/parboil
- ed-core-1.1.7.jar,WEB-INF/lib/parboiled-scala_2.11-1.1.7.jar,WEB-INF/li
- b/pdfbox-0_7_1.jar,WEB-INF/lib/rhino-1.7R2.jar,WEB-INF/lib/saxon-9-1-0-
- 8_orbeon_20160615.jar,WEB-INF/lib/saxpath-dev_orbeon.jar,WEB-INF/lib/sbinary_2.11-SNAPSHOT.jar,WEB-INF/lib/scala-library-2.11.8.jar,WEB-INF/lib/scala-xml_2.11-1.0.4.jar,WEB-INF/lib/s
- implecaptcha-1.2.1.jar,WEB-INF/lib/slf4j-api-1.7.7.jar,WEB-INF/lib/slf4j-log4j12-1.7.7.jar,WEB-INF/lib/spray-json_2.11-1.3.2.jar,WEB-INF/li
- b/tagsoup-1.2.jar,WEB-INF/lib/xerces-2.11-orbeon.jar,WEB-INF/lib/xqj2-0
+ -embedding.jar,WEB-INF/lib/orbeon-form-builder.jar,WEB-INF/lib/orbeon-form-runner.jar,WEB-INF/lib/orbeon-full-portlet.jar,
+ WEB-INF/lib/orbeon-portlet-support.jar,WEB-INF/lib/orbeon-proxy-portlet.jar,WEB-INF/lib/orbeon-xupdate.jar,
+ WEB-INF/lib/parboiled-core-1.1.7.jar,WEB-INF/lib/parboiled-scala_2.11-1.1.7.jar,WEB-INF/lib/saxon-9-1-0-
+ 8_orbeon_20160615.jar,WEB-INF/lib/sbinary_2.11-SNAPSHOT.jar,WEB-INF/lib/scala-library-2.11.8.jar,WEB-INF/lib/scala-xml_2.11-1.0.6.jar,WEB-INF/lib/s
+ implecaptcha-1.2.1.jar,WEB-INF/lib/slf4j-api-1.7.21.jar,WEB-INF/lib/slf4j-log4j12-1.7.7.jar,WEB-INF/lib/spray-json_2.11-1.3.2.jar,WEB-INF/li
+ b/tagsoup-1.2-orbeon.jar,WEB-INF/lib/tyrex-1.0.jar,WEB-INF/lib/xerces-2.11-orbeon.jar,WEB-INF/lib/xqj2-0
  .0.1.jar,WEB-INF/lib/xqjapi.jar
 Bundle-ManifestVersion: 2
 Bundle-Name: orbeon
@@ -166,6 +163,6 @@ Import-Package: javax.servlet,javax.servlet.http,javax.accessibility;res
  =optional,org.orbeon.oxf.servlet;resolution:=optional,org.w3c.dom,org.j
  free.chart.servlet;resolution:=optional
 Tool: Bnd-2.2.0.20130927-173417
-WAR-URL: file:///C:/Programs/orbeon-2016.2.201608230055-CE/orbeon-qbe-xbl
+WAR-URL: file:///C:/Programs/orbeon-2016.3.201612302139-CE/orbeon-qbe-xbl
  /orbeon.war
 Web-ContextPath: orbeon

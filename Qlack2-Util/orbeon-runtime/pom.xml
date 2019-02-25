@@ -12,8 +12,8 @@
 	<artifactId>orbeon-runtime</artifactId>
 
 	<properties>
-		<orbeon.version>2016.2.201608230055-CE</orbeon.version>
-		<pax.logging.version>1.7.2</pax.logging.version>
+		<orbeon.version>2016.3.201612302139-CE</orbeon.version>
+		<pax.logging.version>1.7.4</pax.logging.version>
 	</properties>
 
 	<build>
@@ -63,23 +63,23 @@
 									dest="${basedir}/target/" />
 								<unzip src="${basedir}/target/orbeon-${orbeon.version}/orbeon.war"
 									dest="${basedir}/target/orbeon-war/" />
-								<echo message="Extracting Orbeon resources private" />
-								<unzip
-									src="${basedir}/target/orbeon-war/WEB-INF/lib/orbeon-resources-private.jar"
-									dest="${basedir}/target/orbeon-resources-private/" />
+								<!--<echo message="Extracting Orbeon resources private" />-->
+								<!--<unzip-->
+									<!--src="${basedir}/target/orbeon-war/WEB-INF/lib/orbeon-resources-private.jar"-->
+									<!--dest="${basedir}/target/orbeon-resources-private/" />-->
 								<echo message="Extracting PAX Logging" />
 								<unzip src="${basedir}/target/pax-logging-api-${pax.logging.version}.jar"
 									dest="${basedir}/target/pax-logging/" />
 								<echo message="Extracting Core Orbeon" />
 								<unzip src="${basedir}/target/orbeon-war/WEB-INF/lib/orbeon-core.jar"
-									dest="${basedir}/target/orbeon/" />							
-								<echo message="Modifying Orbeon resources private" />
-								<copy todir="${basedir}/target/orbeon-resources-private">
-									<fileset dir="${basedir}/non-packaged-resources/custom-submit" />
-								</copy>
-								<echo message="Recreating resources private" />
-								<zip destfile="${basedir}/target/orbeon-resources-private.jar"
-									basedir="${basedir}/target/orbeon-resources-private" />
+									dest="${basedir}/target/orbeon/" />
+								<!--<echo message="Modifying Orbeon resources private" />-->
+								<!--<copy todir="${basedir}/target/orbeon-resources-private">-->
+									<!--<fileset dir="${basedir}/non-packaged-resources/custom-submit" />-->
+								<!--</copy>-->
+								<!--<echo message="Recreating resources private" />-->
+								<!--<zip destfile="${basedir}/target/orbeon-resources-private.jar"-->
+									<!--basedir="${basedir}/target/orbeon-resources-private" />-->
 								<echo message="Modifying Orbeon WAR (standalone)" />
 								<copy todir="${basedir}/target/orbeon-war" overwrite="true">
 									<fileset dir="${basedir}/non-packaged-resources/standalone" />
@@ -87,9 +87,9 @@
 								<echo message="Recreating Orbeon WAR (standalone)" />
 								<zip destfile="${basedir}/target/orbeon-standalone.war"
 									basedir="${basedir}/target/orbeon-war" />
-								<echo message="Modifying Orbeon WAR (QBE)" />
-								<copy todir="${basedir}/target/orbeon-war/WEB-INF/lib"
-									file="${basedir}/target/orbeon-resources-private.jar" />
+								<!--<echo message="Modifying Orbeon WAR (QBE)" />-->
+								<!--<copy todir="${basedir}/target/orbeon-war/WEB-INF/lib"-->
+									<!--file="${basedir}/target/orbeon-resources-private.jar" />-->
 								<copy todir="${basedir}/target/orbeon-war" overwrite="true">
 									<fileset dir="${basedir}/non-packaged-resources/qbe" />
 								</copy>
@@ -123,7 +123,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
-				<version>1.8</version>
+				<version>1.7</version>
 				<executions>
 					<execution>
 						<id>attach-artifacts-orbeon-standalone</id>
