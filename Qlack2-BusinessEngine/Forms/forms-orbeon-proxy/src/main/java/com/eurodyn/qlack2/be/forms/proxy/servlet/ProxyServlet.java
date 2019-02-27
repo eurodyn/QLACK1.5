@@ -233,8 +233,10 @@ public class ProxyServlet extends HttpServlet {
 		} finally {
 			// make sure the entire entity was consumed, so the connection is
 			// released
-			consumeQuietly(proxyResponse.getEntity());
-			closeQuietly(servletResponse.getOutputStream());
+			if (proxyResponse != null && proxyResponse.getEntity() != null ) {
+				consumeQuietly(proxyResponse.getEntity());
+				closeQuietly(servletResponse.getOutputStream());
+			}
 		}
 	}
 

@@ -161,7 +161,9 @@ public class AccountingServiceImpl implements AccountingService {
 				attribute.setName(attributeDTO.getName());
 				attribute.setSession(Session.find(attributeDTO.getSessionId(), em));
 			}
-			attribute.setValue(attributeDTO.getValue());
+			if (attributeDTO.getValue() != null ){
+				attribute.setValue(attributeDTO.getValue());
+			}
 			em.merge(attribute);
 		}
 	}

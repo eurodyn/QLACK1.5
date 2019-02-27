@@ -202,6 +202,11 @@ public class BayeuxSecurityPolicy extends DefaultSecurityPolicy  implements Serv
 			// Users can subscribe either to their private channel, or the
 			// global public channel.
 			if (signedTicket != null) {
+				//added because of possible null pointer deference
+				String channelId = "Invalid Channel";
+				if (channel != null && channel.getId() != null){
+					channelId = channel.getId();
+				}
 				if (channel != null && channel.getId() != null
 						&& (channel.getId().equals("/service/private") || channel.getId().equals("/public"))) {
 					retVal = true;
@@ -209,11 +214,11 @@ public class BayeuxSecurityPolicy extends DefaultSecurityPolicy  implements Serv
 					LOGGER.log(Level.WARNING,
 						"User {0} tried to subscribe to invalid "
 							+ "channel {1}.", new Object[] {
-							signedTicket.getUserID(), channel.getId() });
+							signedTicket.getUserID(), channelId });
 				}
 				LOGGER.log(Level.FINE,
 					"Subscription request for {0} (granted={1}).",
-					new Object[] { channel.getId(), retVal });
+					new Object[] { channelId, retVal });
 			}
 		} catch (IOException e) {
 			LOGGER.log(Level.SEVERE, "Could not parse JSON ticket from cache.", e);

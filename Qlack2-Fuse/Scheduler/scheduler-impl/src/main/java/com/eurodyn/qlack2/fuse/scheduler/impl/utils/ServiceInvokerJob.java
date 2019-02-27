@@ -1,8 +1,10 @@
 package com.eurodyn.qlack2.fuse.scheduler.impl.utils;
 
+import com.eurodyn.qlack2.fuse.scheduler.api.jobs.SchedulerJob;
+import com.eurodyn.qlack2.fuse.scheduler.api.utils.Constants;
 import java.util.Collection;
+import java.util.Objects;
 import java.util.logging.Logger;
-
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.InvalidSyntaxException;
@@ -11,9 +13,6 @@ import org.quartz.Job;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-
-import com.eurodyn.qlack2.fuse.scheduler.api.jobs.SchedulerJob;
-import com.eurodyn.qlack2.fuse.scheduler.api.utils.Constants;
 
 public class ServiceInvokerJob implements Job {
 	@SuppressWarnings("unused")
@@ -54,14 +53,17 @@ public class ServiceInvokerJob implements Job {
 		Collection<ServiceReference<SchedulerJob>> serviceReferences = null;
 		try {
 			serviceReferences = bundleContext.getServiceReferences(SchedulerJob.class, null);
+
 		} catch (InvalidSyntaxException e) {
 			// not possible
 		}
-
-		for (ServiceReference<SchedulerJob> serviceReference : serviceReferences) {
-			String currentJobQualifier = (String) serviceReference.getProperty(Constants.QSCH_JOB_QUALIFIER);
-			if (jobQualifier.equals(currentJobQualifier)) {
-				return serviceReference;
+		if (serviceReferences != null) {
+			for (ServiceReference<SchedulerJob> serviceReference : serviceReferences) {
+				String currentJobQualifier = (String) serviceReference
+						.getProperty(Constants.QSCH_JOB_QUALIFIER);
+				if (Objects.equals(jobQualifier, currentJobQualifier)) {
+					return serviceReference;
+				}
 			}
 		}
 

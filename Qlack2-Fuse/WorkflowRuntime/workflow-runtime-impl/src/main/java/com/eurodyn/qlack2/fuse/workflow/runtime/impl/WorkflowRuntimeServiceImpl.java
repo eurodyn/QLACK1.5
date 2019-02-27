@@ -1,5 +1,16 @@
 package com.eurodyn.qlack2.fuse.workflow.runtime.impl;
 
+import com.eurodyn.qlack2.fuse.auditing.api.Constants;
+import com.eurodyn.qlack2.fuse.auditing.api.dto.AuditLogDTO;
+import com.eurodyn.qlack2.fuse.eventpublisher.api.EventPublisherService;
+import com.eurodyn.qlack2.fuse.workflow.runtime.api.QWorkflowRuntimeException;
+import com.eurodyn.qlack2.fuse.workflow.runtime.api.WorkflowRuntimeService;
+import com.eurodyn.qlack2.fuse.workflow.runtime.api.dto.NodeInstanceDesc;
+import com.eurodyn.qlack2.fuse.workflow.runtime.api.dto.ProcessInstanceDesc;
+import com.eurodyn.qlack2.fuse.workflow.runtime.api.dto.TaskSummary;
+import com.eurodyn.qlack2.fuse.workflow.runtime.impl.model.ProcessContent;
+import com.eurodyn.qlack2.fuse.workflow.runtime.impl.util.ConverterUtil;
+import com.eurodyn.qlack2.fuse.workflow.runtime.impl.util.JndiUtil;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -14,19 +25,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.transaction.TransactionManager;
 import javax.transaction.TransactionSynchronizationRegistry;
 import javax.transaction.UserTransaction;
-
 import org.apache.commons.codec.digest.DigestUtils;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.drools.core.spi.ProcessContext;
 import org.drools.compiler.builder.impl.KnowledgeBuilderImpl;
 import org.drools.core.impl.InternalKnowledgeBase;
+import org.drools.core.spi.ProcessContext;
 import org.jbpm.process.audit.NodeInstanceLog;
 import org.jbpm.process.audit.ProcessInstanceLog;
 import org.jbpm.process.audit.VariableInstanceLog;
@@ -50,25 +59,12 @@ import org.kie.api.runtime.process.WorkflowProcessInstance;
 import org.kie.api.task.TaskService;
 import org.kie.api.task.UserGroupCallback;
 import org.kie.api.task.model.OrganizationalEntity;
+import org.kie.api.task.model.Status;
 import org.kie.api.task.model.Task;
 import org.kie.internal.builder.KnowledgeBuilder;
 import org.kie.internal.builder.KnowledgeBuilderFactory;
 import org.kie.internal.io.ResourceFactory;
 import org.kie.internal.runtime.manager.context.ProcessInstanceIdContext;
-
-import com.eurodyn.qlack2.fuse.auditing.api.Constants;
-import com.eurodyn.qlack2.fuse.auditing.api.dto.AuditLogDTO;
-import com.eurodyn.qlack2.fuse.eventpublisher.api.EventPublisherService;
-import com.eurodyn.qlack2.fuse.workflow.runtime.api.QWorkflowRuntimeException;
-import com.eurodyn.qlack2.fuse.workflow.runtime.api.WorkflowRuntimeService;
-import com.eurodyn.qlack2.fuse.workflow.runtime.api.dto.ProcessInstanceDesc;
-import com.eurodyn.qlack2.fuse.workflow.runtime.api.dto.NodeInstanceDesc;
-import com.eurodyn.qlack2.fuse.workflow.runtime.api.dto.TaskSummary;
-import com.eurodyn.qlack2.fuse.workflow.runtime.impl.model.ProcessContent;
-import com.eurodyn.qlack2.fuse.workflow.runtime.impl.util.ConverterUtil;
-import com.eurodyn.qlack2.fuse.workflow.runtime.impl.util.JndiUtil;
-
-import org.kie.api.task.model.Status;
 
 public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 
@@ -824,13 +820,14 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 		 }
     }
 
-	protected KieBase createKnowledgeBase(Map<String, ResourceType> resources) {
-	      RuntimeEnvironmentBuilder builder = null;
-	      for (Map.Entry<String, ResourceType> entry : resources.entrySet())
-	          builder.addAsset(ResourceFactory.newClassPathResource(entry.getKey()), entry.getValue());
-	      environment = builder.get();
-	      return environment.getKieBase();
-	}
+//	protected KieBase createKnowledgeBase(Map<String, ResourceType> resources) {
+//	      RuntimeEnvironmentBuilder builder = null;
+//	      for (Map.Entry<String, ResourceType> entry : resources.entrySet()) {
+//					builder.addAsset(ResourceFactory.newClassPathResource(entry.getKey()), entry.getValue());
+//				}
+//	      environment = builder.get();
+//	      return environment.getKieBase();
+//	}
 
 	private void checkRestartWorkflowInstancesInDB()
 	{
@@ -977,16 +974,15 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 	private void audit(String event, String description, String referenceId, Object traceData) {
 
 		final Writer result = new StringWriter();
-	    final PrintWriter printWriter = new PrintWriter(result);
-	    ((Throwable)traceData).printStackTrace(printWriter);
+		final PrintWriter printWriter = new PrintWriter(result);
+		((Throwable) traceData).printStackTrace(printWriter);
 
-		String traceDataStr = "";
-		if (traceData != null) {
-			try {
-				traceDataStr = objectMapper.writeValueAsString(result.toString());
-			} catch (Exception e) {
-				traceDataStr = e.getLocalizedMessage();
-			}
+		String traceDataStr;
+
+		try {
+			traceDataStr = objectMapper.writeValueAsString(result.toString());
+		} catch (Exception e) {
+			traceDataStr = e.getLocalizedMessage();
 		}
 
 		final AuditLogDTO dto = new AuditLogDTO();

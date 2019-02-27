@@ -1,10 +1,5 @@
 package com.eurodyn.qlack2.webdesktop.impl;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import com.eurodyn.qlack2.fuse.aaa.api.GroupService;
 import com.eurodyn.qlack2.fuse.aaa.api.OpTemplateService;
 import com.eurodyn.qlack2.fuse.aaa.api.OperationService;
@@ -41,6 +36,11 @@ import com.eurodyn.qlack2.webdesktop.api.request.security.RequirePermittedReques
 import com.eurodyn.qlack2.webdesktop.api.request.security.UpdateSecureResourceRequest;
 import com.eurodyn.qlack2.webdesktop.impl.util.ConverterUtil;
 import com.eurodyn.qlack2.webdesktop.impl.util.DomainUtil;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 public class SecurityServiceImpl implements SecurityService {
 	private ResourceService resourceService;
@@ -322,8 +322,10 @@ public class SecurityServiceImpl implements SecurityService {
 			String requestObjectId = sreq.getResourceObjectId();
 			String operationObjectId = operation.getResource().getObjectID();
 
-			if ((operationObjectId == null && requestObjectId == null) || operationObjectId.equals(requestObjectId)) {
-				retVal.add(new SecureOperationAccessDTO(operation.getOperation().getName(), !operation.isDeny()));
+			if ((operationObjectId == null && requestObjectId == null) ||
+					Objects.equals(requestObjectId, operationObjectId)) {
+				retVal.add(
+						new SecureOperationAccessDTO(operation.getOperation().getName(), !operation.isDeny()));
 			}
 		}
 		return retVal;
