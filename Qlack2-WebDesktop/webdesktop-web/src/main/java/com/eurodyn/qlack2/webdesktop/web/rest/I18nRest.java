@@ -53,10 +53,10 @@ public class I18nRest {
 	public Map<String, String> getModuleTranslations(@PathParam("groupName") String groupName, @QueryParam("lang") String locale) {
 		GroupDTO group = groupService.getGroupByName(groupName);
 		if (group == null) {
-			LOGGER.log(Level.SEVERE, "Error retrieving translations for group " + groupName + ". The group does not exist");
+			LOGGER.log(Level.SEVERE, "Error retrieving translations for group {0}. The group does not exist",  groupName );
+			return null;
 		}
-		Map<String, String> translations = keyService.getTranslationsForGroupAndLocale(group.getId(), locale);
-		return translations;
+		return keyService.getTranslationsForGroupAndLocale(group.getId(), locale);
 	}
 
 	@GET

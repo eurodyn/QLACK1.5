@@ -14,23 +14,6 @@
  */
 package com.eurodyn.qlack2.util.fileupload.impl;
 
-import io.sensesecure.clamav4j.ClamAV;
-import io.sensesecure.clamav4j.ClamAVException;
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.eurodyn.qlack2.fuse.idm.api.IDMService;
 import com.eurodyn.qlack2.fuse.idm.api.annotations.ValidateTicket;
 import com.eurodyn.qlack2.util.fileupload.api.FileUpload;
@@ -53,6 +36,19 @@ import com.eurodyn.qlack2.util.fileupload.api.response.FileUploadResponse;
 import com.eurodyn.qlack2.util.fileupload.api.response.VirusScanResponse;
 import com.eurodyn.qlack2.util.fileupload.impl.model.DBFile;
 import com.eurodyn.qlack2.util.fileupload.impl.model.DBFilePK;
+import io.sensesecure.clamav4j.ClamAV;
+import io.sensesecure.clamav4j.ClamAVException;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import org.apache.commons.lang3.StringUtils;
 
 public class FileUploadImpl implements FileUpload {
 	private static final Logger LOGGER = Logger.getLogger(FileUploadImpl.class
@@ -171,7 +167,7 @@ public class FileUploadImpl implements FileUpload {
 		List<DBFile> results = q.getResultList();
 
 		// Check if any chunk for the requested file has been found.
-		if (results != null && results.size() == 0) {
+		if (results == null || (results != null && !results.isEmpty())) {
 			throw new QFileNotFoundException();
 		}
 
@@ -221,6 +217,7 @@ public class FileUploadImpl implements FileUpload {
 		dto.setTotalSize(randomChunk.getFileSize());
 
 		return dto;
+
 	}
 
 	@Override
