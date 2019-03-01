@@ -138,7 +138,7 @@ public class AccountingServiceImpl implements AccountingService {
                 + "WHERE s.terminatedOn IS NULL "
                 + "AND s.user.id in (:userIDs)");
         query.setParameter("userIDs", userIDs);
-        return new HashSet<String>(query.getResultList());
+        return new HashSet<>(query.getResultList());
     }
 
 
@@ -161,7 +161,7 @@ public class AccountingServiceImpl implements AccountingService {
 				attribute.setName(attributeDTO.getName());
 				attribute.setSession(Session.find(attributeDTO.getSessionId(), em));
 			}
-			if (attributeDTO.getValue() != null ){
+			if (attribute != null && attributeDTO.getValue() != null ){
 				attribute.setValue(attributeDTO.getValue());
 			}
 			em.merge(attribute);

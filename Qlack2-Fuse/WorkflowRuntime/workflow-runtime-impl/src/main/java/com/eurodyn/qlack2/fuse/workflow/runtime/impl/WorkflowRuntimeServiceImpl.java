@@ -92,8 +92,6 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
     private KieBase kbase;
     private RuntimeEnvironmentBuilder builder;
 
-    //private TaskService taskService;
-
     private String emailHost;
     private String emailPort;
     private String emailUsername;
@@ -215,7 +213,7 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 	        registerCustomWorkItemHandlers(ksession);
 	        ProcessInstance processInstance = ksession.startProcess(processId, parameters);
 			processInstanceId = processInstance.getId();
-			logger.log(Level.INFO, "startWorkflowInstance: ProcessInstanceId: " + processInstanceId);
+			logger.log(Level.INFO, "startWorkflowInstance: ProcessInstanceId: {0}", processInstanceId);
 		}
 		catch (Exception e)
 		{
@@ -252,9 +250,8 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 	        
 	        ProcessInstance processInstance = ksession.createProcessInstance(processId, parameters);
 	        // insert process
-	        //ksession.insert(processInstance);
 			processInstanceId = processInstance.getId();
-			logger.log(Level.INFO, "createWorkflowInstance: ProcessInstanceId: " + processInstanceId);			
+			logger.log(Level.INFO, "createWorkflowInstance: ProcessInstanceId: {0}", processInstanceId);
 		}
 		catch (Exception e)
 		{
@@ -286,7 +283,7 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 
 	        ProcessInstance processInstance = ksession.startProcessInstance(processInstanceId);
 			processInstanceId = processInstance.getId();
-			logger.log(Level.INFO, "startWorkflowInstance: ProcessInstanceId: " + processInstanceId);
+			logger.log(Level.INFO, "startWorkflowInstance: ProcessInstanceId: {0}", processInstanceId);
 		}
 		catch (Exception e)
 		{
@@ -309,7 +306,7 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 	public List<ProcessInstanceDesc> getProcessInstancesByProcessId(String processId)
 	{
 		List<ProcessInstanceDesc> processInstances = null;
-        Map<String, Object> params = new HashMap<String, Object>();
+        Map<String, Object> params = new HashMap<>();
         params.put("processId", processId +"%");
         processInstances = (List<ProcessInstanceDesc>) queryStringWithParameters(params, "getProcessInstancesByProcessId");
 
@@ -339,7 +336,7 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 	public List<ProcessInstanceDesc> getProcessInstancesByProcessIdList(List<String> processIds)
 	{
 		List<ProcessInstanceDesc> processInstances = null;
-        Map<String, Object> params = new HashMap<String, Object>();
+        Map<String, Object> params = new HashMap<>();
 		params.put("processIds", processIds);
 		processInstances = (List<ProcessInstanceDesc>) queryStringWithParameters(params, "getProcessInstancesByProcessIdList");
         
@@ -378,7 +375,7 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 		ProcessInstanceDesc processInstance = null;
 		if (processInstanceId != -1)
 		{
-			Map<String, Object> params = new HashMap<String, Object>();
+			Map<String, Object> params = new HashMap<>();
 		    params.put("instanceId", processInstanceId);
 		    processInstance = (ProcessInstanceDesc) queryStringWithParametersSingleResult(params, "getProcessInstanceDetailsByProcessInstanceId");
 
@@ -403,7 +400,7 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 		if (processInstanceId != -1)
 		{
 			try {
-				logger.log(Level.INFO, "Inside getVariableInstance!!!!, processInstanceId:" + processInstanceId);
+				logger.log(Level.INFO, "Inside getVariableInstance!!!!, processInstanceId:{0}", processInstanceId);
 
 				ProcessInstanceIdContext myContext = ProcessInstanceIdContext.get(processInstanceId);
 				RuntimeEngine runtimeEngine = runtimeManager.getRuntimeEngine(myContext);
@@ -454,7 +451,7 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 		Thread thread = Thread.currentThread();
 		ClassLoader loader = thread.getContextClassLoader();
 		try {
-			logger.log(Level.INFO, "Inside stopWorkflowInstance!!!!, processInstanceId:" + processInstanceId);
+			logger.log(Level.INFO, "Inside stopWorkflowInstance!!!!, processInstanceId:{0}", processInstanceId);
 			thread.setContextClassLoader(this.getClass().getClassLoader());
 
 			ProcessInstanceIdContext myContext = ProcessInstanceIdContext.get(processInstanceId);
@@ -481,7 +478,7 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 	public void deleteWorkflowInstance(Long processInstanceId) {
 		ProcessInstanceLog processInstance = null;
 		try {
-			logger.log(Level.INFO, "Inside deleteWorkflowInstance!!!!, processInstanceId:" + processInstanceId);
+			logger.log(Level.INFO, "Inside deleteWorkflowInstance!!!!, processInstanceId:{0}", processInstanceId);
 
 	        processInstance = (ProcessInstanceLog)em.createQuery("FROM ProcessInstanceLog WHERE processInstanceId = :processInstanceId").setParameter("processInstanceId", processInstanceId).getSingleResult();
 	        if (processInstance.getStatus() != ProcessInstance.STATE_COMPLETED
@@ -530,7 +527,7 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 		if (processInstanceId != -1)
 		{
 			try {
-				logger.log(Level.INFO, "Inside signalWorkflowInstance!!!!, processInstanceId:" + processInstanceId);
+				logger.log(Level.INFO, "Inside signalWorkflowInstance!!!!, processInstanceId:{0}", processInstanceId);
 				thread.setContextClassLoader(this.getClass().getClassLoader());
 				
 				ProcessInstanceIdContext myContext = ProcessInstanceIdContext.get(processInstanceId);
@@ -548,7 +545,10 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 			catch (Exception e)
 			{
 				logger.log(Level.SEVERE, "signalWorkflowInstance: Exception throws: " + e.toString());
-				audit("LOG_EVENT_SIGNAL_WORKFLOW_INSTANCE", processInstance.getProcessId(), processInstanceId.toString(), e);
+				if (processInstance != null){
+					audit("LOG_EVENT_SIGNAL_WORKFLOW_INSTANCE", processInstance.getProcessId(), processInstanceId.toString(), e);
+				}
+
 				throw new QWorkflowRuntimeException(e.toString(), e);
 			}
 			finally {
@@ -568,7 +568,7 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
             List<OrganizationalEntity> potentialOwners = task.getPeopleAssignments().getPotentialOwners();
             List<String> potOwnersList = null;
             if (potentialOwners != null) {
-            	potOwnersList = new ArrayList<String>(potentialOwners.size());
+            	potOwnersList = new ArrayList<>(potentialOwners.size());
                 for (OrganizationalEntity e : potentialOwners) {
                 	potOwnersList.add(e.getId());
                 }
@@ -595,7 +595,7 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 			for (String status : statusList)
 				queryStatusList.add(Status.valueOf(status));
 		}
-        List<TaskSummary> taskSummaries = new ArrayList<TaskSummary>();
+        List<TaskSummary> taskSummaries = new ArrayList<>();
 		List<org.kie.api.task.model.TaskSummary> myTasks = taskService.getTasksAssignedAsPotentialOwnerByStatus(userId, queryStatusList, "en-UK");
         for (org.kie.api.task.model.TaskSummary myTask : myTasks)
         {
@@ -605,7 +605,7 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 	        	 List<OrganizationalEntity> potentialOwners = task.getPeopleAssignments().getPotentialOwners();
 	             List<String> potOwnersList = null;
 	             if (potentialOwners != null) {
-	             	potOwnersList = new ArrayList<String>(potentialOwners.size());
+	             	potOwnersList = new ArrayList<>(potentialOwners.size());
 	                 for (OrganizationalEntity e : potentialOwners) {
 	                 	potOwnersList.add(e.getId());
 	                 }
@@ -627,7 +627,7 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 			for (String status : statusList)
 				queryStatusList.add(Status.valueOf(status));
 		}
-        List<TaskSummary> taskSummaries = new ArrayList<TaskSummary>();
+        List<TaskSummary> taskSummaries = new ArrayList<>();
 		List<org.kie.api.task.model.TaskSummary> myTasks = taskService.getTasksByStatusByProcessInstanceId(processInstanceId, queryStatusList, "en-UK");
         for (org.kie.api.task.model.TaskSummary myTask : myTasks)
         {
@@ -635,7 +635,7 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 	        	 List<OrganizationalEntity> potentialOwners = task.getPeopleAssignments().getPotentialOwners();
 	             List<String> potOwnersList = null;
 	             if (potentialOwners != null) {
-	             	potOwnersList = new ArrayList<String>(potentialOwners.size());
+	             	potOwnersList = new ArrayList<>(potentialOwners.size());
 	                 for (OrganizationalEntity e : potentialOwners) {
 	                 	potOwnersList.add(e.getId());
 	                 }
@@ -655,7 +655,7 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 				queryStatusList.add(Status.valueOf(status));
 		}
 		TaskService taskService = runtimeManager.getRuntimeEngine(ProcessInstanceIdContext.get()).getTaskService();
-		List<TaskSummary> taskSummaries = new ArrayList<TaskSummary>();
+		List<TaskSummary> taskSummaries = new ArrayList<>();
 		List<org.kie.api.task.model.TaskSummary> myTasks = taskService.getTasksAssignedAsPotentialOwnerByStatus(userId, queryStatusList, "en-UK");
         for (org.kie.api.task.model.TaskSummary myTask : myTasks)
         {
@@ -663,7 +663,7 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
         	 List<OrganizationalEntity> potentialOwners = task.getPeopleAssignments().getPotentialOwners();
              List<String> potOwnersList = null;
              if (potentialOwners != null) {
-             	potOwnersList = new ArrayList<String>(potentialOwners.size());
+             	potOwnersList = new ArrayList<>(potentialOwners.size());
                  for (OrganizationalEntity e : potentialOwners) {
                  	potOwnersList.add(e.getId());
                  }
@@ -689,7 +689,7 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 		if (processInstanceId != -1)
 		{
 			try {
-				logger.log(Level.INFO, "Inside acceptTask!!!!, processInstanceId:" + processInstanceId);
+				logger.log(Level.INFO, "Inside acceptTask!!!!, processInstanceId:{0}", processInstanceId);
 				thread.setContextClassLoader(this.getClass().getClassLoader());
 				
 		     	ProcessInstanceIdContext myContext = ProcessInstanceIdContext.get(processInstanceId);
@@ -720,7 +720,7 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 		if (processInstanceId != -1)
 		{
 			try {			
-				logger.log(Level.INFO, "Inside startTask!!!!, processInstanceId:" + processInstanceId);
+				logger.log(Level.INFO, "Inside startTask!!!!, processInstanceId:{0}", processInstanceId);
 				thread.setContextClassLoader(this.getClass().getClassLoader());
 				
 		     	ProcessInstanceIdContext myContext = ProcessInstanceIdContext.get(processInstanceId);
@@ -750,7 +750,7 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 		ClassLoader loader = thread.getContextClassLoader();
 		if (processInstanceId != -1) {
 			try {
-				logger.log(Level.INFO, "Inside completeTask!!!!, processInstanceId:" + processInstanceId);
+				logger.log(Level.INFO, "Inside completeTask!!!!, processInstanceId:{0}", processInstanceId);
 				thread.setContextClassLoader(this.getClass().getClassLoader());
 				
 		     	ProcessInstanceIdContext myContext = ProcessInstanceIdContext.get(processInstanceId);
@@ -774,7 +774,7 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 	
 	@Override
     public List<NodeInstanceDesc> getProcessInstanceFullHistory(Long processInstanceId) {
-    	Map<String, Object> params = new HashMap<String, Object>();
+    	Map<String, Object> params = new HashMap<>();
     	params.put("processId", processInstanceId);
         List<NodeInstanceDesc> nodeInstances = (List<NodeInstanceDesc>) queryStringWithParameters(params, "getProcessInstanceFullHistory");
         return nodeInstances;
@@ -782,7 +782,7 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 	
 	@Override
     public List<NodeInstanceDesc> getProcessInstanceActiveNodes(Long processInstanceId) {
-		Map<String, Object> params = new HashMap<String, Object>();
+		Map<String, Object> params = new HashMap<>();
     	params.put("processId", processInstanceId);
         List<NodeInstanceDesc> nodeInstances = (List<NodeInstanceDesc>) queryStringWithParameters(params, "getProcessInstanceActiveNodeInstances");
         return nodeInstances;
@@ -790,7 +790,7 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 	
 	@Override
     public String getTaskVariableValueByTaskId(Long taskId, String variableName) {
-		Map<String, Object> params = new HashMap<String, Object>();
+		Map<String, Object> params = new HashMap<>();
     	params.put("taskId", taskId);
     	params.put("variableName", variableName);
     	List<String> variableValue = (List<String>) queryStringWithParameters(params, "getTaskVariableValuebyTaskId");
@@ -798,7 +798,7 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
     }
 	
 	private Date getTaskEventCompletionbyTaskId(Long taskId) {
-		Map<String, Object> params = new HashMap<String, Object>();
+		Map<String, Object> params = new HashMap<>();
     	params.put("taskId", taskId);
     	List<Date> value = (List<Date>) queryStringWithParameters(params, "getTaskEventCompletionbyTaskId");
         return value.size() > 0 ? value.get(0) : null;
@@ -820,21 +820,12 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 		 }
     }
 
-//	protected KieBase createKnowledgeBase(Map<String, ResourceType> resources) {
-//	      RuntimeEnvironmentBuilder builder = null;
-//	      for (Map.Entry<String, ResourceType> entry : resources.entrySet()) {
-//					builder.addAsset(ResourceFactory.newClassPathResource(entry.getKey()), entry.getValue());
-//				}
-//	      environment = builder.get();
-//	      return environment.getKieBase();
-//	}
-
 	private void checkRestartWorkflowInstancesInDB()
 	{
 		new Thread(() -> {
 			try {
 				List<ProcessInstanceDesc> processInstances = null;
-				Map<String, Object> params = new HashMap<String, Object>();
+				Map<String, Object> params = new HashMap<>();
 				List<Integer> states = new ArrayList();
 				states.add(ProcessInstance.STATE_ACTIVE);
 				params.put("states", states);
@@ -905,7 +896,7 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 
 			if (myContent == null)
 			{
-				logger.log(Level.INFO, "Saving content of processId: " + processId);
+				logger.log(Level.INFO, "Saving content of processId: {0}" , processId);
 				myContent = new ProcessContent();
 				myContent.setId(processId);
 				myContent.setContent(content);
@@ -917,21 +908,21 @@ public class WorkflowRuntimeServiceImpl implements WorkflowRuntimeService {
 				//check MD5
 				if (myContent.getChecksum().equals(checksum))
 					logger.log(Level.INFO, "Ignoring content to be saved, because the content is unchanged since the last time it was processed");
-				else
-				{
-					logger.log(Level.INFO, "The content of processId: " + processId + " is different");
-					//RuntimeEngine runtime = runtimeManager.getRuntimeEngine(EmptyContext.get());
-					//AuditService logService = runtime.getAuditLogService();
-					//if (logService.findActiveProcessInstances(processId).size() > 0)
+				else {
+					logger.log(Level.INFO, "The content of processId: {0} is different", processId);
 					List<ProcessInstanceDesc> processInstances = null;
-			        Map<String, Object> params = new HashMap<String, Object>();
-			        List<Integer> states = new ArrayList();
-			        states.add(ProcessInstance.STATE_ACTIVE);
-			        params.put("states", states);
-			        params.put("processId", processId);
+					Map<String, Object> params = new HashMap<>();
+					List<Integer> states = new ArrayList();
+					states.add(ProcessInstance.STATE_ACTIVE);
+					params.put("states", states);
+					params.put("processId", processId);
 
-			        if (((List<ProcessInstanceDesc>)queryStringWithParameters(params, "getProcessInstancesByProcessIdAndStatus")).size() > 0)
-						throw new Exception("Cannot update content of processId: " + processId + " because there are active process instances.");
+					if (((List<ProcessInstanceDesc>) queryStringWithParameters(params,
+							"getProcessInstancesByProcessIdAndStatus")).size() > 0) {
+						throw new Exception("Cannot update content of processId: " + processId
+								+ " because there are active process instances.");
+					}
+
 					myContent.setContent(content);
 					myContent.setChecksum(checksum);
 					em.merge(myContent);

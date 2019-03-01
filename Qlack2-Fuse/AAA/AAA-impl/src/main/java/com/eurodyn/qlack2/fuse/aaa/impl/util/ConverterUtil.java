@@ -86,7 +86,7 @@ public class ConverterUtil {
 			return null;
 		}
 
-		Set<UserAttributeDTO> dtos = new HashSet<UserAttributeDTO>();
+		Set<UserAttributeDTO> dtos = new HashSet<>();
 		for (UserAttribute entity : entities) {
 			UserAttributeDTO dto = userAttributeToUserAttributeDTO(entity, userId);
 			dtos.add(dto);
@@ -186,7 +186,7 @@ public class ConverterUtil {
 	    if (entities == null) {
 	        return null;
 	    }
-	    Set<SessionAttributeDTO> dtos = new HashSet<SessionAttributeDTO>();
+	    Set<SessionAttributeDTO> dtos = new HashSet<>();
 	    for (SessionAttribute attribute : entities) {
 	        dtos.add(sessionAttributeToSessionAttributeDTO(attribute));
 	    }
@@ -304,7 +304,9 @@ public class ConverterUtil {
 			GroupDTO parent = groupIndex.get(group.getParent().getId());
 			if (parent == null) {
 				parent = groupToGroupDTO(group.getParent(), false);
-				groupIndex.put(parent.getId(), parent);
+				if (parent != null ){
+					groupIndex.put(parent.getId(), parent);
+				}
 			}
 			dto.setParent(parent);
 		}
