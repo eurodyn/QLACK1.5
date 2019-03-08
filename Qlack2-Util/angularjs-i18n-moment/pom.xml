@@ -3,7 +3,7 @@
   <parent>
     <groupId>com.eurodyn.qlack2.util</groupId>
     <artifactId>util</artifactId>
-    <version>1.6.7</version>
+    <version>1.7.0</version>
   </parent>
   <artifactId>angularjs-i18n-moment</artifactId>
   
