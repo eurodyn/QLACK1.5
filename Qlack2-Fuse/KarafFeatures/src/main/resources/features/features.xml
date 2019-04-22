@@ -16,7 +16,7 @@ a single line, Karaf fails to restart.
 		<bundle>mvn:joda-time/joda-time/${joda.version}</bundle>
 		<bundle>mvn:org.apache.commons/commons-lang3/${commons.lang3.version}</bundle>
 		<bundle>mvn:commons-collections/commons-collections/${commons.collections.version}</bundle>
-		<bundle>wrap:mvn:org.beanshell/bsh/${beanshell.version}</bundle>
+		<bundle>wrap:mvn:org.apache-extras.beanshell/bsh/${beanshell.version}</bundle>
 		<bundle>mvn:org.yaml/snakeyaml/${snakeyaml.version}</bundle>
 		<bundle>mvn:com.eurodyn.qlack2.fuse/AAA-api/${project.version}</bundle>
 		<bundle>mvn:com.eurodyn.qlack2.fuse/AAA-impl/${project.version}/jar/${bundle.classifier}</bundle>

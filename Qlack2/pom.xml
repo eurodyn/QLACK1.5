@@ -60,7 +60,7 @@
 		<aspectj.springsource.version>1.8.5.RELEASE</aspectj.springsource.version> <!-- old - should be removed -->
 		<aspectj.servicemix.version>1.8.5_1</aspectj.servicemix.version>
 		
-		<beanshell.version>2.0b5</beanshell.version>
+		<beanshell.version>2.0b6</beanshell.version>
 		<cometd.version>2.6.0</cometd.version>
 		<commons.beanutils.version>1.9.3</commons.beanutils.version>
 		<commons.codec.version>1.8</commons.codec.version>
@@ -84,7 +84,7 @@
 		<!-- Webjar versions -->
 		<angular.translate.version>2.1.0-1</angular.translate.version>
 		<clamav4j.version>0.5</clamav4j.version>
-		<bouncycastle.version>1.59</bouncycastle.version>
+		<bouncycastle.version>1.61</bouncycastle.version>
 	</properties>
 
 	<repositories>
