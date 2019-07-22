@@ -5,6 +5,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -408,7 +409,7 @@ public class RulesRuntimeServiceImpl implements RulesRuntimeService {
 
 	@Override
 	public String insertFact(String runtimeId, byte[] fact) {
-		List<byte[]> facts = Arrays.asList(fact);
+		List<byte[]> facts = Collections.singletonList(fact);
 		List<String> factIds = insertFacts(runtimeId, facts);
 		return factIds.get(0);
 	}

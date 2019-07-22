@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.eurodyn.qlack2</groupId>
 		<artifactId>qlack2</artifactId>
-		<version>1.4.1</version>
+		<version>1.4.2</version>
 		<relativePath>../Qlack2</relativePath>
 	</parent>
 
@@ -15,8 +15,8 @@
 	<packaging>pom</packaging>
 
 	<properties>
-		<qlack2.common.version>1.4.1</qlack2.common.version>
-		<qlack2.fuse.version>1.6.1</qlack2.fuse.version>
+		<qlack2.common.version>1.4.2</qlack2.common.version>
+		<qlack2.fuse.version>1.6.2</qlack2.fuse.version>
 		<qlack2.util.version>1.7.0</qlack2.util.version>
 		<qlack2.webdesktop.version>1.3.0</qlack2.webdesktop.version>
 		<qlack2.webdesktop.apps.version>1.3.0</qlack2.webdesktop.apps.version>
