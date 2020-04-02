@@ -85,6 +85,11 @@
 		<angular.translate.version>2.1.0-1</angular.translate.version>
 		<clamav4j.version>0.5</clamav4j.version>
 		<bouncycastle.version>1.61</bouncycastle.version>
+
+		<version.sonar>3.7.0.1746</version.sonar>
+		<version.dependency-check-maven>5.3.0</version.dependency-check-maven>
+		<sonar.dependencyCheck.reportPath>target/dependency-check-report.xml</sonar.dependencyCheck.reportPath>
+		<sonar.dependencyCheck.htmlReportPath>target/dependency-check-report.html</sonar.dependencyCheck.htmlReportPath>
 	</properties>
 
 	<repositories>
@@ -231,6 +236,26 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-install-plugin</artifactId>
 					<version>2.5.2</version>
+				</plugin>
+				<plugin>
+					<groupId>org.sonarsource.scanner.maven</groupId>
+					<artifactId>sonar-maven-plugin</artifactId>
+					<version>${version.sonar}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.owasp</groupId>
+					<artifactId>dependency-check-maven</artifactId>
+					<version>${version.dependency-check-maven}</version>
+					<configuration>
+						<format>ALL</format>
+						<suppressionFiles>
+							<suppressionFile>
+								https://raw.githubusercontent.com/eurodyn/Qlack2/master/owasp-suppression.xml
+							</suppressionFile>
+							<suppressionFile>owasp-suppression.xml</suppressionFile>
+						</suppressionFiles>
+						<failOnError>false</failOnError>
+					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>
