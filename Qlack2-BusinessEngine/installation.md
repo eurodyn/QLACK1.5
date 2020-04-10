@@ -3,7 +3,7 @@
 ## Prerequisites
 
 * JDK 1.8.x
-* Karaf 3.0.2
+* Karaf 3.0.2   the karaf installation can be found [here](https://archive.apache.org/dist/karaf/3.0.2/)
 * MySQL 5.7.10
 
 
@@ -21,7 +21,7 @@ in settings.xml add  the following profile
       <liquibase.driver>com.mysql.jdbc.Driver</liquibase.driver>
       <liquibase.url>jdbc:mysql://localhost/qbe?useUnicode=true&amp;characterEncoding=UTF-8&amp;characterSetResults=utf8&amp;connectionCollation=utf8_general_ci</liquibase.url>
       <liquibase.username>root</liquibase.username>
-      <liquibase.password>ioannis</liquibase.password>
+      <liquibase.password>password</liquibase.password>
     </properties>
 </profile>
 ```
@@ -62,7 +62,7 @@ At your local karaf folder navigate to the ..\apache-karaf-3.0.2\etc
 ` start datasource-generic`<br>
 `feature:install qlack-qbe`
 
-## Creating a defaut user
+## Creating a defauLt user
 
 The ESCP users database comes empty, so you need a default user to login with.
 Go to your Karaf console and execute:
