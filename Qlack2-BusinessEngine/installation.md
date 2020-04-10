@@ -36,30 +36,30 @@ Go to terminal navigate to the ..\QLACK1.5\Qlack2 and execute the following comm
 
 ### Install QBE Karaf features
 
-`feature:repo-add cxf 2.7.18`
-`feature:repo-add mvn:com.eurodyn.qlack2.util/util-karaf-features/1.7.0/xml/features`
-`feature:repo-add mvn:com.eurodyn.qlack2.webdesktop/webdesktop-karaf-features/1.3.0/xml/features`
-`feature:repo-add mvn:com.eurodyn.qlack2.webdesktop.apps/webdesktop-apps-karaf-features/1.3.0/xml/features`
-`feature:repo-add mvn:com.eurodyn.qlack2.common/common-karaf-features/1.4.2/xml/features`
-`feature:repo-add mvn:com.eurodyn.qlack2.util/repack-karaf-features/1.7.0/xml/features`
-`feature:repo-add mvn:com.eurodyn.qlack2.fuse/fuse-karaf-features/1.6.2/xml/features`
-`feature:repo-add mvn:com.eurodyn.qlack2.be/be-karaf-features/1.3.0/xml/features`
-`feature:install qlack-util-datasource-mysql-xa`
-`feature:install hibernate/4.2.15.Final`
+`feature:repo-add cxf 2.7.18` <br>
+`feature:repo-add mvn:com.eurodyn.qlack2.util/util-karaf-features/1.7.0/xml/features`<br> 
+`feature:repo-add mvn:com.eurodyn.qlack2.webdesktop/webdesktop-karaf-features/1.3.0/xml/features`<br>
+`feature:repo-add mvn:com.eurodyn.qlack2.webdesktop.apps/webdesktop-apps-karaf-features/1.3.0/xml/features`<br>
+`feature:repo-add mvn:com.eurodyn.qlack2.common/common-karaf-features/1.4.2/xml/features`<br>
+`feature:repo-add mvn:com.eurodyn.qlack2.util/repack-karaf-features/1.7.0/xml/features`<br>
+`feature:repo-add mvn:com.eurodyn.qlack2.fuse/fuse-karaf-features/1.6.2/xml/features`<br>
+`feature:repo-add mvn:com.eurodyn.qlack2.be/be-karaf-features/1.3.0/xml/features`<br>
+`feature:install qlack-util-datasource-mysql-xa`<br>
+`feature:install hibernate/4.2.15.Final`<br>
 ### Configure the QBE datasource
 At your local karaf folder navigate to the ..\apache-karaf-3.0.2\etc
 
 * Open  the com.eurodyn.qlack2.util.datasourcegeneric.cfg file and update your database credentials 
 * create a new file with name org.apache.cxf.osgi.cfg and add the following content:
 
-`org.apache.cxf.servlet.context = /api`
-`org.apache.cxf.servlet.service-list-path = /myservices`
-`org.apache.cxf.servlet.hide-service-list-page = false`
+`org.apache.cxf.servlet.context = /api`<br>
+`org.apache.cxf.servlet.service-list-path = /myservices`<br>
+`org.apache.cxf.servlet.hide-service-list-page = false`<br>
 
 ### Install the qlack-qbe feature
  Go to your Karaf console and execute: 
- `
- start datasource-generic`
+ 
+` start datasource-generic`<br>
 `feature:install qlack-qbe`
 
 ## Creating a defaut user
