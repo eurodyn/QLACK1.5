@@ -8,7 +8,6 @@ a single line, Karaf 3.0.0 fails to restart.
 	name="QLACK-QBE">
 
 	<feature description="Qlack Business Engine" name="qlack-qbe" version="${project.version}">
-		<feature version="${cxf.dosgi.version}">cxf-dosgi-core</feature>
 		<feature version="${qlack2.util.version}">qlack2-util-cxf-util</feature>
 		<feature version="${qlack2.webdesktop.version}">qlack-webdesktop</feature>
 		<feature version="${qlack2.webdesktop.apps.version}">qlack-webdesktop-appmanagement</feature>
