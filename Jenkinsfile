@@ -13,6 +13,7 @@ pipeline{
     	stage('Build') {
             steps {
                 sh 'mvn -f Qlack2/pom.xml clean install'
+                sh 'mvn -f Qlack2/pom.xml clean install -Dliquibase.driver.groupId=mysql -Dliquibase.driver.artifactId=mysql-connector-java -Dliquibase.driver.version=5.1.29 -Dcontainer=jboss'
             }
         }
         stage('Dependencies Check') {
