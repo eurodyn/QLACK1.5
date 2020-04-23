@@ -14,7 +14,8 @@
 
 	<properties>
 		<spifly.version>1.0.2</spifly.version>
-		
+    <apache.httpcore.version>4.4.6</apache.httpcore.version>
+    <apache.httpclient.version>4.5.6</apache.httpclient.version>
 	</properties>
 
 	<build>
@@ -229,6 +230,23 @@
 									<overWrite>false</overWrite>
 									<outputDirectory>${project.build.directory}/</outputDirectory>
 								</artifactItem>
+               <!-- http-client-->
+                <artifactItem>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${apache.httpclient.version}</version>
+                <type>jar</type>
+                <overWrite>false</overWrite>
+                <outputDirectory>${project.build.directory}/</outputDirectory>
+              </artifactItem>
+                <artifactItem>
+                  <groupId>org.apache.httpcomponents</groupId>
+                  <artifactId>httpcore</artifactId>
+                  <version>${apache.httpcore.version}</version>
+                  <type>jar</type>
+                  <overWrite>false</overWrite>
+                  <outputDirectory>${project.build.directory}/</outputDirectory>
+                </artifactItem>
 							</artifactItems>
 						</configuration>
 					</execution>
@@ -359,6 +377,15 @@
 								<unzip
 									src="${basedir}/target/jbpm-services-api-${jbpm.version}.jar"
 									dest="${basedir}/target/jbpm" />
+                <echo message="Extracting http-client" />
+                <unzip
+                  src="${basedir}/target/httpclient-${apache.httpclient.version}.jar"
+                  dest="${basedir}/target/jbpm" />
+
+                <echo message="Extracting http-client-core" />
+                <unzip
+                  src="${basedir}/target/httpcore-${apache.httpcore.version}.jar"
+                  dest="${basedir}/target/jbpm" />
 
 								<echo message="Deleting old manifest" />
 								<delete file="${basedir}/target/jbpm/META-INF/MANIFEST.MF" />

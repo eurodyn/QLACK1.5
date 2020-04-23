@@ -639,7 +639,7 @@ public class RuntimeServiceImpl implements RuntimeService{
 						+ "CASE PROC.STATUS WHEN 0 THEN 'Pending'" + "WHEN 1 THEN 'Active' "
 						+ "WHEN 2 THEN 'Completed' " + "WHEN 3 THEN 'Aborted'" + "WHEN 4 THEN 'Suspended' "
 						+ "ELSE 'Invalid state' " + "END STATUSTEXT "
-						+ "FROM JBPM_PROCESSINSTANCELOG PROC JOIN WFL_WORKFLOW_VERSION WV ON PROC.PROCESSID=WV.PROCESSID JOIN WFL_WORKFLOW W ON W.ID = WV.WORKFLOW "
+						+ "FROM jbpm_ProcessInstanceLog PROC JOIN wfl_workflow_version WV ON PROC.PROCESSID=WV.PROCESSID JOIN wfl_workflow W ON W.ID = WV.WORKFLOW "
 						+ "where W.PROJECT_ID = :projectId AND PROC.STATUS != 2");
 		query.setParameter("projectId", projectId);
 

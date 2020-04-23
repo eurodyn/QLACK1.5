@@ -248,7 +248,7 @@ public class WorkflowVersion implements Serializable {
 	
 	public static String findLatestFinalizedWorkflowVersionByWorkflowId(EntityManager em,String workflowId) {
 		Query query = em.createNativeQuery("SELECT id FROM (SELECT v.id FROM WFL_WORKFLOW_VERSION v "
-						+ "JOIN WFL_WORKFLOW w on w.id = v.WORKFLOW WHERE w.id = :workflowId AND v.state = 1 order by v.last_modified_on desc) WHERE rownum = 1");
+						+ "JOIN wfl_workflow w on w.id = v.WORKFLOW WHERE w.id = :workflowId AND v.state = 1 order by v.last_modified_on desc) WHERE rownum = 1");
 
 		query.setParameter("workflowId", workflowId);
 

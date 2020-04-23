@@ -4,7 +4,7 @@ databaseChangeLog:
       author: European Dynamics SA (eleni.giannakopoulou@eurodyn.com)
       changes:
         - createTable:
-            tableName: jbpm_processcontent
+            tableName: jbpm_ProcessContent
             columns:
               - column:
                   name: processId
