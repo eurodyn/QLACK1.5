@@ -61,6 +61,7 @@ At your local karaf folder navigate to the ..\apache-karaf-3.0.2\etc
  
 ` start datasource-generic`<br>
 `feature:install qlack-qbe`
+`bundle:install mvn:com.eurodyn.qlack2.util/hibernate-core-kie/1.7.0`
 
 ## Creating a defauLt user
 
