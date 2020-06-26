@@ -28,6 +28,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.mail.internet.MimeUtility;
 import javax.mail.util.ByteArrayDataSource;
 
 import org.apache.commons.lang3.StringUtils;
@@ -205,7 +206,7 @@ public class MailQueueSender {
 						MimeBodyPart attachment = new MimeBodyPart();
 						attachment.setDataHandler(new DataHandler(
 								mimePartDataSource));
-						attachment.setFileName(filename);
+						attachment.setFileName(MimeUtility.encodeText(filename,"UTF-8","Q"));
 						multipart.addBodyPart(attachment);
 					}
 				}
