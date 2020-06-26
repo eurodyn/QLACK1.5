@@ -167,7 +167,7 @@ public class FileUploadImpl implements FileUpload {
 		List<DBFile> results = q.getResultList();
 
 		// Check if any chunk for the requested file has been found.
-		if (results == null || (results != null && !results.isEmpty())) {
+		if (results.isEmpty()) {
 			throw new QFileNotFoundException();
 		}
 
@@ -239,17 +239,14 @@ public class FileUploadImpl implements FileUpload {
 		String scanResult = null;
 		try {
 			scanResult = clamAV.scan(new ByteArrayInputStream(fileDTO.getFileData()));
-		} catch (IOException e) {
-			LOGGER.log(Level.SEVERE, "Could not check file for virus, file ID=" + req.getId(), e);
-			throw new QVirusScanException("Could not check file for virus, file ID=" + req.getId());
-		} catch (ClamAVException e) {
+		} catch (IOException | ClamAVException e) {
 			LOGGER.log(Level.SEVERE, "Could not check file for virus, file ID=" + req.getId(), e);
 			throw new QVirusScanException("Could not check file for virus, file ID=" + req.getId());
 		}
 
 		VirusScanResponse res = new VirusScanResponse();
 		res.setId(req.getId());
-		res.setVirusFree(scanResult.equals("OK") ? true : false);
+		res.setVirusFree(scanResult.equals("OK"));
 		res.setVirusScanDescription(scanResult);
 
 		return res;
