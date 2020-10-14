@@ -3,7 +3,7 @@
   <parent>
     <groupId>com.eurodyn.qlack2.fuse</groupId>
     <artifactId>fuse</artifactId>
-    <version>1.6.2</version>
+    <version>1.6.3</version>
     <relativePath>../</relativePath>
   </parent>
   <artifactId>search</artifactId>
