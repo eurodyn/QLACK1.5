@@ -224,4 +224,15 @@ public interface FormVersionsService {
 	List<Integer> getConditionTypes(EmptySignedRequest request)
 			throws QInvalidTicketException;
 
+	/**
+	 * Retrieves previous (chronological) finalized version
+	 *
+	 * @param qSignedRequest the q signed request
+	 * @return previous finalized form version id by name and Version Name
+	 * @throws QInvalidTicketException the q invalid ticket exception
+	 * @throws QAuthorisationException the q authorisation exception
+	 */
+	String getPreviousFinalizedFormVersionIdByFormIdAndVersionName(GetFormVersionIdByNameRequest qSignedRequest)
+			throws QInvalidTicketException, QAuthorisationException;
+
 }

@@ -110,6 +110,18 @@ public class FormVersion implements Serializable {
 		return result == null ? null : result;
 	}
 
+	public static String getPreviousFinalizedFormVersionIdByFormIdAndVersion(EntityManager em,
+			String formId, String versionName) {
+		Query query = em
+				.createNativeQuery("select name from (Select fv.name FROM fmn_form_version fv where fv.state = 1 and fv.form = :formId and fv.name = :versionName fv.last_modified_on < "
+						+ "(SELECT v.last_modified_on FROM fmn_form_version v where v.state = 1 and v.form = :formId and v.name = :versionName ) order by fv.last_modified_on desc ) where rownum = 1");
+		query.setParameter("formId", formId);
+		query.setParameter("versionName", formId);
+
+		String result = (String) query.getSingleResult();
+		return result == null ? null : result;
+	}
+
 	public static Long countFormVersionsLockedByOtherUser(EntityManager em,
 			String formId, String user) {
 		Query query = em

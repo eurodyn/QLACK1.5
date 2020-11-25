@@ -1,5 +1,7 @@
 package com.eurodyn.qlack2.be.forms.impl;
 
+import com.eurodyn.qlack2.fuse.idm.api.exception.QAuthorisationException;
+import com.eurodyn.qlack2.fuse.idm.api.exception.QInvalidTicketException;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -1234,6 +1236,21 @@ public class FormVersionsServiceImpl implements FormVersionsService {
 		}
 
 		return conditionTypes;
+	}
+
+	@Override
+	@ValidateTicket
+	public String getPreviousFinalizedFormVersionIdByFormIdAndVersionName(
+			GetFormVersionIdByNameRequest request)
+			throws QInvalidTicketException, QAuthorisationException {
+		LOGGER.log(
+				Level.FINE,
+				"Getting previous finalized form version for form with ID {0} and Form Version Name {1}",
+				new String[] { request.getFormId(), request.getFormVersionName() });
+
+		request.setFormVersionName(FormVersion.getPreviousFinalizedFormVersionIdByFormIdAndVersion(em, request.getFormId(), request.getFormVersionName()));
+
+		return getFormVersionIdByName(request);
 	}
 
 	private void publishEvent(SignedTicket signedTicket, String event,
