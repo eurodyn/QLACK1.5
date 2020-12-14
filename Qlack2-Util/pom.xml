@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.eurodyn.qlack2</groupId>
 		<artifactId>qlack2</artifactId>
-		<version>1.4.3</version>
+		<version>1.4.4</version>
 		<relativePath>../Qlack2</relativePath>
 	</parent>
 
@@ -16,7 +16,7 @@
 	
 	<properties>
 		<qlack2.fuse.version>1.6.3</qlack2.fuse.version>
-		<qlack2.common.version>1.4.3</qlack2.common.version>
+		<qlack2.common.version>1.4.4</qlack2.common.version>
 		<hibernate.validator.version>4.3.2.Final</hibernate.validator.version>
 		<javax.el.version>2.2.4</javax.el.version>
 		<validation-api.version>1.0.0.GA</validation-api.version>
