@@ -16,11 +16,6 @@ pipeline{
                 sh 'mvn -f Qlack2/pom.xml clean install -Dliquibase.driver.groupId=mysql -Dliquibase.driver.artifactId=mysql-connector-java -Dliquibase.driver.version=5.1.29 -Dcontainer=jboss'
             }
         }
-        stage('Dependencies Check') {
-            steps {
-                sh 'mvn -f Qlack2/pom.xml org.owasp:dependency-check-maven:aggregate'
-            }
-        }
         stage('Sonar Analysis') {
             steps {
                 withSonarQubeEnv('sonar'){
@@ -56,6 +51,5 @@ pipeline{
                             body: '$DEFAULT_CONTENT',
                             to: 'qlack@eurodyn.com'
          }
-
     }
 }
