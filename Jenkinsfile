@@ -15,11 +15,6 @@ pipeline{
                 sh 'mvn -f Qlack2/pom.xml clean install'
             }
         }
-        stage('Dependencies Check') {
-            steps {
-                sh 'mvn -f Qlack2/pom.xml org.owasp:dependency-check-maven:aggregate'
-            }
-        }
         stage('Sonar Analysis') {
             steps {
                 sh 'mvn -f Qlack2/pom.xml sonar:sonar -Dsonar.projectName=QLACK1.5 -Dsonar.host.url=${SONAR_HOST_URL} -Dsonar.login=${SONAR_KEY_QLACK1_5}'
