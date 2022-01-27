@@ -33,7 +33,7 @@ pipeline{
                 sh '''
                     cat > payload.json <<__HERE__
                     {
-                        "project": "26777f12-1128-4601-a026-93c7c2ea5948",
+                        "project": "7a1b3e8b-b31f-494e-b31f-c2f1e02224d6",
                         "bom": "$(cat Qlack2/target/bom.xml |base64 -w 0 -)"
                     }
                     __HERE__
