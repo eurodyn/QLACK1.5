@@ -5,14 +5,14 @@ pipeline{
               apiVersion: v1
               kind: Pod
               metadata:
-                name: qlack1.5
+                name: qlack15
                 namespace: jenkins
               spec:
                 securityContext:
                     runAsUser: 0
                     runAsGroup: 0
                 containers:
-                - name: qlack1.5-builder
+                - name: qlack15-builder
                   image: eddevopsd2/maven-java-npm-docker:mvn3.6.3-jdk8-npm6.14.4-docker
                   volumeMounts:
                   - name: maven
@@ -40,7 +40,7 @@ pipeline{
     stages{
     	stage('Build') {
             steps {
-                container (name: 'qlack1.5-builder'){
+                container (name: 'qlack15-builder'){
                     sh 'mvn -f Qlack2/pom.xml clean install'
                     sh 'mvn -f Qlack2/pom.xml clean install -Dliquibase.driver.groupId=mysql -Dliquibase.driver.artifactId=mysql-connector-java -Dliquibase.driver.version=5.1.29 -Dcontainer=jboss'
                 }
@@ -48,7 +48,7 @@ pipeline{
         }
         stage('Sonar Analysis') {
             steps {
-                container (name: 'qlack1.5-builder'){
+                container (name: 'qlack15-builder'){
                     withSonarQubeEnv('sonar'){
                         sh 'update-alternatives --set java /usr/lib/jvm/java-11-openjdk-amd64/bin/java'
                         sh 'mvn -f Qlack2/pom.xml sonar:sonar -Dsonar.projectName=QLACK1.5 -Dsonar.host.url=${SONAR_HOST_URL} -Dsonar.login=${SONAR_GLOBAL_KEY}'
@@ -58,14 +58,14 @@ pipeline{
         }
         stage('Produce bom.xml'){
             steps{
-                container (name: 'qlack1.5-builder'){
+                container (name: 'qlack15-builder'){
                     sh 'mvn -f Qlack2/pom.xml org.cyclonedx:cyclonedx-maven-plugin:makeAggregateBom'
                 }
             }
         }
         stage('Dependency-Track Analysis'){
             steps{
-                container (name: 'qlack1.5-builder'){
+                container (name: 'qlack15-builder'){
                     sh '''
                         cat > payload.json <<__HERE__
                         {
