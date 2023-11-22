@@ -74,7 +74,7 @@
 		<javassist.version>3.18.2-GA</javassist.version>
 		<jbpm.version>6.4.0.Final</jbpm.version>
 		<joda.version>2.2</joda.version>
-		<quartz.version>2.2.1</quartz.version>
+		<quartz.version>2.3.2</quartz.version>
 		<snakeyaml.version>1.12</snakeyaml.version>
 		<!-- Testing dependencies versions -->
 		<junit.version>4.8.1</junit.version>
