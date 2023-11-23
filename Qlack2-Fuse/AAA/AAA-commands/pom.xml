@@ -35,6 +35,10 @@
 					<groupId>org.apache.mina</groupId>
 					<artifactId>mina-core</artifactId>
 				</exclusion>
+				<exclusion>
+					<groupId>org.apache.sshd</groupId>
+					<artifactId>sshd-core</artifactId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 	</dependencies>

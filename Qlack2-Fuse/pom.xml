@@ -16,7 +16,6 @@
 	
 	<properties>
 		<qlack2.common.version>1.4.4</qlack2.common.version>
-		<elasticsearch.version>0.90.5</elasticsearch.version>
 		<freemarker.version>2.3.20</freemarker.version>
 		<geronimo.javamail.version>1.7.1</geronimo.javamail.version>
 		<ical4j.version>1.0.2</ical4j.version>

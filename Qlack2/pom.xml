@@ -53,7 +53,7 @@
 		<javax.ws.rs.version>1.1.1</javax.ws.rs.version>
 		<jersey.version>1.17.1</jersey.version>
 		<!--  Utility libraries -->
-		<apache.poi.version>3.9</apache.poi.version>
+		<apache.poi.version>3.17</apache.poi.version>
 		<apache.poi.servicemix.version>3.9_2</apache.poi.servicemix.version>
 		<asm.version>4.1</asm.version>
 		<aspectj.version>1.8.5</aspectj.version>
@@ -67,7 +67,7 @@
 		<commons.collections.version>3.2.2</commons.collections.version>
 		<commons.dbcp.version>1.4</commons.dbcp.version>
 		<commons.dbcp.servicemix.version>1.4_3</commons.dbcp.servicemix.version>
-		<commons.io.version>2.4</commons.io.version>
+		<commons.io.version>2.15.0</commons.io.version>
 		<commons.lang3.version>3.5</commons.lang3.version>
 		<commons.lang.version>2.6</commons.lang.version>
 		<commons.pool.version>1.5.4</commons.pool.version>
