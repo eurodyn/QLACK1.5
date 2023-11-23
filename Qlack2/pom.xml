@@ -62,7 +62,7 @@
 		
 		<beanshell.version>2.0b6</beanshell.version>
 		<cometd.version>2.6.0</cometd.version>
-		<commons.beanutils.version>1.9.3</commons.beanutils.version>
+		<commons.beanutils.version>1.9.4</commons.beanutils.version>
 		<commons.codec.version>1.8</commons.codec.version>
 		<commons.collections.version>3.2.2</commons.collections.version>
 		<commons.dbcp.version>1.4</commons.dbcp.version>
