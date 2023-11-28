@@ -5,13 +5,13 @@
 	<parent>
 		<groupId>com.eurodyn.qlack2</groupId>
 		<artifactId>qlack2</artifactId>
-		<version>1.4.4</version>
+		<version>1.4.5</version>
 		<relativePath>../</relativePath>
 	</parent>
 
 	<groupId>com.eurodyn.qlack2.common</groupId>
 	<artifactId>common</artifactId>
-	<version>1.4.4</version>
+	<version>1.4.5</version>
 	<packaging>pom</packaging>
 
 	<modules>
