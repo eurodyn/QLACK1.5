@@ -53,7 +53,7 @@
 		<javax.ws.rs.version>1.1.1</javax.ws.rs.version>
 		<jersey.version>1.17.1</jersey.version>
 		<!--  Utility libraries -->
-		<apache.poi.version>3.17</apache.poi.version>
+		<apache.poi.version>3.9</apache.poi.version>
 		<apache.poi.servicemix.version>3.9_2</apache.poi.servicemix.version>
 		<asm.version>4.1</asm.version>
 		<aspectj.version>1.8.5</aspectj.version>
@@ -62,19 +62,19 @@
 		
 		<beanshell.version>2.0b6</beanshell.version>
 		<cometd.version>2.6.0</cometd.version>
-		<commons.beanutils.version>1.9.4</commons.beanutils.version>
+		<commons.beanutils.version>1.9.3</commons.beanutils.version>
 		<commons.codec.version>1.8</commons.codec.version>
 		<commons.collections.version>3.2.2</commons.collections.version>
 		<commons.dbcp.version>1.4</commons.dbcp.version>
 		<commons.dbcp.servicemix.version>1.4_3</commons.dbcp.servicemix.version>
-		<commons.io.version>2.15.0</commons.io.version>
+		<commons.io.version>2.4</commons.io.version>
 		<commons.lang3.version>3.5</commons.lang3.version>
 		<commons.lang.version>2.6</commons.lang.version>
 		<commons.pool.version>1.5.4</commons.pool.version>
 		<javassist.version>3.18.2-GA</javassist.version>
 		<jbpm.version>6.4.0.Final</jbpm.version>
 		<joda.version>2.2</joda.version>
-		<quartz.version>2.3.2</quartz.version>
+		<quartz.version>2.2.1</quartz.version>
 		<snakeyaml.version>1.12</snakeyaml.version>
 		<!-- Testing dependencies versions -->
 		<junit.version>4.8.1</junit.version>
@@ -87,6 +87,9 @@
 		<bouncycastle.version>1.61</bouncycastle.version>
 
 		<version.sonar>3.7.0.1746</version.sonar>
+		<version.dependency-check-maven>5.3.0</version.dependency-check-maven>
+		<sonar.dependencyCheck.reportPath>target/dependency-check-report.xml</sonar.dependencyCheck.reportPath>
+		<sonar.dependencyCheck.htmlReportPath>target/dependency-check-report.html</sonar.dependencyCheck.htmlReportPath>
 	</properties>
 
 	<repositories>
@@ -238,6 +241,21 @@
 					<groupId>org.sonarsource.scanner.maven</groupId>
 					<artifactId>sonar-maven-plugin</artifactId>
 					<version>${version.sonar}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.owasp</groupId>
+					<artifactId>dependency-check-maven</artifactId>
+					<version>${version.dependency-check-maven}</version>
+					<configuration>
+						<format>ALL</format>
+						<suppressionFiles>
+							<suppressionFile>
+								https://raw.githubusercontent.com/eurodyn/Qlack2/master/owasp-suppression.xml
+							</suppressionFile>
+							<suppressionFile>owasp-suppression.xml</suppressionFile>
+						</suppressionFiles>
+						<failOnError>false</failOnError>
+					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>

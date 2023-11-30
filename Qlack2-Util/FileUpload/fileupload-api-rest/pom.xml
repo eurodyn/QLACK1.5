@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.eurodyn.qlack2.util</groupId>
 		<artifactId>fileupload</artifactId>
-		<version>1.7.2</version>
+		<version>1.7.1</version>
 		<relativePath>../</relativePath>
 	</parent>
 
@@ -35,20 +35,6 @@
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-bundle-jaxrs</artifactId>
 			<version>${cxf.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.eclipse.jetty</groupId>
-					<artifactId>jetty-http</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.eclipse.jetty</groupId>
-					<artifactId>jetty-io</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.eclipse.jetty</groupId>
-					<artifactId>jetty-server</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 	</dependencies>
 </project>

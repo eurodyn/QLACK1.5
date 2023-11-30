@@ -24,7 +24,7 @@
 	<properties>
 		<qlack2.common.version>1.4.5</qlack2.common.version>
 		<qlack2.fuse.version>1.6.4</qlack2.fuse.version>
-		<qlack2.util.version>1.7.2</qlack2.util.version>
+		<qlack2.util.version>1.7.1</qlack2.util.version>
 		<jetty.websocket.version>7.6.8.v20121106</jetty.websocket.version>
 	</properties>
 

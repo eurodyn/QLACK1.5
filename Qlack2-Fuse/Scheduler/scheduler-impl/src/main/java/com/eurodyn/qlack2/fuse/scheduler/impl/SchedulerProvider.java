@@ -129,6 +129,8 @@ public class SchedulerProvider {
 	private Properties getConfigProperties() {
 		Properties properties = new Properties();
 
+		properties.put(StdSchedulerFactory.PROP_SCHED_SKIP_UPDATE_CHECK, "true");
+
 		if (schedulerIdleWaitTime != null) {
 			properties.put(StdSchedulerFactory.PROP_SCHED_IDLE_WAIT_TIME, Long.toString(schedulerIdleWaitTime));
 		}
